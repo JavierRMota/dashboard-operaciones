@@ -1,10 +1,10 @@
 export const donutChartData = [
-  { foodType: 'Beverages', percentSold: 16.5 },
-  { foodType: 'Condiments', percentSold: 24 },
-  { foodType: 'Produce', percentSold: 13 },
-  { foodType: 'Meat/Poultry', percentSold: 16.5 },
-  { foodType: 'Seafood', percentSold: 20 },
-  { foodType: 'Other', percentSold: 10 },
+  { tipo: 'Beverages', cantidad: 16.5 },
+  { tipo: 'Condiments', cantidad: 24 },
+  { tipo: 'Produce', cantidad: 13 },
+  { tipo: 'Meat/Poultry', cantidad: 16.5 },
+  { tipo: 'Seafood', cantidad: 20 },
+  { tipo: 'Other', cantidad: 10 },
 ];
 export const barChartQ4Months = ['October', 'November', 'December'];
 export const barChartMonthlyPercentages = [
