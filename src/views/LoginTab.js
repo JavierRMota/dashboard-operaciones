@@ -11,7 +11,7 @@ import '../App.css';
 
 class LoginTab extends Component {
   handleLogin = () => {
-    this.props.handler(1);
+    this.props.handler(true);
   };
 
   classes = makeStyles({
@@ -43,7 +43,8 @@ class LoginTab extends Component {
 
   render() {
     return (
-      <Container maxWidth="sm">
+      <Container maxWidth="md" alignItems="center"
+        justify="center">
         <Card className={this.classes.card}>
         <CardContent>
           <form className={this.classes.container} noValidate autoComplete="off">

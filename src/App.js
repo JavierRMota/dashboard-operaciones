@@ -1,32 +1,31 @@
 import React, { Component } from 'react';
 import LoginTab from './views/LoginTab';
-import Dashboard from './views/Dashboard';
+import Home from './views/Home';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      window: 0,
+      logged: false,
     };
     this.handler = this.handler.bind(this);
   }
 
   handler(someValue) {
     this.setState({
-      window: someValue,
+      logged: someValue,
     });
   }
 
   render() {
-    switch (this.state.window) {
-      case 1:
-        return (
-          <Dashboard handler= {this.handler} />
-        );
-      default:
-        return (
-          <LoginTab handler= {this.handler} />
-        );
+    if (this.state.logged) {
+      return (
+        <Home handler= {this.handler} />
+      );
+    } else {
+      return (
+        <LoginTab handler= {this.handler} />
+      );
     }
   }
 }
