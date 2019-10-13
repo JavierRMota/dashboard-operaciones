@@ -11,7 +11,7 @@ import {
 
 class DonutChartContainer extends Component {
   render() {
-    const labelTemplate = (e) => (e.category + '\n'  + (e.percentage * 100) + '%');
+    const labelTemplate = (e) => (e.category + '\n'  + (e.percentage * 100).toFixed(2) + '%');
     return (
       <Chart style={{ height: 300 }}>
         <ChartSeries>

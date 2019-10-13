@@ -28,8 +28,10 @@ import TableRow from '@material-ui/core/TableRow';
 //Dummy data
 import { donutChartData } from '../data/appData';
 import { barChartQ4Months, barChartMonthlyPercentages } from '../data/appData';
+import { donutChartProductsData} from '../data/appData';
+import { barChartVentas, barCharVentasProductos} from '../data/appData';
 
-class Dashboard extends Component {
+class Ventas extends Component {
   constructor(props) {
     super(props);
     this.appContainer = React.createRef();
@@ -51,23 +53,7 @@ class Dashboard extends Component {
   };
 
   handleReturn = () => {
-    this.props.handleState(-1);
-  };
-
-  handleShowMoreVentas = () => {
-    this.props.handleState(1);
-  };
-
-  handleShowMoreGastos = () => {
-    this.props.handleState(2);
-  };
-
-  handleShowMorePendienteCobro = () => {
-    this.props.handleState(3);
-  };
-
-  handleShowMoreInventario = () => {
-    this.props.handleState(4);
+    this.props.handleState(0);
   };
 
   years = [2016, 2017, 2018, 2019, 'Todos'];
@@ -109,12 +95,11 @@ class Dashboard extends Component {
         <div className="app-container container" ref={(el) => this.appContainer = el}>
           <div className="row">
             <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-              <h1>Empresa | Reporte de operaciones</h1>
+              <h1>Empresa | Reporte específico de Ventas</h1>
             </div>
             <div className="col-xs-6 col-sm-6 col-md-8 col-lg-8 col-xl-8 buttons-right">
               <Button onClick={this.handleReturn} look="outline">Regresar</Button>
               <Button primary={true} onClick={this.handleShare}>Compartir</Button>
-              <Button primary={true} look="outline"> Agregar CSV</Button>
               <Button onClick={this.handlePDFExport}>Exportar a PDF</Button>
             </div>
           </div>
@@ -163,121 +148,34 @@ class Dashboard extends Component {
             </TextField>
           </div>
           <div className="row">
-            <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-              <h2>Ventas</h2>
-              <ArcGaugeContainer value="68000" of="100000"/>
+            <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+              <h2>Ventas Totales de Marcas</h2>
+              <DonutChartContainer data={donutChartProductsData}
+                categoryField="tipo" field="cantidad"/>
               <List>
-                    <ListItem>
-                      <ListItemText
-                        primary="$ 68,000.00"
-                        secondary="Ventas actuales"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText
-                        primary="$ 100,000.00"
-                        secondary="Objetivo de ventas"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText
-                        primary="-$ 32,000.00"
-                        secondary="Diferencia de ventas"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <Button primary={true} onClick={this.handleShowMoreVentas}>Ver más</Button>
-                    </ListItem>
-                </List>
+                <ListItem>
+                  <ListItemText
+                    primary="Producto más vendido"
+                    secondary="Powerade"
+                  />
+                  <ListItemText
+                    primary="Producto menos vendido"
+                    secondary="Sabritas"
+                  />
+                </ListItem>
+              </List>
             </div>
-            <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-              <h2>Gastos</h2>
-              <ArcGaugeContainer value="48000" of="60000"/>
-              <List>
-                    <ListItem>
-                      <ListItemText
-                        primary="$ 48,000.00"
-                        secondary="Gastos actuales"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText
-                        primary="$ 60,000.00"
-                        secondary="Presupuesto actual"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText
-                        primary="-$ 12,000.00"
-                        secondary="Diferencia de ventas"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <Button primary={true} onClick={this.handleShowMoreGastos}>Ver más</Button>
-                    </ListItem>
-                </List>
-            </div>
-            <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-              <h2>Pendiente de cobro</h2>
-              <ArcGaugeContainer value="784000" of="854000"/>
-              <List>
-                    <ListItem>
-                      <ListItemText
-                        primary="$ 863,000.00"
-                        secondary="Importe abierto"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText
-                        primary="$ 208,000.00"
-                        secondary="Importe vencido"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText
-                        primary="$ 655,000.00"
-                        secondary="Diferencia cobro"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <Button primary={true} onClick={this.handleShowMorePendienteCobro}>Ver más</Button>
-                    </ListItem>
-                </List>
-            </div>
-            <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-              <h2>Inventario</h2>
-              <ArcGaugeContainer value="784000" of="854000"/>
-              <List>
-                    <ListItem>
-                      <ListItemText
-                        primary="$ 784,000.00"
-                        secondary="Valor inventario"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText
-                        primary="$ 854,000.00"
-                        secondary="Objetivo Inventario"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText
-                        primary="-$ 70,000.00"
-                        secondary="Diferencia Inventario"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <Button primary={true} onClick={this.handleShowMoreInventario}>Ver más</Button>
-                    </ListItem>
-                </List>
+            <div className="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+              <h2>Ventas Esperadas Vs. Ventas Reales</h2>
+              <BarChartContainer categories={barChartVentas}
+                data={barCharVentasProductos} />
             </div>
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
               <Table>
                 <TableHead>
                   <TableRow>
                     <TableCell>Región</TableCell>
-                    <TableCell align="right">Gastos</TableCell>
-                    <TableCell align="right">Ventas</TableCell>
+                    <TableCell align="center">Ventas</TableCell>
                     <TableCell align="right">% Ventas</TableCell>
                   </TableRow>
                 </TableHead>
@@ -287,8 +185,7 @@ class Dashboard extends Component {
                       <TableCell component="th" scope="row">
                         {row.nombre}
                       </TableCell>
-                      <TableCell align="right">{row.gastos}</TableCell>
-                      <TableCell align="right">{row.ventas}</TableCell>
+                      <TableCell align="center">{row.ventas}</TableCell>
                       <TableCell align="right">{row.porcentaje}</TableCell>
                     </TableRow>
                   ))}
@@ -296,8 +193,7 @@ class Dashboard extends Component {
                 <TableHead>
                   <TableRow>
                     <TableCell>Total</TableCell>
-                    <TableCell align="right">$ 200,000.00</TableCell>
-                    <TableCell align="right">$ 500,000.00</TableCell>
+                    <TableCell align="center">$ 500,000.00</TableCell>
                     <TableCell align="right"> 72%</TableCell>
                   </TableRow>
                 </TableHead>
@@ -307,9 +203,6 @@ class Dashboard extends Component {
           <div className="row">
             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
               <LineChartContainer title="Ingresos"/>
-            </div>
-            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-              <LineChartContainer title="Gastos"/>
             </div>
           </div>
           {this.state.showDialog &&
@@ -329,4 +222,4 @@ class Dashboard extends Component {
   }
 
 }
-export default Dashboard;
+export default Ventas;

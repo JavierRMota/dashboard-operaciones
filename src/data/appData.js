@@ -15,3 +15,17 @@ export const barChartMonthlyPercentages = [
   { name: 'Seafood', data: [21.5, 20, 17] },
   { name: 'Other', data: [7, 12, 11] },
 ];
+
+export const donutChartProductsData = [
+  { tipo: 'Coca-Cola', cantidad: 14},
+  { tipo: 'Nestea', cantidad: 11},
+  { tipo: 'Powerade', cantidad: 73},
+  { tipo: 'Sabritas', cantidad: 2},
+];
+export const barChartVentas = ['Ventas Esperadas', 'Ventas Reales'];
+export const barCharVentasProductos = [
+  { name: 'Coca-Cola', data: [100000, 75000] },
+  { name: 'Nestea', data: [350000, 315000] },
+  { name: 'Powerade', data: [150000, 180000]},
+  { name: 'Sabritas', data: [23000, 10000]},
+];

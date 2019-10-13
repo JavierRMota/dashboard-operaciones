@@ -16,7 +16,7 @@ class BarChartContainer extends Component {
   render() {
     return (
       <Chart style={{ height: 288 }}>
-        <ChartLegend visible={false} />
+        <ChartLegend visible={true} />
         <ChartCategoryAxis>
           <ChartCategoryAxisItem categories={this.props.categories} startAngle={45} />
         </ChartCategoryAxis>
