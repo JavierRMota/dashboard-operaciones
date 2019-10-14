@@ -80,12 +80,12 @@ class Ventas extends Component {
     },
   }));
 
-  createData = (nombre, gastos, ventas, porcentaje) => ({ nombre, gastos, ventas, porcentaje });
+  createData = (nombreProducto, ventasEsperadas, ventasReales, porcentaje) => ({ nombreProducto, ventasEsperadas, ventasReales, porcentaje });
   rows = [
-    this.createData('América', 14000, 250000, 30),
-    this.createData('Asia', 20000, 100000, 15),
-    this.createData('Europa', 30000, 100000, 15),
-    this.createData('África', 10000, 50000, 12),
+    this.createData('Coca-Cola', 100000, 75000, 75),
+    this.createData('Nestea', 350000, 315000, 90),
+    this.createData('Powerade', 150000, 180000, 120),
+    this.createData('Sabritas', 23000, 10000, 43.48),
   ];
 
   render() {
@@ -174,27 +174,30 @@ class Ventas extends Component {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell>Región</TableCell>
-                    <TableCell align="center">Ventas</TableCell>
+                    <TableCell>Marcas</TableCell>
+                    <TableCell align="center">Ventas Reales</TableCell>
+                    <TableCell align="center">Ventas Esperadas</TableCell>
                     <TableCell align="right">% Ventas</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {this.rows.map(row => (
-                    <TableRow key={row.nombre}>
+                    <TableRow key={row.nombreProducto}>
                       <TableCell component="th" scope="row">
-                        {row.nombre}
+                        {row.nombreProducto}
                       </TableCell>
-                      <TableCell align="center">{row.ventas}</TableCell>
-                      <TableCell align="right">{row.porcentaje}</TableCell>
+                      <TableCell align="center">${row.ventasReales}</TableCell>
+                      <TableCell align="center">${row.ventasEsperadas}</TableCell>
+                      <TableCell align="right">{row.porcentaje}%</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
                 <TableHead>
                   <TableRow>
                     <TableCell>Total</TableCell>
-                    <TableCell align="center">$ 500,000.00</TableCell>
-                    <TableCell align="right"> 72%</TableCell>
+                    <TableCell align="center">$ 580,000.00</TableCell>
+                    <TableCell align="center">$ 623,000.00</TableCell>
+                    <TableCell align="right">93.10%</TableCell>
                   </TableRow>
                 </TableHead>
               </Table>
