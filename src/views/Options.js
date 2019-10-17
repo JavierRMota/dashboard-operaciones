@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ReactFileReader from 'react-file-reader';
+import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
 import '@progress/kendo-theme-material/dist/all.css';
 import 'bootstrap-4-grid/css/grid.min.css';
 import '../App.css';
@@ -8,7 +10,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import { Button } from '@progress/kendo-react-buttons';
 import TextField from '@material-ui/core/TextField';
-import { companies } from '../data/appData';
+import { companies, expenses, incomes, goals } from '../data/appData';
 
 class Options extends Component {
   constructor(props) {
@@ -29,6 +31,12 @@ class Options extends Component {
     });
   };
 
+  handleUpload = () => {
+    this.setState({
+      showDialog: !this.state.showDialog,
+    });
+  };
+
   onSubmit = (e) => {
     if (this.state.name == this.state.nameConfirm && this.state.name != '') {
       companies.push({ name: this.state.name });
@@ -38,6 +46,54 @@ class Options extends Component {
       name: '',
       nameConfirm: '',
     });
+  };
+
+  handleGoals = files => {
+    var reader = new FileReader();
+    reader.onload = (e) => {
+      // Use reader.result
+      var result = reader.result.split('\n');
+      alert('Se han registrado ' + (result.length - 1) + ' metas ');
+      console.log(result);
+    };
+
+    reader.readAsText(files[0]);
+  };
+
+  handleIncomes = files => {
+    var reader = new FileReader();
+    reader.onload = (e) => {
+      // Use reader.result
+      var result = reader.result.split('\n');
+      alert('Se han registrado ' + (result.length - 1) + ' ingresos ');
+      console.log(result);
+    };
+
+    reader.readAsText(files[0]);
+  };
+
+  handleCompanies = files => {
+    var reader = new FileReader();
+    reader.onload = (e) => {
+      // Use reader.result
+      var result = reader.result.split('\n');
+      alert('Se han registrado ' + (result.length - 1) + ' empresas ');
+      console.log(result);
+    };
+
+    reader.readAsText(files[0]);
+  };
+
+  handleExpenses = files => {
+    var reader = new FileReader();
+    reader.onload = (e) => {
+      // Use reader.result
+      var result = reader.result.split('\n');
+      alert('Se han registrado ' + (result.length - 1) + ' gastos ');
+      console.log(result);
+    };
+
+    reader.readAsText(files[0]);
   };
 
   render() {
@@ -91,10 +147,32 @@ class Options extends Component {
                   value={this.state.nameConfirm}
                 />
                 <br />
-                <Button primary={true} look="outline">Subir CSV</Button>
+                <Button primary={true} type="button" look="outline" onClick={this.handleUpload}>Subir CSV</Button>
                 <Button primary={true} type="button"
                   onClick={(e) => this.onSubmit(e)}>Crear</Button>
               </form>
+              {this.state.showDialog &&
+                <Dialog title={'Compartir reporte'} onClose={this.handleUpload}>
+                  <p>Documento a subir: </p>
+                    <ReactFileReader handleFiles={this.handleExpenses} fileTypes={'.csv'}>
+                        <Button primary={true}>Gastos</Button>
+                    </ReactFileReader>
+                    <br/>
+                    <ReactFileReader handleFiles={this.handleIncomes} fileTypes={'.csv'}>
+                        <Button primary={true}>Ingresos</Button>
+                    </ReactFileReader>
+                    <br/>
+                    <ReactFileReader handleFiles={this.handleGoals} fileTypes={'.csv'}>
+                        <Button primary={true}>Metas</Button>
+                    </ReactFileReader>
+                    <br/>
+                    <ReactFileReader handleFiles={this.handleCompanies} fileTypes={'.csv'}>
+                        <Button primary={true}>Empresas</Button>
+                    </ReactFileReader>
+                    <br/>
+                    <Button onClick={this.handleUpload}>Cancelar</Button>
+                </Dialog>
+              }
 
             </div>
           </div>

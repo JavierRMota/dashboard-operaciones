@@ -29,9 +29,34 @@ export const barCharVentasProductos = [
   { name: 'Powerade', data: [150000, 180000] },
   { name: 'Sabritas', data: [23000, 10000] },
 ];
+
+//Datos dummies
 export var companies = [
-  { name: 'FEMSA' },
-  { name: 'FACEBOOK' },
-  { name: 'PEPSICO' },
-  { name: 'MICROSOFT' },
+  { id: 0, name: 'FEMSA' },
+  { id: 1, name: 'FACEBOOK' },
+  { id: 2, name: 'PEPSICO' },
+  { id: 3, name: 'MICROSOFT' },
+];
+
+export var expenses = [
+  { date: 1571332800, name: 'FEMSA', amount: 10000.00, category: 'SALARIOS' },
+  { date: 1571332801, name: 'FEMSA', amount: 20000.00, category: 'RENTAS' },
+  { date: 1571332802, name: 'FEMSA', amount: 5000.00, category: 'GASOLINA' },
+  { date: 1571332803, name: 'FEMSA', amount: 2000.00, category: 'PAPELERIA' },
+  { date: 1571332804, name: 'FEMSA', amount: 4000.00, category: 'REPARACIONES' },
+];
+
+export var incomes = [
+  { date: 1571332800, name: 'FEMSA', amount: 10000.00, category: 'COCACOLA' },
+  { date: 1571332801, name: 'FEMSA', amount: 20000.00, category: 'FANTA' },
+  { date: 1571332802, name: 'FEMSA', amount: 5000.00, category: 'SPRITE' },
+  { date: 1571332803, name: 'FEMSA', amount: 2000.00, category: 'CINEPOLIS' },
+  { date: 1571332804, name: 'FEMSA', amount: 4000.00, category: 'INVERSIONES' },
+];
+
+export var goals = [
+  { date: 1572566400, amount: 100000.00, category: 'VENTAS' },
+  { date: 1572566400, amount: 50000.00, category: 'GASTO' },
+  { date: 1575158400, amount: 100000.00, category: 'VENTAS' },
+  { date: 1575158400, amount: 50000.00, category: 'GASTO' },
 ];
