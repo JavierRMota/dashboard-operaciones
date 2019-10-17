@@ -17,15 +17,21 @@ export const barChartMonthlyPercentages = [
 ];
 
 export const donutChartProductsData = [
-  { tipo: 'Coca-Cola', cantidad: 14},
-  { tipo: 'Nestea', cantidad: 11},
-  { tipo: 'Powerade', cantidad: 73},
-  { tipo: 'Sabritas', cantidad: 2},
+  { tipo: 'Coca-Cola', cantidad: 14 },
+  { tipo: 'Nestea', cantidad: 11 },
+  { tipo: 'Powerade', cantidad: 73 },
+  { tipo: 'Sabritas', cantidad: 2 },
 ];
 export const barChartVentas = ['Ventas Esperadas', 'Ventas Reales'];
 export const barCharVentasProductos = [
   { name: 'Coca-Cola', data: [100000, 75000] },
   { name: 'Nestea', data: [350000, 315000] },
-  { name: 'Powerade', data: [150000, 180000]},
-  { name: 'Sabritas', data: [23000, 10000]},
+  { name: 'Powerade', data: [150000, 180000] },
+  { name: 'Sabritas', data: [23000, 10000] },
+];
+export var companies = [
+  { name: 'FEMSA' },
+  { name: 'FACEBOOK' },
+  { name: 'PEPSICO' },
+  { name: 'MICROSOFT' },
 ];

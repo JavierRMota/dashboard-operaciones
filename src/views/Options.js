@@ -8,13 +8,47 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import { Button } from '@progress/kendo-react-buttons';
 import TextField from '@material-ui/core/TextField';
+import { companies } from '../data/appData';
 
 class Options extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        name: '',
+        nameConfirm: '',
+      };
+  }
+
   handleClick = () => {
     this.props.handleState(0);
   };
 
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  onSubmit = (e) => {
+    if (this.state.name == this.state.nameConfirm && this.state.name != '') {
+      companies.push({ name: this.state.name });
+    }
+
+    this.setState({
+      name: '',
+      nameConfirm: '',
+    });
+  };
+
   render() {
+    var company = companies.map((item, key) =>
+      <div>
+        <Divider />
+        <ListItem button onClick={this.handleClick}>
+          <ListItemText primary={item.name}/>
+        </ListItem>
+      </div>
+    );
     return (
       <div className="bootstrap-wrapper">
         <div className="app-container container" ref={(el) => this.appContainer = el}>
@@ -31,41 +65,35 @@ class Options extends Component {
                 label="Buscar empresa"
                 margin="normal"
               />
+              {}
               <List component="nav" aria-label="main mailbox folders">
-                <ListItem button onClick={this.handleClick}>
-                  <ListItemText primary="FEMSA"/>
-                </ListItem>
-                <Divider />
-                <ListItem button onClick={this.handleClick}>
-                  <ListItemText primary="PEPSICO" />
-                </ListItem>
-                <Divider />
-                <ListItem button onClick={this.handleClick}>
-                  <ListItemText primary="FACEBOOK" />
-                </ListItem>
-                <Divider />
-                <ListItem button onClick={this.handleClick}>
-                  <ListItemText primary="MICROSOFT" />
-                </ListItem>
+                {company}
               </List>
             </div>
             <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
               <h2>Crear empresa</h2>
               <form noValidate autoComplete="off">
                 <TextField
+                  name="name"
                   id="standard-name"
                   label="Nombre empresa"
                   margin="normal"
+                  onChange={e => this.handleChange(e)}
+                  value={this.state.name}
                 />
                 <br />
                 <TextField
+                  name="nameConfirm"
                   id="standard-name"
                   label="Confirmar nombre"
                   margin="normal"
+                  onChange={e => this.handleChange(e)}
+                  value={this.state.nameConfirm}
                 />
                 <br />
                 <Button primary={true} look="outline">Subir CSV</Button>
-                <Button primary={true}>Crear</Button>
+                <Button primary={true} type="button"
+                  onClick={(e) => this.onSubmit(e)}>Crear</Button>
               </form>
 
             </div>

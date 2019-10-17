@@ -218,52 +218,25 @@ class Dashboard extends Component {
                 </List>
             </div>
             <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-              <h2>Pendiente de cobro</h2>
-              <ArcGaugeContainer value="784000" of="854000"/>
+              <h2>Margen</h2>
+              <ArcGaugeContainer value="25" of="50"/>
               <List>
                     <ListItem>
                       <ListItemText
-                        primary="$ 863,000.00"
-                        secondary="Importe abierto"
+                        primary="25 %"
+                        secondary="Valor margen"
                       />
                     </ListItem>
                     <ListItem>
                       <ListItemText
-                        primary="$ 208,000.00"
-                        secondary="Importe vencido"
+                        primary="50"
+                        secondary="Objetivo margen"
                       />
                     </ListItem>
                     <ListItem>
                       <ListItemText
-                        primary="$ 655,000.00"
-                        secondary="Diferencia cobro"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <Button primary={true} onClick={this.handleShowMorePendienteCobro}>Ver más</Button>
-                    </ListItem>
-                </List>
-            </div>
-            <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-              <h2>Inventario</h2>
-              <ArcGaugeContainer value="784000" of="854000"/>
-              <List>
-                    <ListItem>
-                      <ListItemText
-                        primary="$ 784,000.00"
-                        secondary="Valor inventario"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText
-                        primary="$ 854,000.00"
-                        secondary="Objetivo Inventario"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText
-                        primary="-$ 70,000.00"
-                        secondary="Diferencia Inventario"
+                        primary="25"
+                        secondary="Diferencia margen"
                       />
                     </ListItem>
                     <ListItem>
