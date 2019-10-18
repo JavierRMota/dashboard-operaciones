@@ -162,6 +162,9 @@ class Dashboard extends Component {
               ))}
             </TextField>
           </div>
+          //Limite de velocidad -> plan de ventas al día
+          // Relleno ventas actuales
+          //Fin objetivo anual
           <div className="row">
             <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
               <h2>Ventas</h2>
@@ -170,19 +173,25 @@ class Dashboard extends Component {
                     <ListItem>
                       <ListItemText
                         primary="$ 68,000.00"
-                        secondary="Ventas actuales"
+                        secondary="Ventas actuales acumuladas"
                       />
                     </ListItem>
                     <ListItem>
                       <ListItemText
                         primary="$ 100,000.00"
-                        secondary="Objetivo de ventas"
+                        secondary="Plan de ventas"
                       />
                     </ListItem>
                     <ListItem>
                       <ListItemText
-                        primary="-$ 32,000.00"
+                        primary="⬇️ $ 32,000.00 | 32 %"
                         secondary="Diferencia de ventas"
+                      />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemText
+                        primary="$ 340,000.00"
+                        secondary="Objetivo anual de ventas"
                       />
                     </ListItem>
                     <ListItem>
