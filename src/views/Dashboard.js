@@ -14,6 +14,7 @@ import '../App.css';
 import DonutChartContainer from '../components/DonutChartContainer';
 import BarChartContainer from '../components/BarChartContainer';
 import ArcGaugeContainer from '../components/ArcGaugeContainer';
+import RadialGaugeContainer from '../components/RadialGaugeContainer';
 import LineChartContainer from '../components/LineChartContainer';
 import { DropDownList } from '@progress/kendo-react-dropdowns';
 import { makeStyles } from '@material-ui/core/styles';
@@ -27,6 +28,7 @@ import TableRow from '@material-ui/core/TableRow';
 
 //Dummy data
 import { donutChartData } from '../data/appData';
+import { report, currency } from '../data/appData';
 import { barChartQ4Months, barChartMonthlyPercentages } from '../data/appData';
 
 class Dashboard extends Component {
@@ -103,6 +105,48 @@ class Dashboard extends Component {
   ];
 
   render() {
+    var gauges = report.gauges.map((item, key) =>
+    <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
+      <h2>{item.title}</h2>
+      <RadialGaugeContainer
+        value={item.value}
+        plan={item.plan}
+        objective={item.objective}/>
+      <List>
+            <ListItem>
+              <ListItemText
+                primary={currency(item.value)}
+                secondary="Ventas actuales acumuladas"
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemText
+                primary={currency(item.plan)}
+                secondary="Plan de ventas"
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemText
+                primary={
+                  (item.value - item.plan ? '↑' : '↓') +
+                  currency(Math.abs(item.value - item.plan)) + ' | ' +
+                  (Math.abs(item.value - item.plan) / item.plan).toFixed(2)
+                  + ' %'}
+                secondary="Diferencia de ventas"
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemText
+                primary={currency(item.objective)}
+                secondary="Objetivo anual de ventas"
+              />
+            </ListItem>
+            <ListItem>
+              <Button primary={true} onClick={this.handleShowMoreVentas}>Ver más</Button>
+            </ListItem>
+        </List>
+    </div>
+    );
     return (
     <Ripple>
       <div className="bootstrap-wrapper">
@@ -166,93 +210,8 @@ class Dashboard extends Component {
           // Relleno ventas actuales
           //Fin objetivo anual
           <div className="row">
-            <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-              <h2>Ventas</h2>
-              <ArcGaugeContainer value="68000" of="100000"/>
-              <List>
-                    <ListItem>
-                      <ListItemText
-                        primary="$ 68,000.00"
-                        secondary="Ventas actuales acumuladas"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText
-                        primary="$ 100,000.00"
-                        secondary="Plan de ventas"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText
-                        primary="⬇️ $ 32,000.00 | 32 %"
-                        secondary="Diferencia de ventas"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText
-                        primary="$ 340,000.00"
-                        secondary="Objetivo anual de ventas"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <Button primary={true} onClick={this.handleShowMoreVentas}>Ver más</Button>
-                    </ListItem>
-                </List>
-            </div>
-            <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-              <h2>Gastos</h2>
-              <ArcGaugeContainer value="48000" of="60000"/>
-              <List>
-                    <ListItem>
-                      <ListItemText
-                        primary="$ 48,000.00"
-                        secondary="Gastos actuales"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText
-                        primary="$ 60,000.00"
-                        secondary="Presupuesto actual"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText
-                        primary="-$ 12,000.00"
-                        secondary="Diferencia de ventas"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <Button primary={true} onClick={this.handleShowMoreGastos}>Ver más</Button>
-                    </ListItem>
-                </List>
-            </div>
-            <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-              <h2>Margen</h2>
-              <ArcGaugeContainer value="25" of="50"/>
-              <List>
-                    <ListItem>
-                      <ListItemText
-                        primary="25 %"
-                        secondary="Valor margen"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText
-                        primary="50"
-                        secondary="Objetivo margen"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText
-                        primary="25"
-                        secondary="Diferencia margen"
-                      />
-                    </ListItem>
-                    <ListItem>
-                      <Button primary={true} onClick={this.handleShowMoreInventario}>Ver más</Button>
-                    </ListItem>
-                </List>
-            </div>
+            {gauges}
+            
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
               <Table>
                 <TableHead>
