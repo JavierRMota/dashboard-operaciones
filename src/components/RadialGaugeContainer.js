@@ -9,24 +9,58 @@ class RadialGaugeContainer extends Component {
     super(props);
 
     this.state = {
-      value: 10,
+      value: props.value,
+      plan: props.plan,
+      objective: props.objective,
+      major: props.objective / 100,
+      minor: props.objective / 200,
     };
+    if (props.plan > props.value) {
+      this.state.ranges =  [
+        { from: 0, to: props.value, color: 'red' },
+        { from: props.value, to: props.plan, color: '#ffd246' },
+      ];
+      this.state.pointer = [
+        {
+          value: props.value,
+          color: 'red',
+        },
+        {
+          value: props.plan,
+          color: '#ffd246',
+        },
+      ];
+    } else {
+      this.state.ranges =  [
+        { from: 0, to: props.value, color: '#78d237' },
+      ];
+      this.state.pointer = [
+        {
+          value: props.value,
+          color: '#78d237',
+        },
+        {
+          value: props.plan,
+          color: '#ffd246',
+        },
+      ];
+    }
   }
 
   render() {
+    console.log(this.state);
     const radialOptions = {
         value: this.state.value,
         shape: 'arrow',
         scale: {
-          minorUnit: 5,
-          majorUnit: 20,
-          max: 180,
-          ranges: [
-            { from: 80, to: 120, color: '#ffc700' },
-            { from: 120, to: 150, color: '#ff7a00' },
-            { from: 150, to: 180, color: '#c20000' },
-          ],
+          majorUnit: this.state.objective / 10,
+          minorUnit: 0,
+          max: this.state.objective,
+          ranges: this.state.ranges,
+          majorTicks: { visible: false },
+          minorTicks: { visible: false },
         },
+        pointer: this.state.pointer,
       };
     return (
         <RadialGauge {...radialOptions} />
