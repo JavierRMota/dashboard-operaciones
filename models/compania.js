@@ -1,11 +1,26 @@
 const mng = require("mongoose");
 const Schema = mng.Schema;
-const trans = require("./transaccion");
 
 var compSchema = new Schema({
   nombre: { type: String, require: true, max: 100 },
-  owner: { type: String, require: false, max: 50 },
-  metasMensual: [Number]
+  planMensual: [
+    {
+      type: mng.Schema.Types.ObjectId,
+      ref: "planMensual"
+    }
+  ],
+  sucursales: [
+    {
+      type: mng.Schema.Types.ObjectId,
+      ref: "Sucursales"
+    }
+  ],
+  gastos: [
+    {
+      type: mng.Schema.Types.ObjectId,
+      ref: "Gastos"
+    }
+  ]
 });
 
 module.exports = mng.model("Compania", compSchema);
