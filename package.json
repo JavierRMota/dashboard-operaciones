@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.5.0",
     "@material-ui/icons": "^4.4.3",
+    "@progress/kendo-charts-vue-wrapper": "^2019.3.1023",
     "@progress/kendo-drawing": "^1.6.0",
     "@progress/kendo-react-buttons": "^3.4.1",
     "@progress/kendo-react-charts": "^3.4.1",

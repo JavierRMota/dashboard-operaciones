@@ -6,6 +6,13 @@ export const donutChartData = [
   { tipo: "Seafood", cantidad: 20 },
   { tipo: "Other", cantidad: 10 }
 ];
+
+export const pruebaMultiplesDatos = ["September", "October", "November", "December"];
+export const pruebaDatosMultiplesDatos = [
+  { data: [{ data:[10, 20, 30, 40]}, { data: [50, 60, 70, 80] }, { data: [90, 100, 110, 120]}]}
+];
+
+
 export const barChartQ4Months = ["October", "November", "December"];
 export const barChartMonthlyPercentages = [
   { name: "Beverages", data: [14, 16, 19.5] },
@@ -185,7 +192,7 @@ export var Catalogo = [
   {
       Id_Catalogo: 2,
       Nombre: "Agua Fresca",
-      Precio: 30.00, 
+      Precio: 30.00,
   },
   {
       Id_Catalogo: 3,
@@ -403,7 +410,7 @@ export var Requisicion = [
       Cantidad: 4,
       Fecha_Requisicion: "2/7/19 15:22",
       Fecha_Entrega: "2/7/19 15:25",
-      Total: 120 
+      Total: 120
   },
   {
       Id_Requisicion: 5,
@@ -557,7 +564,7 @@ export var Insumos = [
       Insumo_Categoria: "Verduras"
   },
   {
-      Id_Insumo: 5,      
+      Id_Insumo: 5,
       Descripcion : "Cebolla",
       Insumo_Categoria: "Verduras"
   },
