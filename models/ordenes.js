@@ -4,7 +4,12 @@ const Schema = mng.Schema;
 var ordSchema = new Schema({
   fechaOrden: Date,
   fechaEntrega: Date,
-  producto: prodSchema,
+  producto: [
+    {
+      type: mng.Schema.Types.ObjectId,
+      ref: "Productos"
+    }
+  ],
   cantidad: Number,
   total: Number
 });
