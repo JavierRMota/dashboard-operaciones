@@ -109,7 +109,10 @@ class Dashboard extends Component {
   render() {
     var gauges = report.gauges.map((item, key) =>
     <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-      <h2>{item.title}</h2>
+
+    <div align="center">
+      <Button primary = {true} look="flat"onClick={this.handleShowMoreVentas}><b>{item.title}</b></Button>
+      </div>
 
       <RadialGaugeContainer
         value={item.value}
@@ -119,14 +122,8 @@ class Dashboard extends Component {
       <List>
             <ListItem>
               <ListItemText
-                primary={currency(item.value)}
-                secondary="Ventas actuales acumuladas"
-              />
-            </ListItem>
-            <ListItem>
-              <ListItemText
-                primary={currency(item.plan)}
-                secondary="Plan de ventas"
+                primary={currency(item.value)+" / "+currency(item.plan)}
+                secondary="Ventas actuales / plan de ventas"
               />
             </ListItem>
             <ListItem>
@@ -144,9 +141,6 @@ class Dashboard extends Component {
                 primary={currency(item.objective)}
                 secondary="Objetivo anual de ventas"
               />
-            </ListItem>
-            <ListItem>
-              <Button primary={true} onClick={this.handleShowMoreVentas}>Ver más</Button>
             </ListItem>
         </List>
     </div>
