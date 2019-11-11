@@ -111,7 +111,7 @@ class Dashboard extends Component {
     <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
 
     <div align="center">
-      <Button primary = {true} look="flat"onClick={this.handleShowMoreVentas}><b>{item.title}</b></Button>
+      <Button primary = {true} look="flat"onClick={this.handleShowMoreVentas}><u><b>{item.title}</b></u></Button>
       </div>
 
       <RadialGaugeContainer
@@ -149,19 +149,26 @@ class Dashboard extends Component {
     return (
     <Ripple>
       <div className="bootstrap-wrapper">
+
         <div className="app-container container" ref={(el) => this.appContainer = el}>
+
           <div className="row">
-            <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-              <h1>Empresa | Reporte de operaciones</h1>
-            </div>
-            <div className="col-xs-6 col-sm-6 col-md-8 col-lg-8 col-xl-8 buttons-right">
-              <Button onClick={this.handleReturn} look="outline">Regresar</Button>
-              <Button primary={true} onClick={this.handleShare}>Compartir</Button>
-              <Button primary={true} look="outline"> Agregar CSV</Button>
-              <Button onClick={this.handlePDFExport}>Exportar a PDF</Button>
-            </div>
+
+          <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+            <h1>Empresa | Reporte de operaciones</h1>
           </div>
-          <div className="col-sm-12 col-md-4">
+
+          <div className="col-xs-6 col-sm-6 col-md-8 col-lg-8 col-xl-8 buttons-right">
+            <Button primary={true} onClick={this.handleShare}>Compartir</Button>
+            <Button primary={true} look="outline"> Agregar CSV</Button>
+            <Button onClick={this.handlePDFExport}>Exportar a PDF</Button>
+            <Button onClick={this.handleReturn} look="outline">Regresar</Button>
+          </div>
+
+
+          </div>
+
+          <div className="col-sm-12 col-md-4" >
             <TextField
                 id="outlined-select-currency"
                 select
@@ -205,9 +212,7 @@ class Dashboard extends Component {
               ))}
             </TextField>
           </div>
-          //Limite de velocidad -> plan de ventas al día
-          // Relleno ventas actuales
-          //Fin objetivo anual
+
           <div className="row">
             {gauges}
 
