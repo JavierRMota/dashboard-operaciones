@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+
 import CardContent from '@material-ui/core/CardContent';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@progress/kendo-react-buttons';
+
 import '@progress/kendo-theme-material/dist/all.css';
 import 'bootstrap-4-grid/css/grid.min.css';
 import '../App.css';
@@ -19,7 +22,7 @@ class LoginTab extends Component {
   classes = makeStyles({
     card: {
       minWidth: 275,
-      spacing: "200px"
+      spacing: 200,
     },
     bullet: {
       display: 'inline-block',
@@ -45,10 +48,17 @@ class LoginTab extends Component {
   });
 
   render() {
+
     return (
+
+      <Grid maxWidth="md" align="center" justify="center">
+      <Box boxShadow = {0}><br /><br /><br /><br /></Box>
+
       <Container maxWidth="md" align="center" justify="center">
+
         <Card className={this.classes.card}>
         <CardContent>
+        <h1>¡Bienvenido!</h1>
           <form className={this.classes.container} noValidate autoComplete="off">
             <TextField
               id="standard-name"
@@ -64,10 +74,21 @@ class LoginTab extends Component {
             <br />
             <br />
             <Button primary={true} onClick={this.handleLogin}>Iniciar sesión</Button>
+            <br />
+            <br />
           </form>
         </CardContent>
       </Card>
+      <Box boxShadow = {0}><br /><br /></Box>
+
+      <Card className={this.classes.card}>
+      <CardContent>
+      <p>Desarollado por Equipo CatAd - MotaTech® 2019</p>
+      </CardContent>
+    </Card>
     </Container>
+    </Grid>
+
     );
   }
 }
