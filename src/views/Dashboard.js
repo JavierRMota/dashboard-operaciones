@@ -16,6 +16,7 @@ import BarChartContainer from '../components/BarChartContainer';
 import ArcGaugeContainer from '../components/ArcGaugeContainer';
 import RadialGaugeContainer from '../components/RadialGaugeContainer';
 import LineChartContainer from '../components/LineChartContainer';
+import MultipleLineChartContainer from '../components/MultipleLineChartContainer';
 import { DropDownList } from '@progress/kendo-react-dropdowns';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -30,6 +31,7 @@ import TableRow from '@material-ui/core/TableRow';
 import { donutChartData } from '../data/appData';
 import { report, currency } from '../data/appData';
 import { barChartQ4Months, barChartMonthlyPercentages } from '../data/appData';
+import { pruebaMultiplesDatos, pruebaDatosMultiplesDatos} from '../data/appData';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -108,10 +110,12 @@ class Dashboard extends Component {
     var gauges = report.gauges.map((item, key) =>
     <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
       <h2>{item.title}</h2>
+
       <RadialGaugeContainer
         value={item.value}
         plan={item.plan}
         objective={item.objective}/>
+
       <List>
             <ListItem>
               <ListItemText
@@ -147,6 +151,7 @@ class Dashboard extends Component {
         </List>
     </div>
     );
+
     return (
     <Ripple>
       <div className="bootstrap-wrapper">
@@ -211,7 +216,7 @@ class Dashboard extends Component {
           //Fin objetivo anual
           <div className="row">
             {gauges}
-            
+
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
               <Table>
                 <TableHead>
@@ -247,7 +252,8 @@ class Dashboard extends Component {
           </div>
           <div className="row">
             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-              <LineChartContainer title="Ingresos"/>
+              //<LineChartContainer title="Ingresos"/>
+              <MultipleLineChartContainer title="Ingresos" categories={pruebaMultiplesDatos} data={pruebaDatosMultiplesDatos}/>
             </div>
             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
               <LineChartContainer title="Gastos"/>
