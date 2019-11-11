@@ -110,10 +110,12 @@ class Dashboard extends Component {
     var gauges = report.gauges.map((item, key) =>
     <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
       <h2>{item.title}</h2>
+
       <RadialGaugeContainer
         value={item.value}
         plan={item.plan}
         objective={item.objective}/>
+
       <List>
             <ListItem>
               <ListItemText
@@ -149,6 +151,7 @@ class Dashboard extends Component {
         </List>
     </div>
     );
+
     return (
     <Ripple>
       <div className="bootstrap-wrapper">

@@ -86,15 +86,15 @@ export var compSemilla = [
 ];
 export var report = {
   gauges: [
-    { title: 'VENTAS', value: 68000, subtitle1: 'Ventas actuales acumuladas',
+    { title: 'VENTAS', value: 10000, subtitle1: 'Ventas actuales acumuladas',
       plan: 100000, subtitle2: 'Plan de ventas',
       objective: 340000, subtitle3: 'Diferencia de ventas',
       subtitle4: 'Objetivo anual de ventas', },
-    { title: 'GASTOS', value: 8000, subtitle1: 'Gastos actuales acumulados',
+    { title: 'GASTOS', value: 5200, subtitle1: 'Gastos actuales acumulados',
       plan: 10000, subtitle2: 'Plan de gastos',
       objective: 20000, subtitle3: 'Diferencia de gastos',
       subtitle4: 'Objetivo anual de gastos', },
-    { title: 'MARGEN', value: 60000, subtitle1: 'Margen actual acumulado',
+    { title: 'MARGEN', value: 90000, subtitle1: 'Margen actual acumulado',
       plan: 90000, subtitle2: 'Plan de margen',
       objective: 320000, subtitle3: 'Diferencia de margen',
       subtitle4: 'Objetivo anual de margen', },
