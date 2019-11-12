@@ -40,22 +40,22 @@ export var Insumo = [
         Insumo_Categoria: "Carne"
     },
     {
-        Id_Insumo: "9",
+        Id_Insumo: 9,
         Descripcion : "Carne de Res",
         Insumo_Categoria: "Carne"
     },
     {
-        Id_Insumo: "10",
+        Id_Insumo: 10,
         Descripcion : "Queso Oaxaca",
         Insumo_Categoria: "Queso"
     },
     {
-        Id_Insumo: "11",
+        Id_Insumo: 11,
         Descripcion : "Queso Chihuahua",
         Insumo_Categoria: "Queso"
     },
     {
-        Id_Insumo: "12",
+        Id_Insumo: 12,
         Descripcion : "Queso Asadero",
         Insumo_Categoria: "Queso"
     },
@@ -75,17 +75,17 @@ export var Insumo = [
         Insumo_Categoria: "Bebidas"
     },
     {
-        Id_Insumo: "16",
+        Id_Insumo: 16,
         Descripcion : "Corona",
         Insumo_Categoria: "Bebidas"
     },
     {
-        Id_Insumo: "17",
+        Id_Insumo: 17,
         Descripcion : "Corona Ligth",
         Insumo_Categoria: "Bebidas"
     },
     {
-        Id_Insumo: "18",
+        Id_Insumo: 18,
         Descripcion : "Victoria",
         Insumo_Categoria: "Bebidas"
     },
