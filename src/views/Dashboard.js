@@ -233,7 +233,7 @@ class Dashboard extends Component {
           </div>
           <div className="row">
             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-              //<LineChartContainer title="Ingresos"/>
+              <LineChartContainer title="Ingresos"/>
               <MultipleLineChartContainer title="Ingresos" categories={pruebaMultiplesDatos} data={pruebaDatosMultiplesDatos}/>
             </div>
             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
