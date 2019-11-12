@@ -16,6 +16,7 @@ import BarChartContainer from '../components/BarChartContainer';
 import ArcGaugeContainer from '../components/ArcGaugeContainer';
 import RadialGaugeContainer from '../components/RadialGaugeContainer';
 import LineChartContainer from '../components/LineChartContainer';
+import MultipleLineChartContainer from '../components/MultipleLineChartContainer';
 import { DropDownList } from '@progress/kendo-react-dropdowns';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -25,11 +26,13 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import { Link } from 'react-router-dom';
 
 //Dummy data
 import { donutChartData } from '../data/appData';
 import { report, currency } from '../data/appData';
 import { barChartQ4Months, barChartMonthlyPercentages } from '../data/appData';
+import { pruebaMultiplesDatos, pruebaDatosMultiplesDatos} from '../data/appData';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -50,26 +53,6 @@ class Dashboard extends Component {
     this.setState({
       showDialog: !this.state.showDialog,
     });
-  };
-
-  handleReturn = () => {
-    this.props.handleState(-1);
-  };
-
-  handleShowMoreVentas = () => {
-    this.props.handleState(1);
-  };
-
-  handleShowMoreGastos = () => {
-    this.props.handleState(2);
-  };
-
-  handleShowMorePendienteCobro = () => {
-    this.props.handleState(3);
-  };
-
-  handleShowMoreInventario = () => {
-    this.props.handleState(4);
   };
 
   years = [2016, 2017, 2018, 2019, 'Todos'];
@@ -107,22 +90,22 @@ class Dashboard extends Component {
   render() {
     var gauges = report.gauges.map((item, key) =>
     <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-      <h2>{item.title}</h2>
+
+    <div align="center">
+    <Link to="/ventas" className="link">
+      <Button primary = {true} look="flat"><u><b>{item.title}</b></u></Button></Link>
+      </div>
+
       <RadialGaugeContainer
         value={item.value}
         plan={item.plan}
         objective={item.objective}/>
+
       <List>
             <ListItem>
               <ListItemText
-                primary={currency(item.value)}
-                secondary="Ventas actuales acumuladas"
-              />
-            </ListItem>
-            <ListItem>
-              <ListItemText
-                primary={currency(item.plan)}
-                secondary="Plan de ventas"
+                primary={currency(item.value)+" / "+currency(item.plan)}
+                secondary="Ventas actuales / plan de ventas"
               />
             </ListItem>
             <ListItem>
@@ -141,28 +124,33 @@ class Dashboard extends Component {
                 secondary="Objetivo anual de ventas"
               />
             </ListItem>
-            <ListItem>
-              <Button primary={true} onClick={this.handleShowMoreVentas}>Ver más</Button>
-            </ListItem>
         </List>
     </div>
     );
+
     return (
     <Ripple>
       <div className="bootstrap-wrapper">
+
         <div className="app-container container" ref={(el) => this.appContainer = el}>
+
           <div className="row">
-            <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-              <h1>Empresa | Reporte de operaciones</h1>
-            </div>
-            <div className="col-xs-6 col-sm-6 col-md-8 col-lg-8 col-xl-8 buttons-right">
-              <Button onClick={this.handleReturn} look="outline">Regresar</Button>
-              <Button primary={true} onClick={this.handleShare}>Compartir</Button>
-              <Button primary={true} look="outline"> Agregar CSV</Button>
-              <Button onClick={this.handlePDFExport}>Exportar a PDF</Button>
-            </div>
+
+          <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+            <h1>Empresa | Reporte de operaciones</h1>
           </div>
-          <div className="col-sm-12 col-md-4">
+
+          <div className="col-xs-6 col-sm-6 col-md-8 col-lg-8 col-xl-8 buttons-right">
+            <Button primary={true} onClick={this.handleShare}>Compartir</Button>
+            <Button primary={true} look="outline"> Agregar CSV</Button>
+            <Button onClick={this.handlePDFExport}>Exportar a PDF</Button>
+            <Link to="/home" className="link"><Button look="outline">Regresar</Button></Link>
+          </div>
+
+
+          </div>
+
+          <div className="col-sm-12 col-md-4" >
             <TextField
                 id="outlined-select-currency"
                 select
@@ -206,12 +194,10 @@ class Dashboard extends Component {
               ))}
             </TextField>
           </div>
-          //Limite de velocidad -> plan de ventas al día
-          // Relleno ventas actuales
-          //Fin objetivo anual
+
           <div className="row">
             {gauges}
-            
+
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
               <Table>
                 <TableHead>
@@ -248,6 +234,7 @@ class Dashboard extends Component {
           <div className="row">
             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
               <LineChartContainer title="Ingresos"/>
+              <MultipleLineChartContainer title="Ingresos" categories={pruebaMultiplesDatos} data={pruebaDatosMultiplesDatos}/>
             </div>
             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
               <LineChartContainer title="Gastos"/>

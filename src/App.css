@@ -25,3 +25,9 @@ h1 {
 .percentage-container:first-child {
   padding-bottom: 3em;
 }
+.link {
+      text-decoration: none;
+    }
+    a{
+    text-decoration: none;
+  }
