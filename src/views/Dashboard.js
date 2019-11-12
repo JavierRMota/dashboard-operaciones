@@ -26,6 +26,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import { Link } from 'react-router-dom';
 
 //Dummy data
 import { donutChartData } from '../data/appData';
@@ -52,26 +53,6 @@ class Dashboard extends Component {
     this.setState({
       showDialog: !this.state.showDialog,
     });
-  };
-
-  handleReturn = () => {
-    this.props.handleState(-1);
-  };
-
-  handleShowMoreVentas = () => {
-    this.props.handleState(1);
-  };
-
-  handleShowMoreGastos = () => {
-    this.props.handleState(2);
-  };
-
-  handleShowMorePendienteCobro = () => {
-    this.props.handleState(3);
-  };
-
-  handleShowMoreInventario = () => {
-    this.props.handleState(4);
   };
 
   years = [2016, 2017, 2018, 2019, 'Todos'];
@@ -111,7 +92,8 @@ class Dashboard extends Component {
     <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
 
     <div align="center">
-      <Button primary = {true} look="flat"onClick={this.handleShowMoreVentas}><u><b>{item.title}</b></u></Button>
+    <Link to="/ventas" className="link">
+      <Button primary = {true} look="flat"><u><b>{item.title}</b></u></Button></Link>
       </div>
 
       <RadialGaugeContainer
@@ -162,7 +144,7 @@ class Dashboard extends Component {
             <Button primary={true} onClick={this.handleShare}>Compartir</Button>
             <Button primary={true} look="outline"> Agregar CSV</Button>
             <Button onClick={this.handlePDFExport}>Exportar a PDF</Button>
-            <Button onClick={this.handleReturn} look="outline">Regresar</Button>
+            <Link to="/home" className="link"><Button look="outline">Regresar</Button></Link>
           </div>
 
 

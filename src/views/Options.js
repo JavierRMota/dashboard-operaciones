@@ -9,6 +9,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import { Button } from '@progress/kendo-react-buttons';
+import { Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import { companies, expenses, incomes, goals } from '../data/appData';
 
@@ -20,10 +21,6 @@ class Options extends Component {
         nameConfirm: '',
       };
   }
-
-  handleClick = () => {
-    this.props.handleState(0);
-  };
 
   handleChange = (e) => {
     this.setState({
@@ -100,9 +97,12 @@ class Options extends Component {
     var company = companies.map((item, key) =>
       <div>
         <Divider />
-        <ListItem button onClick={this.handleClick}>
-          <ListItemText primary={item.name}/>
-        </ListItem>
+        <Link to="/reporte" className="link">
+          <ListItem button>
+            <ListItemText primary={item.name}/>
+          </ListItem>
+        </Link>
+
       </div>
     );
     return (

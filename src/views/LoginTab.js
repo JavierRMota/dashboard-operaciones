@@ -8,6 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@progress/kendo-react-buttons';
+import { Link } from 'react-router-dom';
 
 import '@progress/kendo-theme-material/dist/all.css';
 import 'bootstrap-4-grid/css/grid.min.css';
@@ -73,7 +74,8 @@ class LoginTab extends Component {
             />
             <br />
             <br />
-            <Button primary={true} onClick={this.handleLogin}>Iniciar sesión</Button>
+            <Link to="/home" className="link">
+            <Button primary={true} >Iniciar sesión</Button></Link>
             <br />
             <br />
           </form>
