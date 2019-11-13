@@ -16,3 +16,14 @@ exports.consultarCompania = (req, res) => {
     res.send(comp);
   });
 };
+
+exports.loginCompania = (req, res) => {
+  compania.findOne({ mail: req.body.mail }, "password", function(err, pass) {
+    pass.comparePassword(req.body.password, function(err, isMatch) {
+      if (err) throw err;
+      if (isMatch) {
+        res.send("welcome");
+      } else res.send("error"); // -&gt; Password123: true
+    });
+  });
+};
