@@ -54,10 +54,6 @@ class Ventas extends Component {
     });
   };
 
-  handleReturn = () => {
-    this.props.handleState(0);
-  };
-
   years = [2016, 2017, 2018, 2019, 'Todos'];
   month = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'Todos'];
 
@@ -100,7 +96,10 @@ class Ventas extends Component {
               <h1>Empresa | Reporte específico de Ventas</h1>
             </div>
             <div className="col-xs-6 col-sm-6 col-md-8 col-lg-8 col-xl-8 buttons-right">
-              <Button onClick={this.handleReturn} look="outline">Regresar</Button>
+              <Link to="/reporte" className="link">
+                <Button look="outline">Regresar</Button>
+              </Link>
+
               <Button primary={true} onClick={this.handleShare}>Compartir</Button>
               <Button onClick={this.handlePDFExport}>Exportar a PDF</Button>
             </div>
