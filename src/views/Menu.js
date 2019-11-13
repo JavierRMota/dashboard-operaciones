@@ -23,9 +23,12 @@ class Menu extends Component {
       <div className={this.classes.root}>
         <AppBar position="static">
           <Toolbar>
+          {this.props.left}
+          <span style={{marginLeft: "auto", marginRight: -12}} >
           <Link to="/login" className="link">
-            <Button color="inherit" >Salir</Button>
+            <Button color="inherit" style={{color: 'white'}} >Salir</Button>
           </Link>
+          </span>
           </Toolbar>
         </AppBar>
       </div>

@@ -22,8 +22,6 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { Link } from 'react-router-dom';
-
 
 //Dummy data
 import { donutChartProductsData} from '../data/appData';
@@ -92,10 +90,6 @@ class Ventas extends Component {
               <h1>Empresa | Reporte específico de Ventas</h1>
             </div>
             <div className="col-xs-6 col-sm-6 col-md-8 col-lg-8 col-xl-8 buttons-right">
-              <Link to="/reporte" className="link">
-                <Button look="outline">Regresar</Button>
-              </Link>
-
               <Button primary={true} onClick={this.handleShare}>Compartir</Button>
               <Button onClick={this.handlePDFExport}>Exportar a PDF</Button>
             </div>
