@@ -13,9 +13,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import '../App.css';
 import DonutChartContainer from '../components/DonutChartContainer';
 import BarChartContainer from '../components/BarChartContainer';
-import ArcGaugeContainer from '../components/ArcGaugeContainer';
 import LineChartContainer from '../components/LineChartContainer';
-import { DropDownList } from '@progress/kendo-react-dropdowns';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -24,12 +22,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { Link } from 'react-router-dom';
-
 
 //Dummy data
-import { donutChartData } from '../data/appData';
-import { barChartQ4Months, barChartMonthlyPercentages } from '../data/appData';
 import { donutChartProductsData} from '../data/appData';
 import { barChartVentas, barCharVentasProductos} from '../data/appData';
 
@@ -58,7 +52,7 @@ class Ventas extends Component {
   month = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'Todos'];
 
   handleChange = name => event => {
-    this.state.year =  event.target.value;
+    this.setState({ year: event.target.value});
   };
 
   classes = makeStyles(theme => ({
@@ -96,10 +90,6 @@ class Ventas extends Component {
               <h1>Empresa | Reporte específico de Ventas</h1>
             </div>
             <div className="col-xs-6 col-sm-6 col-md-8 col-lg-8 col-xl-8 buttons-right">
-              <Link to="/reporte" className="link">
-                <Button look="outline">Regresar</Button>
-              </Link>
-
               <Button primary={true} onClick={this.handleShare}>Compartir</Button>
               <Button onClick={this.handlePDFExport}>Exportar a PDF</Button>
             </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactFileReader from 'react-file-reader';
-import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
+import { Dialog } from '@progress/kendo-react-dialogs';
 import '@progress/kendo-theme-material/dist/all.css';
 import 'bootstrap-4-grid/css/grid.min.css';
 import '../App.css';
@@ -11,7 +11,7 @@ import Divider from '@material-ui/core/Divider';
 import { Button } from '@progress/kendo-react-buttons';
 import { Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
-import { companies, expenses, incomes, goals } from '../data/appData';
+import { companies } from '../data/appData';
 
 class Options extends Component {
   constructor(props) {
@@ -35,7 +35,7 @@ class Options extends Component {
   };
 
   onSubmit = (e) => {
-    if (this.state.name == this.state.nameConfirm && this.state.name != '') {
+    if (this.state.name === this.state.nameConfirm && this.state.name !== '') {
       companies.push({ name: this.state.name });
     }
 

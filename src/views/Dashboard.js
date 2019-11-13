@@ -11,28 +11,14 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import '../App.css';
-import DonutChartContainer from '../components/DonutChartContainer';
-import BarChartContainer from '../components/BarChartContainer';
-import ArcGaugeContainer from '../components/ArcGaugeContainer';
 import RadialGaugeContainer from '../components/RadialGaugeContainer';
-import LineChartContainer from '../components/LineChartContainer';
-import MultipleLineChartContainer from '../components/MultipleLineChartContainer';
-import { DropDownList } from '@progress/kendo-react-dropdowns';
+
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import { Link } from 'react-router-dom';
-
 //Dummy data
-import { donutChartData } from '../data/appData';
 import { report, currency } from '../data/appData';
-import { barChartQ4Months, barChartMonthlyPercentages } from '../data/appData';
-import { pruebaMultiplesDatos, pruebaDatosMultiplesDatos} from '../data/appData';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -59,7 +45,7 @@ class Dashboard extends Component {
   month = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'Todos'];
 
   handleChange = name => event => {
-    this.state.year =  event.target.value;
+    this.setState({year:  event.target.value});
   };
 
   classes = makeStyles(theme => ({
@@ -131,26 +117,18 @@ class Dashboard extends Component {
     return (
     <Ripple>
       <div className="bootstrap-wrapper">
-
         <div className="app-container container" ref={(el) => this.appContainer = el}>
-
           <div className="row">
-
-          <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-            <h1>Empresa | Reporte de operaciones</h1>
+            <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+              <h1>Empresa | Reporte de operaciones</h1>
+            </div>
+            <div className="col-xs-6 col-sm-6 col-md-8 col-lg-8 col-xl-8 buttons-right">
+              <Button primary={true} onClick={this.handleShare}>Compartir</Button>
+              <Button onClick={this.handlePDFExport}>Exportar a PDF</Button>
+            </div>
           </div>
-
-          <div className="col-xs-6 col-sm-6 col-md-8 col-lg-8 col-xl-8 buttons-right">
-            <Button primary={true} onClick={this.handleShare}>Compartir</Button>
-            <Button primary={true} look="outline"> Agregar CSV</Button>
-            <Button onClick={this.handlePDFExport}>Exportar a PDF</Button>
-            <Link to="/home" className="link"><Button look="outline">Regresar</Button></Link>
-          </div>
-
-
-          </div>
-
-          <div className="col-sm-12 col-md-4" >
+          <div class="row"></div>
+          <div className="col-sm-2 col-md-4" >
             <TextField
                 id="outlined-select-currency"
                 select
@@ -197,48 +175,6 @@ class Dashboard extends Component {
 
           <div className="row">
             {gauges}
-
-            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Región</TableCell>
-                    <TableCell align="right">Gastos</TableCell>
-                    <TableCell align="right">Ventas</TableCell>
-                    <TableCell align="right">% Ventas</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {this.rows.map(row => (
-                    <TableRow key={row.nombre}>
-                      <TableCell component="th" scope="row">
-                        {row.nombre}
-                      </TableCell>
-                      <TableCell align="right">{row.gastos}</TableCell>
-                      <TableCell align="right">{row.ventas}</TableCell>
-                      <TableCell align="right">{row.porcentaje}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Total</TableCell>
-                    <TableCell align="right">$ 200,000.00</TableCell>
-                    <TableCell align="right">$ 500,000.00</TableCell>
-                    <TableCell align="right"> 72%</TableCell>
-                  </TableRow>
-                </TableHead>
-              </Table>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-              <LineChartContainer title="Ingresos"/>
-              <MultipleLineChartContainer title="Ingresos" categories={pruebaMultiplesDatos} data={pruebaDatosMultiplesDatos}/>
-            </div>
-            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-              <LineChartContainer title="Gastos"/>
-            </div>
           </div>
           {this.state.showDialog &&
             <Dialog title={'Compartir reporte'} onClose={this.handleShare}>
