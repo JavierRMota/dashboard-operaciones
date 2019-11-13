@@ -11,13 +11,9 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import '../App.css';
-import DonutChartContainer from '../components/DonutChartContainer';
-import BarChartContainer from '../components/BarChartContainer';
-import ArcGaugeContainer from '../components/ArcGaugeContainer';
 import RadialGaugeContainer from '../components/RadialGaugeContainer';
 import LineChartContainer from '../components/LineChartContainer';
 import MultipleLineChartContainer from '../components/MultipleLineChartContainer';
-import { DropDownList } from '@progress/kendo-react-dropdowns';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -29,9 +25,7 @@ import TableRow from '@material-ui/core/TableRow';
 import { Link } from 'react-router-dom';
 
 //Dummy data
-import { donutChartData } from '../data/appData';
 import { report, currency } from '../data/appData';
-import { barChartQ4Months, barChartMonthlyPercentages } from '../data/appData';
 import { pruebaMultiplesDatos, pruebaDatosMultiplesDatos} from '../data/appData';
 
 class Dashboard extends Component {
@@ -59,7 +53,7 @@ class Dashboard extends Component {
   month = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'Todos'];
 
   handleChange = name => event => {
-    this.state.year =  event.target.value;
+    this.setState({year:  event.target.value});
   };
 
   classes = makeStyles(theme => ({

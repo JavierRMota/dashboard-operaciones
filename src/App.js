@@ -4,7 +4,6 @@ import Home from './views/Home';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Menu from './views/Menu';
 import Dashboard from './views/Dashboard';
-import Options from './views/Options';
 import Ventas from './views/Ventas';
 
 class App extends Component {

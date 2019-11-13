@@ -43,7 +43,7 @@ class LineChartContainer extends Component {
         </ChartCategoryAxis>
         <ChartSeries>
           <ChartSeriesItem data={data.series.data} type="line"
-            style="smooth" name={data.series.name} />
+            style={{smooth: true}} name={data.series.name} />
         </ChartSeries>
     </Chart>
     );
