@@ -28,8 +28,9 @@ import { Link } from 'react-router-dom';
 //Dummy data
 import { donutChartProductsData } from '../data/appData';
 import { barChartVentas, barCharVentasProductos } from '../data/appData';
-import { productoCantidad } from '../data/productoCantidad';
-import { productoMasVendido, productoMenosVendido } from '../data/productoCantidad';
+import { productoCantidad, productoMasVendido, productoMenosVendido } from '../data/productoCantidad';
+import { empleadoTotalVentas, empleadoMasVentas, empleadoMenosVentas } from '../data/ventaEmpleado';
+import { datosSucursalDineroGenerado, sucursalMasVentas, sucursalMenosVentas } from '../data/sucursalDineroGenerado';
 
 class Ventas extends Component {
   constructor(props) {
@@ -44,6 +45,12 @@ class Ventas extends Component {
 
   catalogoMasVendido = productoMasVendido(productoCantidad);
   catalogoMenosVendido = productoMenosVendido(productoCantidad);
+  empleadoMas = empleadoMasVentas(empleadoTotalVentas);
+  empleadoMenos = empleadoMenosVentas(empleadoTotalVentas);
+  sucursalMas = sucursalMasVentas(datosSucursalDineroGenerado);
+  sucursalMenos = sucursalMenosVentas(datosSucursalDineroGenerado);
+  sucursalMasDato = 2385;
+  sucursalMenosDato = 1100;
 
   handlePDFExport = () => {
     savePDF(ReactDOM.findDOMNode(this.appContainer), { paperSize: 'auto' });
@@ -205,7 +212,7 @@ class Ventas extends Component {
             //////////////////////////////////
             <div className="row">
               <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-                <h2>Ventas Totales de Productos Catálogo</h2>
+                <h2>Ventas Totales Catálogo</h2>
                 <DonutChartContainer data={productoCantidad}
                   categoryField="tipo" field="cantidad" />
                 <List>
@@ -222,7 +229,46 @@ class Ventas extends Component {
                 </List>
               </div>
               <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-                <h2>Empleados que más venden</h2>
+                <h2>Desempeño Empleados</h2>
+                <DonutChartContainer data={empleadoTotalVentas} categoryField="nombre" field="ventas" />
+                <List>
+                  <ListItem>
+                    <ListItemText
+                      primary="Empleado que más vende"
+                      secondary={this.empleadoMas}
+                    />
+                    <ListItemText
+                      primary="Empleado que menos vende"
+                      secondary={this.empleadoMenos}
+                    />
+                  </ListItem>
+                </List>
+              </div>
+              <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                <h2>Ventas Sucursales</h2>
+                <DonutChartContainer data={datosSucursalDineroGenerado} categoryField="sucursal" field="dineroGenerado" />
+                <List>
+                  <ListItem>
+                    <ListItemText
+                      primary="Sucursal con más ingresos"
+                      secondary={this.sucursalMas}
+                    />
+                    <ListItemText
+                      primary="Sucursal con menos ingresos"
+                      secondary={this.sucursalMenos}
+                    />
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText
+                      primary="Ingresos"
+                      secondary={'$ ' + this.sucursalMasDato}
+                    />
+                    <ListItemText
+                      primary="Ingresos"
+                      secondary={'$ ' + this.sucursalMenosDato}
+                    />
+                  </ListItem>
+                </List>
               </div>
             </div>
 
