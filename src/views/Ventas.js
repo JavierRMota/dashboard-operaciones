@@ -22,8 +22,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { Link } from 'react-router-dom';
-
+import MultipleLineChartContainer from '../components/MultipleLineChartContainer';
 
 //Dummy data
 import { donutChartProductsData } from '../data/appData';
@@ -31,6 +30,12 @@ import { barChartVentas, barCharVentasProductos } from '../data/appData';
 import { productoCantidad, productoMasVendido, productoMenosVendido } from '../data/productoCantidad';
 import { empleadoTotalVentas, empleadoMasVentas, empleadoMenosVentas } from '../data/ventaEmpleado';
 import { datosSucursalDineroGenerado, sucursalMasVentas, sucursalMenosVentas } from '../data/sucursalDineroGenerado';
+import { pruebaMultiplesDatos, pruebaDatosMultiplesDatos} from '../data/appData';
+
+import { currency, report } from '../data/appData';
+import RadialGaugeContainer from '../components/RadialGaugeContainer';
+
+
 
 class Ventas extends Component {
   constructor(props) {
@@ -40,6 +45,7 @@ class Ventas extends Component {
       showDialog: false,
       year: 'Todos',
       month: 'Todos',
+      ventas: report.gauges[0],
     };
   }
 
@@ -66,7 +72,7 @@ class Ventas extends Component {
   month = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'Todos'];
 
   handleChange = name => event => {
-    this.setState({ year: event.target.value });
+    this.setState({[name]:  event.target.value});
   };
 
   classes = makeStyles(theme => ({
@@ -95,34 +101,73 @@ class Ventas extends Component {
   ];
 
   render() {
+    var ventas = this.state.ventas
     return (
       <Ripple>
         <div className="bootstrap-wrapper">
           <div className="app-container container" ref={(el) => this.appContainer = el}>
             <div className="row">
-              <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+              <div className="col-xs-6 col-sm-6 col-md-8 col-lg-8 col-xl-8">
                 <h1>Empresa | Reporte específico de Ventas</h1>
               </div>
-              <div className="col-xs-6 col-sm-6 col-md-8 col-lg-8 col-xl-8 buttons-right">
+              <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 buttons-right">
                 <Button primary={true} onClick={this.handleShare}>Compartir</Button>
                 <Button onClick={this.handlePDFExport}>Exportar a PDF</Button>
               </div>
             </div>
-            <div className="col-sm-12 col-md-4">
+            <div className="row">
+            <div className="col-xs-4 col-sm-4 col-md-3 col-lg-3 col-xl-3">
+              <div align="center">
+                <h1>{ventas.title}</h1>
+              </div>
+              <RadialGaugeContainer
+                value={ventas.value}
+                plan={ventas.plan}
+                objective={ventas.objective}/>
+              <List>
+                <ListItem>
+                  <ListItemText
+                    primary={currency(ventas.value)+" / "+currency(ventas.plan)}
+                    secondary="Ventas actuales / plan de ventas"
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemText
+                    primary={
+                      (ventas.value - ventas.plan ? '↑' : '↓') +
+                      currency(Math.abs(ventas.value - ventas.plan)) + ' | ' +
+                      (Math.abs(ventas.value - ventas.plan) / ventas.plan).toFixed(2)
+                    + ' %'}
+                    secondary="Diferencia de ventas"
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemText
+                    primary={currency(ventas.objective)}
+                    secondary="Objetivo anual de ventas"
+                  />
+                </ListItem>
+              </List>
+            </div>
+            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+              <MultipleLineChartContainer title="Ingresos" categories={pruebaMultiplesDatos} data={pruebaDatosMultiplesDatos}/>
+            </div>
+            <div className="col-sm-2 col-md-2" >
+              <div class="row">
               <TextField
-                id="outlined-select-currency"
-                select
-                label="Año"
-                className={this.classes.textField}
-                SelectProps={{
-                  MenuProps: {
-                    className: this.classes.menu,
-                  },
-                }}
-                onChange={this.handleChange('year')}
-                value={this.state.year}
-                margin="normal"
-                variant="outlined"
+                  id="outlined-select-currency"
+                  select
+                  label="Año"
+                  className={this.classes.textField}
+                  SelectProps={{
+                    MenuProps: {
+                      className: this.classes.menu,
+                    },
+                  }}
+                  onChange={this.handleChange('year')}
+                  value={this.state.year}
+                  margin="normal"
+                  variant="outlined"
               >
                 {this.years.map(option => (
                   <MenuItem key={option} value={option}>
@@ -130,20 +175,22 @@ class Ventas extends Component {
                   </MenuItem>
                 ))}
               </TextField>
+              </div>
+                <div class="row">
               <TextField
-                id="outlined-select-currency"
-                select
-                label="Mes"
-                className={this.classes.textField}
-                SelectProps={{
-                  MenuProps: {
-                    className: this.classes.menu,
-                  },
-                }}
-                onChange={this.handleChange('month')}
-                value={this.state.month}
-                margin="normal"
-                variant="outlined"
+                  id="outlined-select-currency"
+                  select
+                  label="Mes"
+                  className={this.classes.textField}
+                  SelectProps={{
+                    MenuProps: {
+                      className: this.classes.menu,
+                    },
+                  }}
+                  onChange={this.handleChange('month')}
+                  value={this.state.month}
+                  margin="normal"
+                  variant="outlined"
               >
                 {this.month.map(option => (
                   <MenuItem key={option} value={option}>
@@ -151,8 +198,8 @@ class Ventas extends Component {
                   </MenuItem>
                 ))}
               </TextField>
+              </div>
             </div>
-            <div className="row">
               <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
                 <h2>Ventas Totales de Marcas</h2>
                 <DonutChartContainer data={donutChartProductsData}
@@ -269,13 +316,6 @@ class Ventas extends Component {
                     />
                   </ListItem>
                 </List>
-              </div>
-            </div>
-
-
-            <div className="row">
-              <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                <LineChartContainer title="Ingresos" />
               </div>
             </div>
             {this.state.showDialog &&

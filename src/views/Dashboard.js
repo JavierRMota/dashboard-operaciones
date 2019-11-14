@@ -45,7 +45,7 @@ class Dashboard extends Component {
   month = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'Todos'];
 
   handleChange = name => event => {
-    this.setState({year:  event.target.value});
+    this.setState({[name]:  event.target.value});
   };
 
   classes = makeStyles(theme => ({
@@ -78,7 +78,7 @@ class Dashboard extends Component {
     <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
 
     <div align="center">
-    <Link to="/ventas" className="link">
+    <Link to={item.path} className="link">
       <Button primary = {true} look="flat"><u><b>{item.title}</b></u></Button></Link>
       </div>
 
@@ -119,16 +119,17 @@ class Dashboard extends Component {
       <div className="bootstrap-wrapper">
         <div className="app-container container" ref={(el) => this.appContainer = el}>
           <div className="row">
-            <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
               <h1>Empresa | Reporte de operaciones</h1>
             </div>
-            <div className="col-xs-6 col-sm-6 col-md-8 col-lg-8 col-xl-8 buttons-right">
+            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 buttons-right">
               <Button primary={true} onClick={this.handleShare}>Compartir</Button>
               <Button onClick={this.handlePDFExport}>Exportar a PDF</Button>
             </div>
           </div>
-          <div class="row"></div>
-          <div className="col-sm-2 col-md-4" >
+          <div class="row">
+          <div className="col-sm-2 col-md-2" >
+            <div class="row">
             <TextField
                 id="outlined-select-currency"
                 select
@@ -150,6 +151,8 @@ class Dashboard extends Component {
                 </MenuItem>
               ))}
             </TextField>
+            </div>
+              <div class="row">
             <TextField
                 id="outlined-select-currency"
                 select
@@ -171,11 +174,11 @@ class Dashboard extends Component {
                 </MenuItem>
               ))}
             </TextField>
+            </div>
           </div>
-
-          <div className="row">
             {gauges}
           </div>
+
           {this.state.showDialog &&
             <Dialog title={'Compartir reporte'} onClose={this.handleShare}>
               <p>Correo a compartir.</p>
