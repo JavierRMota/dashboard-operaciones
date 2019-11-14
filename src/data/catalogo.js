@@ -1,8 +1,8 @@
 export var Catalogo = [
     {
-      Id_Catalogo: 1,
-      Nombre: "Refresco",
-      Precio: 25.00,
+        Id_Catalogo: 1,
+        Nombre: "Refresco",
+        Precio: 25.00,
     },
     {
         Id_Catalogo: 2,
@@ -45,8 +45,8 @@ export var Catalogo = [
         Precio: 35.00
     },
     {
-        Id_Catalog: 10,
+        Id_Catalogo: 10,
         Nombre: "Queso Fundido",
         Precio: 55.00
     }
-  ];
+];
