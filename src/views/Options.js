@@ -22,6 +22,34 @@ class Options extends Component {
       };
   }
 
+  csv2JSON(csv){
+    var lines=csv.split("\n");
+    var result = [];
+    var headers=lines[0].split(",");
+    for(var i=1;i<lines.length;i++){
+      var obj = {};
+      var currentline=lines[i].split(",");
+      for(var j=0;j<headers.length;j++){
+        obj[headers[j]] = currentline[j];
+      }
+      result.push(obj);
+    }
+    //return result; //JavaScript object
+    return JSON.stringify(result); //JSON
+  }
+
+  handleCatalog = files => {
+    var reader = new FileReader();
+    reader.onload = (e) => {
+    // Use reader.result
+    var result = this.csv2JSON(reader);
+    alert('Se han registrado ' + (result.length - 1) + ' elementos del catalogo.');
+    console.log(result);
+    };
+    reader.readAsText(files[0]);
+    return result;
+  };
+
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
