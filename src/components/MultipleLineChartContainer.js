@@ -5,22 +5,24 @@ import {
   ChartSeries,
   ChartSeriesItem,
   ChartCategoryAxis,
-  ChartCategoryAxisItem
+  ChartCategoryAxisItem,
+  ChartLegend
 } from '@progress/kendo-react-charts';
 
 class MultipleLineChartContainer extends Component {
 
   render() {
-    return(
+    return (
       <Chart>
         <ChartTitle text={this.props.title} />
+        <ChartLegend position="bottom" orientation="horizontal" />
         <ChartCategoryAxis>
-          <ChartCategoryAxisItem title={{text: "Meses"}} categories={this.props.categories}/>
+          <ChartCategoryAxisItem title={{ text: "Meses" }} categories={this.props.categories} />
         </ChartCategoryAxis>
         <ChartSeries>
-          {this.props.data[0].data.map((item, idx) =>{
+          {this.props.data[0].data.map((item, idx) => {
             console.log(item)
-            return <ChartSeriesItem key={idx} type="line" data={ item.data }/>
+            return <ChartSeriesItem key={idx} type="line" data={item.data} name={item.name} />
           }
 
           )}

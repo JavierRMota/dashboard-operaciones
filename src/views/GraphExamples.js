@@ -5,7 +5,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import LineChartContainer from '../components/LineChartContainer';
 import MultipleLineChartContainer from '../components/MultipleLineChartContainer';
-import { pruebaMultiplesDatos, pruebaDatosMultiplesDatos} from '../data/appData';
+import { pruebaMultiplesDatos, pruebaDatosMultiplesDatos } from '../data/appData';
 <div className="row">
   <div className="col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
     <div className="row">
@@ -68,12 +68,66 @@ import { pruebaMultiplesDatos, pruebaDatosMultiplesDatos} from '../data/appData'
     </Table>
   </div>
   <div className="row">
-  <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-    <LineChartContainer title="Ingresos"/>
-    <MultipleLineChartContainer title="Ingresos" categories={pruebaMultiplesDatos} data={pruebaDatosMultiplesDatos}/>
-  </div>
-  <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-    <LineChartContainer title="Gastos"/>
+    <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+      <LineChartContainer title="Ingresos" />
+      <MultipleLineChartContainer title="Ingresos" categories={pruebaMultiplesDatos} data={pruebaDatosMultiplesDatos} />
+    </div>
+    <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+      <LineChartContainer title="Gastos" />
+    </div>
   </div>
 </div>
-</div>
+  <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+    <h2>Ventas Totales de Marcas</h2>
+    <DonutChartContainer data={donutChartProductsData}
+      categoryField="tipo" field="cantidad" />
+    <List>
+      <ListItem>
+        <ListItemText
+          primary="Producto más vendido"
+          secondary="Powerade"
+        />
+        <ListItemText
+          primary="Producto menos vendido"
+          secondary="Sabritas"
+        />
+      </ListItem>
+    </List>
+  </div>
+  <div className="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+    <h2>Ventas Esperadas Vs. Ventas Reales</h2>
+    <BarChartContainer categories={barChartVentas}
+      data={barCharVentasProductos} />
+  </div>
+  <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableCell>Marcas</TableCell>
+          <TableCell align="center">Ventas Reales</TableCell>
+          <TableCell align="center">Ventas Esperadas</TableCell>
+          <TableCell align="right">% Ventas</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {this.rows.map(row => (
+          <TableRow key={row.nombreProducto}>
+            <TableCell component="th" scope="row">
+              {row.nombreProducto}
+            </TableCell>
+            <TableCell align="center">${row.ventasReales}</TableCell>
+            <TableCell align="center">${row.ventasEsperadas}</TableCell>
+            <TableCell align="right">{row.porcentaje}%</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+      <TableHead>
+        <TableRow>
+          <TableCell>Total</TableCell>
+          <TableCell align="center">$ 580,000.00</TableCell>
+          <TableCell align="center">$ 623,000.00</TableCell>
+          <TableCell align="right">93.10%</TableCell>
+        </TableRow>
+      </TableHead>
+    </Table>
+  </div>
