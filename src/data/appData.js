@@ -98,7 +98,7 @@ export var report = {
             plan: 10000, subtitle2: 'Plan de gastos',
             objective: 20000, subtitle3: 'Diferencia de gastos',
             subtitle4: 'Objetivo anual de gastos',
-            path: '/ventas',
+            path: '/gastos',
         },
         {
             title: 'MARGEN', value: 90000, subtitle1: 'Margen actual acumulado',

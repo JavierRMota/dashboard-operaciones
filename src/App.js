@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Menu from './views/Menu';
 import Dashboard from './views/Dashboard';
 import Ventas from './views/Ventas';
+import Gastos from './views/Gastos';
 import { Button } from '@progress/kendo-react-buttons';
 import { Link } from 'react-router-dom';
 
@@ -32,20 +33,31 @@ class App extends Component {
                   <Link to="/reporte" className="link">
                     <Button color="inherit" >Regresar</Button>
                   </Link>
-                }/>
+                } />
                 <Ventas />
               </div>} />
             <Route
-                exact
-                path="/reporte"
-                render={() => <div>
-                  <Menu left={
-                    <Link to="/home" className="link">
-                      <Button color="inherit" >Regresar</Button>
-                    </Link>
-                  }/>
-                  <Dashboard />
-                </div>} />
+              exact
+              path="/gastos"
+              render={() => <div>
+                <Menu left={
+                  <Link to="/reporte" className="link">
+                    <Button color="inherit" >Regresar</Button>
+                  </Link>
+                } />
+                <Gastos />
+              </div>} />
+            <Route
+              exact
+              path="/reporte"
+              render={() => <div>
+                <Menu left={
+                  <Link to="/home" className="link">
+                    <Button color="inherit" >Regresar</Button>
+                  </Link>
+                } />
+                <Dashboard />
+              </div>} />
           </Switch>
         </div>
       </BrowserRouter>

@@ -32,6 +32,7 @@ import { empleadoTotalVentas, empleadoMasVentas, empleadoMenosVentas } from '../
 import { datosSucursalDineroGenerado, sucursalMasVentas, sucursalMenosVentas } from '../data/sucursalDineroGenerado';
 import { pruebaMultiplesDatos, pruebaDatosMultiplesDatos } from '../data/appData';
 import { mesesGraficaMultiple, datosGraficaMultiple } from '../data/datosGraficaMultiple';
+import { clientesTipicos, clienteMasAsiste, clienteMenosAsiste } from '../data/datosTipoClientela';
 
 import { currency, report } from '../data/appData';
 import RadialGaugeContainer from '../components/RadialGaugeContainer';
@@ -58,6 +59,8 @@ class Ventas extends Component {
   sucursalMenos = sucursalMenosVentas(datosSucursalDineroGenerado);
   sucursalMasDato = 2385;
   sucursalMenosDato = 1100;
+  clienteFrecuenciaMaxima = clienteMasAsiste(clientesTipicos);
+  clienteFrecuenciaMinima = clienteMenosAsiste(clientesTipicos);
 
   handlePDFExport = () => {
     savePDF(ReactDOM.findDOMNode(this.appContainer), { paperSize: 'auto' });
@@ -203,7 +206,7 @@ class Ventas extends Component {
               </div>
             </div>
             <div className="row">
-              <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+              <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <h2>Ventas Totales Catálogo</h2>
                 <DonutChartContainer data={productoCantidad}
                   categoryField="tipo" field="cantidad" />
@@ -220,7 +223,7 @@ class Ventas extends Component {
                   </ListItem>
                 </List>
               </div>
-              <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+              <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <h2>Desempeño Empleados</h2>
                 <DonutChartContainer data={empleadoTotalVentas} categoryField="nombre" field="ventas" />
                 <List>
@@ -236,7 +239,9 @@ class Ventas extends Component {
                   </ListItem>
                 </List>
               </div>
-              <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+            </div>
+            <div className="row">
+              <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <h2>Ventas Sucursales</h2>
                 <DonutChartContainer data={datosSucursalDineroGenerado} categoryField="sucursal" field="dineroGenerado" />
                 <List>
@@ -258,6 +263,23 @@ class Ventas extends Component {
                     <ListItemText
                       primary="Ingresos"
                       secondary={'$ ' + this.sucursalMenosDato}
+                    />
+                  </ListItem>
+                </List>
+              </div>
+              <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <h2>Tipo de Clientela</h2>
+                <DonutChartContainer data={clientesTipicos}
+                  categoryField="tipoCliente" field="cantidad" />
+                <List>
+                  <ListItem>
+                    <ListItemText
+                      primary="Más frecuente"
+                      secondary={this.clienteFrecuenciaMaxima}
+                    />
+                    <ListItemText
+                      primary="Menos frecuente"
+                      secondary={this.clienteFrecuenciaMinima}
                     />
                   </ListItem>
                 </List>
