@@ -22,10 +22,20 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import MultipleLineChartContainer from '../components/MultipleLineChartContainer';
 
 //Dummy data
-import { donutChartProductsData} from '../data/appData';
-import { barChartVentas, barCharVentasProductos} from '../data/appData';
+import { donutChartProductsData } from '../data/appData';
+import { barChartVentas, barCharVentasProductos } from '../data/appData';
+import { productoCantidad, productoMasVendido, productoMenosVendido } from '../data/productoCantidad';
+import { empleadoTotalVentas, empleadoMasVentas, empleadoMenosVentas } from '../data/ventaEmpleado';
+import { datosSucursalDineroGenerado, sucursalMasVentas, sucursalMenosVentas } from '../data/sucursalDineroGenerado';
+import { pruebaMultiplesDatos, pruebaDatosMultiplesDatos} from '../data/appData';
+
+import { currency, report } from '../data/appData';
+import RadialGaugeContainer from '../components/RadialGaugeContainer';
+
+
 
 class Ventas extends Component {
   constructor(props) {
@@ -35,8 +45,18 @@ class Ventas extends Component {
       showDialog: false,
       year: 'Todos',
       month: 'Todos',
+      ventas: report.gauges[0],
     };
   }
+
+  catalogoMasVendido = productoMasVendido(productoCantidad);
+  catalogoMenosVendido = productoMenosVendido(productoCantidad);
+  empleadoMas = empleadoMasVentas(empleadoTotalVentas);
+  empleadoMenos = empleadoMenosVentas(empleadoTotalVentas);
+  sucursalMas = sucursalMasVentas(datosSucursalDineroGenerado);
+  sucursalMenos = sucursalMenosVentas(datosSucursalDineroGenerado);
+  sucursalMasDato = 2385;
+  sucursalMenosDato = 1100;
 
   handlePDFExport = () => {
     savePDF(ReactDOM.findDOMNode(this.appContainer), { paperSize: 'auto' });
@@ -52,7 +72,7 @@ class Ventas extends Component {
   month = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'Todos'];
 
   handleChange = name => event => {
-    this.setState({ year: event.target.value});
+    this.setState({[name]:  event.target.value});
   };
 
   classes = makeStyles(theme => ({
@@ -81,137 +101,236 @@ class Ventas extends Component {
   ];
 
   render() {
+    var ventas = this.state.ventas
     return (
-    <Ripple>
-      <div className="bootstrap-wrapper">
-        <div className="app-container container" ref={(el) => this.appContainer = el}>
-          <div className="row">
-            <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-              <h1>Empresa | Reporte específico de Ventas</h1>
+      <Ripple>
+        <div className="bootstrap-wrapper">
+          <div className="app-container container" ref={(el) => this.appContainer = el}>
+            <div className="row">
+              <div className="col-xs-6 col-sm-6 col-md-8 col-lg-8 col-xl-8">
+                <h1>Empresa | Reporte específico de Ventas</h1>
+              </div>
+              <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 buttons-right">
+                <Button primary={true} onClick={this.handleShare}>Compartir</Button>
+                <Button onClick={this.handlePDFExport}>Exportar a PDF</Button>
+              </div>
             </div>
-            <div className="col-xs-6 col-sm-6 col-md-8 col-lg-8 col-xl-8 buttons-right">
-              <Button primary={true} onClick={this.handleShare}>Compartir</Button>
-              <Button onClick={this.handlePDFExport}>Exportar a PDF</Button>
-            </div>
-          </div>
-          <div className="col-sm-12 col-md-4">
-            <TextField
-                id="outlined-select-currency"
-                select
-                label="Año"
-                className={this.classes.textField}
-                SelectProps={{
-                  MenuProps: {
-                    className: this.classes.menu,
-                  },
-                }}
-                onChange={this.handleChange('year')}
-                value={this.state.year}
-                margin="normal"
-                variant="outlined"
-            >
-              {this.years.map(option => (
-                <MenuItem key={option} value={option}>
-                  {option}
-                </MenuItem>
-              ))}
-            </TextField>
-            <TextField
-                id="outlined-select-currency"
-                select
-                label="Mes"
-                className={this.classes.textField}
-                SelectProps={{
-                  MenuProps: {
-                    className: this.classes.menu,
-                  },
-                }}
-                onChange={this.handleChange('month')}
-                value={this.state.month}
-                margin="normal"
-                variant="outlined"
-            >
-              {this.month.map(option => (
-                <MenuItem key={option} value={option}>
-                  {option}
-                </MenuItem>
-              ))}
-            </TextField>
-          </div>
-          <div className="row">
-            <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-              <h2>Ventas Totales de Marcas</h2>
-              <DonutChartContainer data={donutChartProductsData}
-                categoryField="tipo" field="cantidad"/>
+            <div className="row">
+            <div className="col-xs-4 col-sm-4 col-md-3 col-lg-3 col-xl-3">
+              <div align="center">
+                <h1>{ventas.title}</h1>
+              </div>
+              <RadialGaugeContainer
+                value={ventas.value}
+                plan={ventas.plan}
+                objective={ventas.objective}/>
               <List>
                 <ListItem>
                   <ListItemText
-                    primary="Producto más vendido"
-                    secondary="Powerade"
+                    primary={currency(ventas.value)+" / "+currency(ventas.plan)}
+                    secondary="Ventas actuales / plan de ventas"
                   />
+                </ListItem>
+                <ListItem>
                   <ListItemText
-                    primary="Producto menos vendido"
-                    secondary="Sabritas"
+                    primary={
+                      (ventas.value - ventas.plan ? '↑' : '↓') +
+                      currency(Math.abs(ventas.value - ventas.plan)) + ' | ' +
+                      (Math.abs(ventas.value - ventas.plan) / ventas.plan).toFixed(2)
+                    + ' %'}
+                    secondary="Diferencia de ventas"
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemText
+                    primary={currency(ventas.objective)}
+                    secondary="Objetivo anual de ventas"
                   />
                 </ListItem>
               </List>
             </div>
-            <div className="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
-              <h2>Ventas Esperadas Vs. Ventas Reales</h2>
-              <BarChartContainer categories={barChartVentas}
-                data={barCharVentasProductos} />
-            </div>
-            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Marcas</TableCell>
-                    <TableCell align="center">Ventas Reales</TableCell>
-                    <TableCell align="center">Ventas Esperadas</TableCell>
-                    <TableCell align="right">% Ventas</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {this.rows.map(row => (
-                    <TableRow key={row.nombreProducto}>
-                      <TableCell component="th" scope="row">
-                        {row.nombreProducto}
-                      </TableCell>
-                      <TableCell align="center">${row.ventasReales}</TableCell>
-                      <TableCell align="center">${row.ventasEsperadas}</TableCell>
-                      <TableCell align="right">{row.porcentaje}%</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Total</TableCell>
-                    <TableCell align="center">$ 580,000.00</TableCell>
-                    <TableCell align="center">$ 623,000.00</TableCell>
-                    <TableCell align="right">93.10%</TableCell>
-                  </TableRow>
-                </TableHead>
-              </Table>
-            </div>
-          </div>
-          <div className="row">
             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-              <LineChartContainer title="Ingresos"/>
+              <MultipleLineChartContainer title="Ingresos" categories={pruebaMultiplesDatos} data={pruebaDatosMultiplesDatos}/>
             </div>
+            <div className="col-sm-2 col-md-2" >
+              <div class="row">
+              <TextField
+                  id="outlined-select-currency"
+                  select
+                  label="Año"
+                  className={this.classes.textField}
+                  SelectProps={{
+                    MenuProps: {
+                      className: this.classes.menu,
+                    },
+                  }}
+                  onChange={this.handleChange('year')}
+                  value={this.state.year}
+                  margin="normal"
+                  variant="outlined"
+              >
+                {this.years.map(option => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </TextField>
+              </div>
+                <div class="row">
+              <TextField
+                  id="outlined-select-currency"
+                  select
+                  label="Mes"
+                  className={this.classes.textField}
+                  SelectProps={{
+                    MenuProps: {
+                      className: this.classes.menu,
+                    },
+                  }}
+                  onChange={this.handleChange('month')}
+                  value={this.state.month}
+                  margin="normal"
+                  variant="outlined"
+              >
+                {this.month.map(option => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </TextField>
+              </div>
+            </div>
+              <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                <h2>Ventas Totales de Marcas</h2>
+                <DonutChartContainer data={donutChartProductsData}
+                  categoryField="tipo" field="cantidad" />
+                <List>
+                  <ListItem>
+                    <ListItemText
+                      primary="Producto más vendido"
+                      secondary="Powerade"
+                    />
+                    <ListItemText
+                      primary="Producto menos vendido"
+                      secondary="Sabritas"
+                    />
+                  </ListItem>
+                </List>
+              </div>
+              <div className="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+                <h2>Ventas Esperadas Vs. Ventas Reales</h2>
+                <BarChartContainer categories={barChartVentas}
+                  data={barCharVentasProductos} />
+              </div>
+              <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Marcas</TableCell>
+                      <TableCell align="center">Ventas Reales</TableCell>
+                      <TableCell align="center">Ventas Esperadas</TableCell>
+                      <TableCell align="right">% Ventas</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.rows.map(row => (
+                      <TableRow key={row.nombreProducto}>
+                        <TableCell component="th" scope="row">
+                          {row.nombreProducto}
+                        </TableCell>
+                        <TableCell align="center">${row.ventasReales}</TableCell>
+                        <TableCell align="center">${row.ventasEsperadas}</TableCell>
+                        <TableCell align="right">{row.porcentaje}%</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Total</TableCell>
+                      <TableCell align="center">$ 580,000.00</TableCell>
+                      <TableCell align="center">$ 623,000.00</TableCell>
+                      <TableCell align="right">93.10%</TableCell>
+                    </TableRow>
+                  </TableHead>
+                </Table>
+              </div>
+            </div>
+
+            //////////////////////////////////
+            <div className="row">
+              <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                <h2>Ventas Totales Catálogo</h2>
+                <DonutChartContainer data={productoCantidad}
+                  categoryField="tipo" field="cantidad" />
+                <List>
+                  <ListItem>
+                    <ListItemText
+                      primary="Producto más vendido"
+                      secondary={this.catalogoMasVendido}
+                    />
+                    <ListItemText
+                      primary="Producto menos vendido"
+                      secondary={this.catalogoMenosVendido}
+                    />
+                  </ListItem>
+                </List>
+              </div>
+              <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                <h2>Desempeño Empleados</h2>
+                <DonutChartContainer data={empleadoTotalVentas} categoryField="nombre" field="ventas" />
+                <List>
+                  <ListItem>
+                    <ListItemText
+                      primary="Empleado que más vende"
+                      secondary={this.empleadoMas}
+                    />
+                    <ListItemText
+                      primary="Empleado que menos vende"
+                      secondary={this.empleadoMenos}
+                    />
+                  </ListItem>
+                </List>
+              </div>
+              <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                <h2>Ventas Sucursales</h2>
+                <DonutChartContainer data={datosSucursalDineroGenerado} categoryField="sucursal" field="dineroGenerado" />
+                <List>
+                  <ListItem>
+                    <ListItemText
+                      primary="Sucursal con más ingresos"
+                      secondary={this.sucursalMas}
+                    />
+                    <ListItemText
+                      primary="Sucursal con menos ingresos"
+                      secondary={this.sucursalMenos}
+                    />
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText
+                      primary="Ingresos"
+                      secondary={'$ ' + this.sucursalMasDato}
+                    />
+                    <ListItemText
+                      primary="Ingresos"
+                      secondary={'$ ' + this.sucursalMenosDato}
+                    />
+                  </ListItem>
+                </List>
+              </div>
+            </div>
+            {this.state.showDialog &&
+              <Dialog title={'Compartir reporte'} onClose={this.handleShare}>
+                <p>Correo a compartir.</p>
+                <Input placeholder="ejemplo@ejemplo.com" />
+                <DialogActionsBar>
+                  <Button primary={true} onClick={this.handleShare}>Compartir</Button>
+                  <Button onClick={this.handleShare}>Cancelar</Button>
+                </DialogActionsBar>
+              </Dialog>
+            }
           </div>
-          {this.state.showDialog &&
-            <Dialog title={'Compartir reporte'} onClose={this.handleShare}>
-              <p>Correo a compartir.</p>
-              <Input placeholder="ejemplo@ejemplo.com" />
-              <DialogActionsBar>
-                <Button primary={true} onClick={this.handleShare}>Compartir</Button>
-                <Button onClick={this.handleShare}>Cancelar</Button>
-              </DialogActionsBar>
-            </Dialog>
-          }
         </div>
-      </div>
-    </Ripple>
+      </Ripple>
     );
   }
 

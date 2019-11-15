@@ -69,8 +69,6 @@ class RadialGaugeContainer extends Component {
   }
 
   render() {
-
-    console.log(this.state);
     const radialOptions = {
         value: this.state.value,
         shape: 'arrow',

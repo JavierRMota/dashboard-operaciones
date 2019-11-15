@@ -13,6 +13,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import '../App.css';
 import RadialGaugeContainer from '../components/RadialGaugeContainer';
 
+import Card from '@material-ui/core/Card';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import CardContent from '@material-ui/core/CardContent';
+
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -45,7 +50,7 @@ class Dashboard extends Component {
   month = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'Todos'];
 
   handleChange = name => event => {
-    this.setState({year:  event.target.value});
+    this.setState({[name]:  event.target.value});
   };
 
   classes = makeStyles(theme => ({
@@ -61,7 +66,7 @@ class Dashboard extends Component {
       marginTop: theme.spacing(2),
     },
     menu: {
-      width: 200,
+      width: 100,
     },
   }));
 
@@ -74,13 +79,15 @@ class Dashboard extends Component {
   ];
 
   render() {
+
     var gauges = report.gauges.map((item, key) =>
     <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
 
     <div align="center">
-    <Link to="/ventas" className="link">
+    <Link to={item.path} className="link">
       <Button primary = {true} look="flat"><u><b>{item.title}</b></u></Button></Link>
       </div>
+
 
       <RadialGaugeContainer
         value={item.value}
@@ -111,6 +118,7 @@ class Dashboard extends Component {
               />
             </ListItem>
         </List>
+
     </div>
     );
 
@@ -119,16 +127,17 @@ class Dashboard extends Component {
       <div className="bootstrap-wrapper">
         <div className="app-container container" ref={(el) => this.appContainer = el}>
           <div className="row">
-            <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
               <h1>Empresa | Reporte de operaciones</h1>
             </div>
-            <div className="col-xs-6 col-sm-6 col-md-8 col-lg-8 col-xl-8 buttons-right">
+            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 buttons-right">
               <Button primary={true} onClick={this.handleShare}>Compartir</Button>
               <Button onClick={this.handlePDFExport}>Exportar a PDF</Button>
             </div>
           </div>
-          <div class="row"></div>
-          <div className="col-sm-2 col-md-4" >
+          <div class="row">
+          <div className="col-sm-2 col-md-2" >
+            <div class="row">
             <TextField
                 id="outlined-select-currency"
                 select
@@ -150,6 +159,8 @@ class Dashboard extends Component {
                 </MenuItem>
               ))}
             </TextField>
+            </div>
+              <div class="row">
             <TextField
                 id="outlined-select-currency"
                 select
@@ -171,11 +182,12 @@ class Dashboard extends Component {
                 </MenuItem>
               ))}
             </TextField>
-          </div>
+            </div>
 
-          <div className="row">
+          </div>
             {gauges}
           </div>
+
           {this.state.showDialog &&
             <Dialog title={'Compartir reporte'} onClose={this.handleShare}>
               <p>Correo a compartir.</p>

@@ -13,6 +13,13 @@ import { Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import { companies } from '../data/appData';
 
+import Card from '@material-ui/core/Card';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import CardContent from '@material-ui/core/CardContent';
+import Container from '@material-ui/core/Container';
+
+
 class Options extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +28,34 @@ class Options extends Component {
         nameConfirm: '',
       };
   }
+
+  csv2JSON(csv){
+    var lines=csv.split("\n");
+    var result = [];
+    var headers=lines[0].split(",");
+    for(var i=1;i<lines.length;i++){
+      var obj = {};
+      var currentline=lines[i].split(",");
+      for(var j=0;j<headers.length;j++){
+        obj[headers[j]] = currentline[j];
+      }
+      result.push(obj);
+    }
+    //return result; //JavaScript object
+    return JSON.stringify(result); //JSON
+  }
+
+  /*handleCatalog = files => {
+    var reader = new FileReader();
+    reader.onload = (e) => {
+    // Use reader.result
+    var result = this.csv2JSON(reader);
+    alert('Se han registrado ' + (result.length - 1) + ' elementos del catalogo.');
+    console.log(result);
+    };
+    reader.readAsText(files[0]);
+    return result;
+  };*/
 
   handleChange = (e) => {
     this.setState({
@@ -113,8 +148,13 @@ class Options extends Component {
               <h1>Bienvenido | Consultor</h1>
             </div>
           </div>
+          <Grid container justify = "center">
+          <Container align="center">
+
           <div className="row">
-            <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+            <div className="col-xs-10 col-sm-10 col-md-8 col-lg-8 col-xl-8">
+            <Card>
+            <CardContent>
               <h2>Empresas</h2>
               <TextField
                 id="standard-name"
@@ -125,8 +165,12 @@ class Options extends Component {
               <List component="nav" aria-label="main mailbox folders">
                 {company}
               </List>
+              </CardContent>
+            </Card>
             </div>
-            <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
+            <div className="col-xs-8 col-sm-8 col-md-4 col-lg-4 col-xl-4">
+            <Card>
+            <CardContent>
               <h2>Crear empresa</h2>
               <form noValidate autoComplete="off">
                 <TextField
@@ -173,9 +217,13 @@ class Options extends Component {
                     <Button onClick={this.handleUpload}>Cancelar</Button>
                 </Dialog>
               }
-
+              </CardContent>
+            </Card>
             </div>
           </div>
+          </Container>
+          </Grid>
+
         </div>
       </div>
     );
