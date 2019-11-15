@@ -45,18 +45,6 @@ class Options extends Component {
     return JSON.stringify(result); //JSON
   }
 
-  /*handleCatalog = files => {
-    var reader = new FileReader();
-    reader.onload = (e) => {
-    // Use reader.result
-    var result = this.csv2JSON(reader);
-    alert('Se han registrado ' + (result.length - 1) + ' elementos del catalogo.');
-    console.log(result);
-    };
-    reader.readAsText(files[0]);
-    return result;
-  };*/
-
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
@@ -84,7 +72,7 @@ class Options extends Component {
     var reader = new FileReader();
     reader.onload = (e) => {
       // Use reader.result
-      var result = reader.result.split('\n');
+      var result = this.csv2JSON(reader.result);
       alert('Se han registrado ' + (result.length - 1) + ' metas ');
       console.log(result);
     };
