@@ -26,7 +26,7 @@ db.once("open", function() {
   db.dropDatabase(function(err, result) {});
   /**/
   companiaM.create(
-    { nombre: "FEMSA", mail: "femsa@mail.com", password: "Femsa123." },
+    { nombre: "FEMSA", mail: "a", password: "a" },
     function(err, doc) {}
   );
 });
