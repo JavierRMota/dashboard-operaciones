@@ -5,24 +5,11 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import axios from "axios";
 
-<<<<<<< HEAD
-import CardContent from '@material-ui/core/CardContent';
-import Container from '@material-ui/core/Container';
-import TextField from '@material-ui/core/TextField';
-import { Button } from '@progress/kendo-react-buttons';
-import { Link } from 'react-router-dom';
-
-
-import '@progress/kendo-theme-material/dist/all.css';
-import 'bootstrap-4-grid/css/grid.min.css';
-import '../App.css';
-=======
 import CardContent from "@material-ui/core/CardContent";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@progress/kendo-react-buttons";
 //import { Link } from "react-router-dom";
->>>>>>> d2763ca61854ccbd5e877071e123c52a8e48f72a
 
 import "@progress/kendo-theme-material/dist/all.css";
 import "bootstrap-4-grid/css/grid.min.css";
