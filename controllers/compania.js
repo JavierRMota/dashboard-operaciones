@@ -18,12 +18,18 @@ exports.consultarCompania = (req, res) => {
 };
 
 exports.loginCompania = (req, res) => {
-  compania.findOne({ mail: req.body.mail }, "password", function(err, pass) {
-    pass.comparePassword(req.body.password, function(err, isMatch) {
-      if (err) throw err;
-      if (isMatch) {
-        res.send("welcome");
-      } else res.send("error"); // -&gt; Password123: true
+  console.log(req.body);
+  if (req.body.usuario.password != "") {
+    compania.findOne({ mail: req.body.usuario.mail }, "password", function(
+      err,
+      pass
+    ) {
+      pass.comparePassword(req.body.usuario.password, function(err, isMatch) {
+        if (err) throw err;
+        if (isMatch) {
+          res.send("welcome");
+        } else res.send("error"); // -&gt; Password123: true
+      });
     });
-  });
+  } else res.send("error");
 };
