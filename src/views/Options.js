@@ -70,51 +70,135 @@ class Options extends Component {
     });
   };
 
-  handleGoals = files => {
+  handleCatalogo = files => {
     var reader = new FileReader();
     reader.onload = (e) => {
       // Use reader.result
       var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' metas ');
+      alert('Se han registrado ' + (result.length - 1) + ' elementos del catálogo. ');
       console.log(result);
     };
-
     reader.readAsText(files[0]);
   };
 
-  handleIncomes = files => {
+  handleClientes = files => {
     var reader = new FileReader();
     reader.onload = (e) => {
       // Use reader.result
-      var result = reader.result.split('\n');
-      alert('Se han registrado ' + (result.length - 1) + ' ingresos ');
+      var result = this.csv2JSON(reader.result);
+      alert('Se han registrado ' + (result.length - 1) + ' clientes. ');
       console.log(result);
     };
-
     reader.readAsText(files[0]);
   };
 
-  handleCompanies = files => {
+  handleGastosDetallados = files => {
     var reader = new FileReader();
     reader.onload = (e) => {
       // Use reader.result
-      var result = reader.result.split('\n');
-      alert('Se han registrado ' + (result.length - 1) + ' empresas ');
+      var result = this.csv2JSON(reader.result);
+      alert('Se han registrado ' + (result.length - 1) + ' gastos detallados. ');
       console.log(result);
     };
-
     reader.readAsText(files[0]);
   };
 
-  handleExpenses = files => {
+  handleGastosFijos = files => {
     var reader = new FileReader();
     reader.onload = (e) => {
       // Use reader.result
-      var result = reader.result.split('\n');
-      alert('Se han registrado ' + (result.length - 1) + ' gastos ');
+      var result = this.csv2JSON(reader.result);
+      alert('Se han registrado ' + (result.length - 1) + ' gastos fijos. ');
       console.log(result);
     };
+    reader.readAsText(files[0]);
+  };
 
+  handleGastosVariables = files => {
+    var reader = new FileReader();
+    reader.onload = (e) => {
+      // Use reader.result
+      var result = this.csv2JSON(reader.result);
+      alert('Se han registrado ' + (result.length - 1) + ' gastos variables. ');
+      console.log(result);
+    };
+    reader.readAsText(files[0]);
+  };
+
+  handleInsumos = files => {
+    var reader = new FileReader();
+    reader.onload = (e) => {
+      // Use reader.result
+      var result = this.csv2JSON(reader.result);
+      alert('Se han registrado ' + (result.length - 1) + ' insumos. ');
+      console.log(result);
+    };
+    reader.readAsText(files[0]);
+  };
+
+  handleLiquidacion = files => {
+    var reader = new FileReader();
+    reader.onload = (e) => {
+      // Use reader.result
+      var result = this.csv2JSON(reader.result);
+      alert('Se han registrado ' + (result.length - 1) + ' liquidaciones. ');
+      console.log(result);
+    };
+    reader.readAsText(files[0]);
+  };
+
+  handleObjetivos = files => {
+    var reader = new FileReader();
+    reader.onload = (e) => {
+      // Use reader.result
+      var result = this.csv2JSON(reader.result);
+      alert('Se han registrado ' + (result.length - 1) + ' objetivos. ');
+      console.log(result);
+    };
+    reader.readAsText(files[0]);
+  };
+
+  handleProveedores = files => {
+    var reader = new FileReader();
+    reader.onload = (e) => {
+      // Use reader.result
+      var result = this.csv2JSON(reader.result);
+      alert('Se han registrado ' + (result.length - 1) + ' proveedores. ');
+      console.log(result);
+    };
+    reader.readAsText(files[0]);
+  };
+
+  handleRequisicion = files => {
+    var reader = new FileReader();
+    reader.onload = (e) => {
+      // Use reader.result
+      var result = this.csv2JSON(reader.result);
+      alert('Se han registrado ' + (result.length - 1) + ' requisiciones. ');
+      console.log(result);
+    };
+    reader.readAsText(files[0]);
+  };
+
+  handleSucursales = files => {
+    var reader = new FileReader();
+    reader.onload = (e) => {
+      // Use reader.result
+      var result = this.csv2JSON(reader.result);
+      alert('Se han registrado ' + (result.length - 1) + ' sucursales. ');
+      console.log(result);
+    };
+    reader.readAsText(files[0]);
+  };
+  
+  handleVendedores = files => {
+    var reader = new FileReader();
+    reader.onload = (e) => {
+      // Use reader.result
+      var result = this.csv2JSON(reader.result);
+      alert('Se han registrado ' + (result.length - 1) + ' vendedores. ');
+      console.log(result);
+    };
     reader.readAsText(files[0]);
   };
 
@@ -188,21 +272,74 @@ class Options extends Component {
               {this.state.showDialog &&
                 <Dialog title={'Compartir reporte'} onClose={this.handleUpload}>
                   <p>Documento a subir: </p>
-                    <ReactFileReader handleFiles={this.handleExpenses} fileTypes={'.csv'}>
-                        <Button primary={true}>Gastos</Button>
-                    </ReactFileReader>
-                    <br/>
-                    <ReactFileReader handleFiles={this.handleIncomes} fileTypes={'.csv'}>
-                        <Button primary={true}>Ingresos</Button>
-                    </ReactFileReader>
-                    <br/>
-                    <ReactFileReader handleFiles={this.handleGoals} fileTypes={'.csv'}>
-                        <Button primary={true}>Metas</Button>
-                    </ReactFileReader>
-                    <br/>
-                    <ReactFileReader handleFiles={this.handleCompanies} fileTypes={'.csv'}>
-                        <Button primary={true}>Empresas</Button>
-                    </ReactFileReader>
+                  <table className="table table-borderless">
+                    <tbody>
+                      <tr>
+                        <td>
+                          <ReactFileReader handleFiles={this.handleCatalogo} fileTypes={'.csv'}>
+                            <Button primary={true}>Catálogo</Button>
+                          </ReactFileReader>
+                        </td>
+                        <td>
+                          <ReactFileReader handleFiles={this.handleClientes} fileTypes={'.csv'}>
+                            <Button primary={true}>Clientes</Button>
+                          </ReactFileReader>
+                        </td>
+                        <td>
+                          <ReactFileReader handleFiles={this.handleGastosDetallados} fileTypes={'.csv'}>
+                            <Button primary={true}>Gastos Detallados</Button>
+                          </ReactFileReader>
+                        </td>
+                        <td>
+                          <ReactFileReader handleFiles={this.handleGastosFijos} fileTypes={'.csv'}>
+                            <Button primary={true}>Gastos Fijos</Button>
+                          </ReactFileReader>
+                        </td>
+                        <td>
+                          <ReactFileReader handleFiles={this.handleGastosVariables} fileTypes={'.csv'}>
+                            <Button primary={true}>Gastos Variables</Button>
+                          </ReactFileReader>
+                        </td>
+                        <td>
+                          <ReactFileReader handleFiles={this.handleInsumos} fileTypes={'.csv'}>
+                            <Button primary={true}>Insumos</Button>
+                          </ReactFileReader>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <ReactFileReader handleFiles={this.handleLiquidacion} fileTypes={'.csv'}>
+                            <Button primary={true}>Liquidación</Button>
+                          </ReactFileReader>
+                        </td>
+                        <td>
+                          <ReactFileReader handleFiles={this.handleObjetivos} fileTypes={'.csv'}>
+                            <Button primary={true}>Objetivos</Button>
+                          </ReactFileReader>
+                        </td>
+                        <td>
+                          <ReactFileReader handleFiles={this.handleProveedores} fileTypes={'.csv'}>
+                            <Button primary={true}>Proveedores</Button>
+                          </ReactFileReader>
+                        </td>
+                        <td>
+                          <ReactFileReader handleFiles={this.handleRequisicion} fileTypes={'.csv'}>
+                            <Button primary={true}>Requisición</Button>
+                          </ReactFileReader>
+                        </td>
+                        <td>
+                          <ReactFileReader handleFiles={this.handleSucursales} fileTypes={'.csv'}>
+                            <Button primary={true}>Sucursales</Button>
+                          </ReactFileReader>
+                        </td>
+                        <td>
+                          <ReactFileReader handleFiles={this.handleVendedores} fileTypes={'.csv'}>
+                            <Button primary={true}>Vendedores</Button>
+                          </ReactFileReader>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                     <br/>
                     <Button onClick={this.handleUpload}>Cancelar</Button>
                 </Dialog>
