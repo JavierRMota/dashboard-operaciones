@@ -234,6 +234,7 @@ class Options extends Component {
             <Card>
             <CardContent>
               <h2>Empresas</h2>
+              <p>Consulte las empresas dadas de alta en el sistema.</p>
               <TextField
                 id="standard-name"
                 label="Buscar empresa"
@@ -250,6 +251,7 @@ class Options extends Component {
             <Card>
             <CardContent>
               <h2>Crear empresa</h2>
+              <p>De de alta una nueva empresa en el sistema.</p>
               <form noValidate autoComplete="off">
                 <TextField
                   name="name"
@@ -269,10 +271,14 @@ class Options extends Component {
                   value={this.state.nameConfirm}
                 />
                 <br />
+                <br />
                 <Button primary={true} type="button" look="outline" onClick={this.handleUpload}>Subir CSV</Button>
+                <br />
+                <br />
                 <Button primary={true} type="button"
-                  onClick={(e) => this.onSubmit(e)}>Crear</Button>
+                  onClick={(e) => this.onSubmit(e)}>Crear Empresa</Button>
               </form>
+              <br />
               {this.state.showDialog &&
                 <Dialog title={'Compartir reporte'} onClose={this.handleUpload}>
                   <p>Documento a subir: </p>

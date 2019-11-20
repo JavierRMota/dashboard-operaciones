@@ -81,8 +81,10 @@ class Dashboard extends Component {
   render() {
 
     var gauges = report.gauges.map((item, key) =>
-    <div className="col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-
+    <div class="col-md-9 col-lg-3 mt-2">
+    <Card>
+    <CardContent>
+    <div>
     <div align="center">
     <Link to={item.path} className="link">
       <Button primary = {true} look="flat"><u><b>{item.title}</b></u></Button></Link>
@@ -93,6 +95,7 @@ class Dashboard extends Component {
         value={item.value}
         plan={item.plan}
         objective={item.objective}/>
+
 
       <List>
             <ListItem>
@@ -120,6 +123,9 @@ class Dashboard extends Component {
         </List>
 
     </div>
+    </CardContent>
+    </Card>
+    </div>
     );
 
     return (
@@ -135,8 +141,9 @@ class Dashboard extends Component {
               <Button onClick={this.handlePDFExport}>Exportar a PDF</Button>
             </div>
           </div>
+
           <div class="row">
-          <div className="col-sm-2 col-md-2" >
+          <div className="col-sm-1 col-md-1" >
             <div class="row">
             <TextField
                 id="outlined-select-currency"

@@ -24,6 +24,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import MultipleLineChartContainer from '../components/MultipleLineChartContainer';
 
+import Card from '@material-ui/core/Card';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import CardContent from '@material-ui/core/CardContent';
+
 //Dummy data
 import { donutChartProductsData } from '../data/appData';
 import { barChartVentas, barCharVentasProductos } from '../data/appData';
@@ -120,7 +125,10 @@ class Ventas extends Component {
               </div>
             </div>
             <div className="row">
-              <div className="col-xs-4 col-sm-4 col-md-3 col-lg-3 col-xl-3">
+              <div class="col-md-6 col-lg-4 mt-2">
+              <Card>
+              <CardContent>
+              <div>
                 <div align="center">
                   <h1>{ventas.title}</h1>
                 </div>
@@ -152,6 +160,9 @@ class Ventas extends Component {
                     />
                   </ListItem>
                 </List>
+              </div>
+              </CardContent>
+              </Card>
               </div>
               <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <MultipleLineChartContainer title="Ingresos" categories={mesesGraficaMultiple} data={datosGraficaMultiple} />
