@@ -19,6 +19,9 @@ import Box from '@material-ui/core/Box';
 import CardContent from '@material-ui/core/CardContent';
 import Container from '@material-ui/core/Container';
 
+import { Ripple } from '@progress/kendo-react-ripple';
+
+
 
 class Options extends Component {
   constructor(props) {
@@ -28,6 +31,7 @@ class Options extends Component {
         nameConfirm: '',
       };
   }
+
 
   csv2JSON(csv){
     var lines=csv.split("\n");
@@ -190,7 +194,7 @@ class Options extends Component {
     };
     reader.readAsText(files[0]);
   };
-  
+
   handleVendedores = files => {
     var reader = new FileReader();
     reader.onload = (e) => {
@@ -206,8 +210,8 @@ class Options extends Component {
     var company = companies.map((item, key) =>
       <div>
         <Divider />
-        <Link to="/reporte" className="link">
-          <ListItem button>
+        <Link to="/reporte"   className="link">
+          <ListItem button className="k-button k-primary mt-3 mb-1">
             <ListItemText primary={item.name}/>
           </ListItem>
         </Link>
