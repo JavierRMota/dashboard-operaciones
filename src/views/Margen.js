@@ -38,7 +38,7 @@ import RadialGaugeContainer from '../components/RadialGaugeContainer';
 
 
 
-class Gastos extends Component {
+class Margen extends Component {
     constructor(props) {
         super(props);
         this.appContainer = React.createRef();
@@ -46,7 +46,7 @@ class Gastos extends Component {
             showDialog: false,
             year: 'Todos',
             month: 'Todos',
-            gastos: report.gauges[1],
+            margen: report.gauges[2],
         };
     }
 
@@ -102,14 +102,14 @@ class Gastos extends Component {
     ];
 
     render() {
-        var gastos = this.state.gastos
+        var margen = this.state.margen
         return (
             <Ripple>
                 <div className="bootstrap-wrapper">
                     <div className="app-container container" ref={(el) => this.appContainer = el}>
                         <div className="row">
                             <div className="col-xs-6 col-sm-6 col-md-8 col-lg-8 col-xl-8">
-                                <h1>Empresa | Reporte específico de Gastos</h1>
+                                <h1>Empresa | Reporte específico de Margen</h1>
                             </div>
                             <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 buttons-right">
                                 <Button primary={true} onClick={this.handleShare}>Compartir</Button>
@@ -119,39 +119,39 @@ class Gastos extends Component {
                         <div className="row">
                             <div className="col-xs-4 col-sm-4 col-md-3 col-lg-3 col-xl-3">
                                 <div align="center">
-                                    <h1>{gastos.title}</h1>
+                                    <h1>{margen.title}</h1>
                                 </div>
                                 <RadialGaugeContainer
-                                    value={gastos.value}
-                                    plan={gastos.plan}
-                                    objective={gastos.objective} />
+                                    value={margen.value}
+                                    plan={margen.plan}
+                                    objective={margen.objective} />
                                 <List>
                                     <ListItem>
                                         <ListItemText
-                                            primary={currency(gastos.value) + " / " + currency(gastos.plan)}
-                                            secondary="Gastos actuales / plan de Gastos"
+                                            primary={currency(margen.value) + " / " + currency(margen.plan)}
+                                            secondary="Margen actual / plan de Margen"
                                         />
                                     </ListItem>
                                     <ListItem>
                                         <ListItemText
                                             primary={
-                                                (gastos.value - gastos.plan ? '↑' : '↓') +
-                                                currency(Math.abs(gastos.value - gastos.plan)) + ' | ' +
-                                                (Math.abs(gastos.value - gastos.plan) / gastos.plan).toFixed(2)
+                                                (margen.value - margen.plan ? '↑' : '↓') +
+                                                currency(Math.abs(margen.value - margen.plan)) + ' | ' +
+                                                (Math.abs(margen.value - margen.plan) / margen.plan).toFixed(2)
                                                 + ' %'}
-                                            secondary="Diferencia de gastos"
+                                            secondary="Diferencia de margen"
                                         />
                                     </ListItem>
                                     <ListItem>
                                         <ListItemText
-                                            primary={currency(gastos.objective)}
-                                            secondary="Objetivo anual de gastos"
+                                            primary={currency(margen.objective)}
+                                            secondary="Objetivo anual de margen"
                                         />
                                     </ListItem>
                                 </List>
                             </div>
                             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                <MultipleLineChartContainer title="Egresos" categories={mesesGraficaMultiple} data={datosEgresosGraficaMultiple} />
+                                <MultipleLineChartContainer title="Margen" categories={mesesGraficaMultiple} data={datosEgresosGraficaMultiple} />
                             </div>
                             <div className="col-sm-2 col-md-2" >
                                 <div class="row">
@@ -210,11 +210,11 @@ class Gastos extends Component {
                                 <List>
                                     <ListItem>
                                         <ListItemText
-                                            primary="Producto con más gastos"
+                                            primary="Producto más vendido"
                                             secondary={this.catalogoMasVendido}
                                         />
                                         <ListItemText
-                                            primary="Producto con menos gastos"
+                                            primary="Producto menos vendido"
                                             secondary={this.catalogoMenosVendido}
                                         />
                                     </ListItem>
@@ -264,4 +264,4 @@ class Gastos extends Component {
     }
 
 }
-export default Gastos;
+export default Margen;

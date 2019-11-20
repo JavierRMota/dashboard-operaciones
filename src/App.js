@@ -6,6 +6,7 @@ import Menu from './views/Menu';
 import Dashboard from './views/Dashboard';
 import Ventas from './views/Ventas';
 import Gastos from './views/Gastos';
+import Margen from './views/Margen';
 import { Button } from '@progress/kendo-react-buttons';
 import { Link } from 'react-router-dom';
 
@@ -46,6 +47,17 @@ class App extends Component {
                   </Link>
                 } />
                 <Gastos />
+              </div>} />
+            <Route
+              exact
+              path="/margen"
+              render={() => <div>
+                <Menu left={
+                  <Link to="/reporte" className="link">
+                    <Button color="inherit" >Regresar</Button>
+                  </Link>
+                } />
+                <Margen />
               </div>} />
             <Route
               exact

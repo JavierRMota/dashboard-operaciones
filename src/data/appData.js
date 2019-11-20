@@ -105,7 +105,7 @@ export var report = {
             plan: 1045000, subtitle2: 'Plan de margen',
             objective: 1170000, subtitle3: 'Diferencia de margen',
             subtitle4: 'Objetivo anual de margen',
-            path: '/ventas',
+            path: '/margen',
         },
     ],
 };
