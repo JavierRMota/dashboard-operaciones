@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import ReactFileReader from 'react-file-reader';
-import { Dialog } from '@progress/kendo-react-dialogs';
 import '@progress/kendo-theme-material/dist/all.css';
 import 'bootstrap-4-grid/css/grid.min.css';
 import '../App.css';
@@ -15,12 +13,8 @@ import { companies } from '../data/appData';
 
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import CardContent from '@material-ui/core/CardContent';
 import Container from '@material-ui/core/Container';
-
-import { Ripple } from '@progress/kendo-react-ripple';
-
 
 
 class Options extends Component {
@@ -31,37 +25,6 @@ class Options extends Component {
         nameConfirm: '',
       };
   }
-
-
-  csv2JSON(csv){
-    var lines=csv.split("\n");
-    var result = [];
-    var headers=lines[0].replace("\r","").split(",");
-    for(var i=1;i<lines.length;i++){
-      var obj = {};
-      var currentline=lines[i].replace("\r","").split(",");
-      for(var j=0;j<headers.length;j++){
-        if(currentline[j]){
-          obj[headers[j]] = currentline[j];
-        }
-      }
-      result.push(obj);
-    }
-    return result; //JavaScript object
-    //return JSON.stringify(result); //JSON
-  }
-
-  handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  handleUpload = () => {
-    this.setState({
-      showDialog: !this.state.showDialog,
-    });
-  };
 
   onSubmit = (e) => {
     if (this.state.name === this.state.nameConfirm && this.state.name !== '') {
@@ -74,136 +37,10 @@ class Options extends Component {
     });
   };
 
-  handleCatalogo = files => {
-    var reader = new FileReader();
-    reader.onload = (e) => {
-      // Use reader.result
-      var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' elementos del catálogo. ');
-      console.log(result);
-    };
-    reader.readAsText(files[0]);
-  };
-
-  handleClientes = files => {
-    var reader = new FileReader();
-    reader.onload = (e) => {
-      // Use reader.result
-      var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' clientes. ');
-      console.log(result);
-    };
-    reader.readAsText(files[0]);
-  };
-
-  handleGastosDetallados = files => {
-    var reader = new FileReader();
-    reader.onload = (e) => {
-      // Use reader.result
-      var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' gastos detallados. ');
-      console.log(result);
-    };
-    reader.readAsText(files[0]);
-  };
-
-  handleGastosFijos = files => {
-    var reader = new FileReader();
-    reader.onload = (e) => {
-      // Use reader.result
-      var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' gastos fijos. ');
-      console.log(result);
-    };
-    reader.readAsText(files[0]);
-  };
-
-  handleGastosVariables = files => {
-    var reader = new FileReader();
-    reader.onload = (e) => {
-      // Use reader.result
-      var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' gastos variables. ');
-      console.log(result);
-    };
-    reader.readAsText(files[0]);
-  };
-
-  handleInsumos = files => {
-    var reader = new FileReader();
-    reader.onload = (e) => {
-      // Use reader.result
-      var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' insumos. ');
-      console.log(result);
-    };
-    reader.readAsText(files[0]);
-  };
-
-  handleLiquidacion = files => {
-    var reader = new FileReader();
-    reader.onload = (e) => {
-      // Use reader.result
-      var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' liquidaciones. ');
-      console.log(result);
-    };
-    reader.readAsText(files[0]);
-  };
-
-  handleObjetivos = files => {
-    var reader = new FileReader();
-    reader.onload = (e) => {
-      // Use reader.result
-      var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' objetivos. ');
-      console.log(result);
-    };
-    reader.readAsText(files[0]);
-  };
-
-  handleProveedores = files => {
-    var reader = new FileReader();
-    reader.onload = (e) => {
-      // Use reader.result
-      var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' proveedores. ');
-      console.log(result);
-    };
-    reader.readAsText(files[0]);
-  };
-
-  handleRequisicion = files => {
-    var reader = new FileReader();
-    reader.onload = (e) => {
-      // Use reader.result
-      var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' requisiciones. ');
-      console.log(result);
-    };
-    reader.readAsText(files[0]);
-  };
-
-  handleSucursales = files => {
-    var reader = new FileReader();
-    reader.onload = (e) => {
-      // Use reader.result
-      var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' sucursales. ');
-      console.log(result);
-    };
-    reader.readAsText(files[0]);
-  };
-
-  handleVendedores = files => {
-    var reader = new FileReader();
-    reader.onload = (e) => {
-      // Use reader.result
-      var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' vendedores. ');
-      console.log(result);
-    };
-    reader.readAsText(files[0]);
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
   };
 
   render() {
@@ -272,88 +109,10 @@ class Options extends Component {
                 />
                 <br />
                 <br />
-                <Button primary={true} type="button" look="outline" onClick={this.handleUpload}>Subir CSV</Button>
-                <br />
-                <br />
                 <Button primary={true} type="button"
                   onClick={(e) => this.onSubmit(e)}>Crear Empresa</Button>
               </form>
               <br />
-              {this.state.showDialog &&
-                <Dialog title={'Compartir reporte'} onClose={this.handleUpload}>
-                  <p>Documento a subir: </p>
-                  <table className="table table-borderless">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <ReactFileReader handleFiles={this.handleCatalogo} fileTypes={'.csv'}>
-                            <Button primary={true}>Catálogo</Button>
-                          </ReactFileReader>
-                        </td>
-                        <td>
-                          <ReactFileReader handleFiles={this.handleClientes} fileTypes={'.csv'}>
-                            <Button primary={true}>Clientes</Button>
-                          </ReactFileReader>
-                        </td>
-                        <td>
-                          <ReactFileReader handleFiles={this.handleGastosDetallados} fileTypes={'.csv'}>
-                            <Button primary={true}>Gastos Detallados</Button>
-                          </ReactFileReader>
-                        </td>
-                        <td>
-                          <ReactFileReader handleFiles={this.handleGastosFijos} fileTypes={'.csv'}>
-                            <Button primary={true}>Gastos Fijos</Button>
-                          </ReactFileReader>
-                        </td>
-                        <td>
-                          <ReactFileReader handleFiles={this.handleGastosVariables} fileTypes={'.csv'}>
-                            <Button primary={true}>Gastos Variables</Button>
-                          </ReactFileReader>
-                        </td>
-                        <td>
-                          <ReactFileReader handleFiles={this.handleInsumos} fileTypes={'.csv'}>
-                            <Button primary={true}>Insumos</Button>
-                          </ReactFileReader>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <ReactFileReader handleFiles={this.handleLiquidacion} fileTypes={'.csv'}>
-                            <Button primary={true}>Liquidación</Button>
-                          </ReactFileReader>
-                        </td>
-                        <td>
-                          <ReactFileReader handleFiles={this.handleObjetivos} fileTypes={'.csv'}>
-                            <Button primary={true}>Objetivos</Button>
-                          </ReactFileReader>
-                        </td>
-                        <td>
-                          <ReactFileReader handleFiles={this.handleProveedores} fileTypes={'.csv'}>
-                            <Button primary={true}>Proveedores</Button>
-                          </ReactFileReader>
-                        </td>
-                        <td>
-                          <ReactFileReader handleFiles={this.handleRequisicion} fileTypes={'.csv'}>
-                            <Button primary={true}>Requisición</Button>
-                          </ReactFileReader>
-                        </td>
-                        <td>
-                          <ReactFileReader handleFiles={this.handleSucursales} fileTypes={'.csv'}>
-                            <Button primary={true}>Sucursales</Button>
-                          </ReactFileReader>
-                        </td>
-                        <td>
-                          <ReactFileReader handleFiles={this.handleVendedores} fileTypes={'.csv'}>
-                            <Button primary={true}>Vendedores</Button>
-                          </ReactFileReader>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                    <br/>
-                    <Button onClick={this.handleUpload}>Cancelar</Button>
-                </Dialog>
-              }
               </CardContent>
             </Card>
             </div>
