@@ -32,9 +32,11 @@ import { empleadoTotalVentas, empleadoMasVentas, empleadoMenosVentas } from '../
 import { datosSucursalDineroGenerado, sucursalMasVentas, sucursalMenosVentas } from '../data/sucursalDineroGenerado';
 import { pruebaMultiplesDatos, pruebaDatosMultiplesDatos } from '../data/appData';
 import { mesesGraficaMultiple, datosEgresosGraficaMultiple } from '../data/datosGraficaMultiple';
-
+import { generarNombres, generarTotalInsumos, totalGastado, insumoPorcentaje, construirDataSet, insumoMasComprado, insumoMenosComprado } from '../data/datosEgresosInsumo';
 import { currency, report } from '../data/appData';
 import RadialGaugeContainer from '../components/RadialGaugeContainer';
+import { Insumo } from '../data/insumo';
+import { DetalleGasto } from '../data/detalleGasto';
 
 
 
@@ -50,14 +52,21 @@ class Gastos extends Component {
         };
     }
 
-    catalogoMasVendido = productoMasVendido(productoCantidad);
-    catalogoMenosVendido = productoMenosVendido(productoCantidad);
     empleadoMas = empleadoMasVentas(empleadoTotalVentas);
     empleadoMenos = empleadoMenosVentas(empleadoTotalVentas);
     sucursalMas = sucursalMasVentas(datosSucursalDineroGenerado);
     sucursalMenos = sucursalMenosVentas(datosSucursalDineroGenerado);
     sucursalMasDato = 2385;
     sucursalMenosDato = 1100;
+
+    arrNombres = []
+    nombresInsumo = generarNombres(Insumo, this.arrNombres);
+    totalInsumos = generarTotalInsumos(DetalleGasto);
+    gastoTotal = totalGastado(this.totalInsumos);
+    porcentajeInsumos = insumoPorcentaje(this.totalInsumos, this.gastoTotal);
+    datosEgresosInsumos = construirDataSet(this.nombresInsumo, this.porcentajeInsumos);
+    insumoCompradoMas = insumoMasComprado(this.datosEgresosInsumos);
+    insumoCompradoMenos = insumoMenosComprado(this.datosEgresosInsumos);
 
     handlePDFExport = () => {
         savePDF(ReactDOM.findDOMNode(this.appContainer), { paperSize: 'auto' });
@@ -204,18 +213,18 @@ class Gastos extends Component {
                         </div>
                         <div className="row">
                             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                <h2>Gastos Totales Catálogo</h2>
-                                <DonutChartContainer data={productoCantidad}
-                                    categoryField="tipo" field="cantidad" />
+                                <h2>Gastos Totales Insumos</h2>
+                                <DonutChartContainer data={this.datosEgresosInsumos}
+                                    categoryField="insumo" field="totalGastado" />
                                 <List>
                                     <ListItem>
                                         <ListItemText
-                                            primary="Producto con más gastos"
-                                            secondary={this.catalogoMasVendido}
+                                            primary="Insumo con más gastos"
+                                            secondary={this.insumoCompradoMas}
                                         />
                                         <ListItemText
-                                            primary="Producto con menos gastos"
-                                            secondary={this.catalogoMenosVendido}
+                                            primary="Insumo con menos gastos"
+                                            secondary={this.insumoCompradoMenos}
                                         />
                                     </ListItem>
                                 </List>
