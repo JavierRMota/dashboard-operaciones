@@ -29,7 +29,7 @@ class LoginTab extends Component {
       response => {
         if (response.data == "welcome") {
           this.props.history.push("/home");
-        } else this.props.history.push("/login");
+        } else alert("bad login");
       },
       error => {
         console.log(error);

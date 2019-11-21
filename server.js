@@ -1,6 +1,6 @@
 const express = require("express");
-const companiaR = require("./routes/compania");
-const companiaM = require("./models/compania");
+const admin = require("./routes/admin");
+const adminMod = require("./models/admin");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 var app = express();
@@ -20,15 +20,22 @@ mongoose.connect(db_url, { userNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 
-app.use("/api/compania", companiaR);
+app.use("/api/compania", admin);
 db.on("error", console.error.bind(console, "Error en la conexión"));
 db.once("open", function() {
   db.dropDatabase(function(err, result) {});
   /**/
+<<<<<<< HEAD
   companiaM.create(
     { nombre: "FEMSA", mail: "a", password: "a" },
     function(err, doc) {}
   );
+=======
+  adminMod.create({ mail: "femsa@mail.com", password: "Femsa123." }, function(
+    err,
+    doc
+  ) {});
+>>>>>>> 3329bd19bd8d379aec2fdb451e34d8e2009aa8cf
 });
 
 app.listen("8080", () => {
