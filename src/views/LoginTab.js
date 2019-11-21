@@ -27,7 +27,7 @@ class LoginTab extends Component {
     console.log(usuario);
     axios.post(`http://localhost:8080/api/compania/login`, { usuario }).then(
       response => {
-        if (response.data == "welcome") {
+        if (response.data === "welcome") {
           this.props.history.push("/home");
         } else this.props.history.push("/login");
       },
