@@ -7,6 +7,64 @@ export const empleadoTotalVentas = [
     { nombre: "Elizabeth", ventas: 13.33 }, //id=6 count=2 total= 15 
 ]
 
+export var generarNombresEmpleado = (data) => {
+    var arr = [];
+    for (let h = 0; h < data.length; h++) {
+        arr.push(data[h].Nombre);
+    }
+    return arr;
+}
+
+export var generarEmpleadoVentas = (data, length) => {
+    let temp = 0;
+    let arr = [];
+
+    for (let a = 0; a < length; a++) {
+        arr[a] = 0.0;
+    }
+
+    for (let i = 0; i < data.length; i++) {
+        temp = arr[(data[i].Id_Vendedor) - 1];
+        if (temp !== undefined) {
+            arr[(data[i].Id_Vendedor) - 1] = temp + 1;
+        }
+        else {
+            arr.splice(data[i].Id_Vendedor, (data[i].Id_Vendedor - 1), 0.0);
+        }
+    }
+    console.log(arr);
+    return arr;
+}
+
+export var totalVentasEmpleados = (arr) => {
+    let totalVentas = 0;
+    for (let j = 0; j < arr.length; j++) {
+        totalVentas += arr[j];
+    }
+    console.log(totalVentas);
+    return totalVentas;
+}
+
+export var ventasEmpleadoPorcentaje = (arr, totalVentas) => {
+    let temp = 0;
+    for (let k = 0; k < arr.length; k++) {
+        temp = ((arr[k] * 100) / totalVentas);
+        arr[k] = temp;
+    }
+    console.log(arr);
+    return arr;
+}
+
+export var construirDataSetEmpleado = (arr1, arr2) => {
+    let arrResultante = [];
+    for (let i = 0; i < arr1.length; i++) {
+        var json = { "nombre": arr1[i], "ventas": arr2[i] };
+        arrResultante.push(json);
+    }
+    console.log(arrResultante);
+    return arrResultante;
+}
+
 export var empleadoMasVentas = (data) => {
     let maximoVentasEmpleado = data[0].ventas;
     let nombreEmpleado = data[0].nombre;

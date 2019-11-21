@@ -17,6 +17,64 @@ export const productoCantidad = [
     { tipo: "Queso Fundido", cantidad: 6.95 } // id=10 total = 72 valor=5
 ];
 
+export var generarNombresProducto = (data) => {
+    var arr = [];
+    for (let h = 0; h < data.length; h++) {
+        arr.push(data[h].Nombre);
+    }
+    return arr;
+}
+
+export var generarVentasProductos = (data, length) => {
+    let temp = 0;
+    let arr = [];
+
+    for (let a = 0; a < length; a++) {
+        arr[a] = 0.0;
+    }
+
+    for (let i = 0; i < data.length; i++) {
+        temp = arr[(data[i].Id_Catalogo) - 1];
+        if (temp !== undefined) {
+            arr[(data[i].Id_Catalogo) - 1] = temp + data[i].Cantidad;
+        }
+        else {
+            arr.splice(data[i].Id_Catalogo, (data[i].Id_Catalogo - 1), 0.0);
+        }
+    }
+    console.log(arr);
+    return arr;
+}
+
+export var totalGenerado = (arr) => {
+    let totalGenerado = 0;
+    for (let j = 0; j < arr.length; j++) {
+        totalGenerado += arr[j];
+    }
+    console.log(totalGenerado);
+    return totalGenerado;
+}
+
+export var ingresoPorcentaje = (arr, totalGenerado) => {
+    let temp = 0;
+    for (let k = 0; k < arr.length; k++) {
+        temp = ((arr[k] * 100) / totalGenerado);
+        arr[k] = temp;
+    }
+    console.log(arr);
+    return arr;
+}
+
+export var construirDataSet = (arr1, arr2) => {
+    let arrResultante = [];
+    for (let i = 0; i < arr1.length; i++) {
+        var json = { "tipo": arr1[i], "cantidad": arr2[i] };
+        arrResultante.push(json);
+    }
+    console.log(arrResultante);
+    return arrResultante;
+}
+
 export var productoMasVendido = (data) => {
     let maximoVentas = data[0].cantidad;
     let nombreProducto = data[0].tipo;

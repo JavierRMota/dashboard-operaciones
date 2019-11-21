@@ -32,12 +32,16 @@ import CardContent from '@material-ui/core/CardContent';
 //Dummy data
 import { donutChartProductsData } from '../data/appData';
 import { barChartVentas, barCharVentasProductos } from '../data/appData';
-import { productoCantidad, productoMasVendido, productoMenosVendido } from '../data/productoCantidad';
-import { empleadoTotalVentas, empleadoMasVentas, empleadoMenosVentas } from '../data/ventaEmpleado';
+import { generarNombresProducto, generarVentasProductos, totalGenerado, ingresoPorcentaje, construirDataSet, productoMasVendido, productoMenosVendido } from '../data/productoCantidad';
+import { generarNombresEmpleado, generarEmpleadoVentas, totalVentasEmpleados, ventasEmpleadoPorcentaje, construirDataSetEmpleado, empleadoMasVentas, empleadoMenosVentas } from '../data/ventaEmpleado';
 import { datosSucursalDineroGenerado, sucursalMasVentas, sucursalMenosVentas } from '../data/sucursalDineroGenerado';
 import { pruebaMultiplesDatos, pruebaDatosMultiplesDatos } from '../data/appData';
 import { mesesGraficaMultiple, datosGraficaMultiple } from '../data/datosGraficaMultiple';
 import { clientesTipicos, clienteMasAsiste, clienteMenosAsiste } from '../data/datosTipoClientela';
+import { Catalogo } from '../data/catalogo';
+import { Requisicion } from '../data/requisicion';
+import { Vendedor } from '../data/vendedor';
+import { Liquidacion } from '../data/liquidacion';
 
 import { currency, report } from '../data/appData';
 import RadialGaugeContainer from '../components/RadialGaugeContainer';
@@ -56,10 +60,21 @@ class Ventas extends Component {
     };
   }
 
-  catalogoMasVendido = productoMasVendido(productoCantidad);
-  catalogoMenosVendido = productoMenosVendido(productoCantidad);
-  empleadoMas = empleadoMasVentas(empleadoTotalVentas);
-  empleadoMenos = empleadoMenosVentas(empleadoTotalVentas);
+  nombresProducto = generarNombresProducto(Catalogo);
+  totalVentas = generarVentasProductos(Requisicion, Catalogo.length);
+  ventasTotalesProductos = totalGenerado(this.totalVentas);
+  porcentajeIngreso = ingresoPorcentaje(this.totalVentas, this.ventasTotalesProductos);
+  datosIngresosProductos = construirDataSet(this.nombresProducto, this.porcentajeIngreso);
+  catalogoMasVendido = productoMasVendido(this.datosIngresosProductos);
+  catalogoMenosVendido = productoMenosVendido(this.datosIngresosProductos);
+
+  nombresEmpleados = generarNombresEmpleado(Vendedor);
+  ventasEmpleados = generarEmpleadoVentas(Liquidacion, Vendedor.length);
+  ventasTotalesEmpleados = totalVentasEmpleados(this.ventasEmpleados);
+  porcentajeVentasEmpleado = ventasEmpleadoPorcentaje(this.ventasEmpleados, this.ventasTotalesEmpleados);
+  datosEmpleadoVentas = construirDataSetEmpleado(this.nombresEmpleados, this.porcentajeVentasEmpleado);
+  empleadoMas = empleadoMasVentas(this.datosEmpleadoVentas);
+  empleadoMenos = empleadoMenosVentas(this.datosEmpleadoVentas);
   sucursalMas = sucursalMasVentas(datosSucursalDineroGenerado);
   sucursalMenos = sucursalMenosVentas(datosSucursalDineroGenerado);
   sucursalMasDato = 2385;
@@ -126,43 +141,43 @@ class Ventas extends Component {
             </div>
             <div className="row">
               <div class="col-md-6 col-lg-4 mt-2">
-              <Card>
-              <CardContent>
-              <div>
-                <div align="center">
-                  <h1>{ventas.title}</h1>
-                </div>
-                <RadialGaugeContainer
-                  value={ventas.value}
-                  plan={ventas.plan}
-                  objective={ventas.objective} />
-                <List>
-                  <ListItem>
-                    <ListItemText
-                      primary={currency(ventas.value) + " / " + currency(ventas.plan)}
-                      secondary="Ventas actuales / plan de ventas"
-                    />
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText
-                      primary={
-                        (ventas.value - ventas.plan ? '↑' : '↓') +
-                        currency(Math.abs(ventas.value - ventas.plan)) + ' | ' +
-                        (Math.abs(ventas.value - ventas.plan) / ventas.plan).toFixed(2)
-                        + ' %'}
-                      secondary="Diferencia de ventas"
-                    />
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText
-                      primary={currency(ventas.objective)}
-                      secondary="Objetivo anual de ventas"
-                    />
-                  </ListItem>
-                </List>
-              </div>
-              </CardContent>
-              </Card>
+                <Card>
+                  <CardContent>
+                    <div>
+                      <div align="center">
+                        <h1>{ventas.title}</h1>
+                      </div>
+                      <RadialGaugeContainer
+                        value={ventas.value}
+                        plan={ventas.plan}
+                        objective={ventas.objective} />
+                      <List>
+                        <ListItem>
+                          <ListItemText
+                            primary={currency(ventas.value) + " / " + currency(ventas.plan)}
+                            secondary="Ventas actuales / plan de ventas"
+                          />
+                        </ListItem>
+                        <ListItem>
+                          <ListItemText
+                            primary={
+                              (ventas.value - ventas.plan ? '↑' : '↓') +
+                              currency(Math.abs(ventas.value - ventas.plan)) + ' | ' +
+                              (Math.abs(ventas.value - ventas.plan) / ventas.plan).toFixed(2)
+                              + ' %'}
+                            secondary="Diferencia de ventas"
+                          />
+                        </ListItem>
+                        <ListItem>
+                          <ListItemText
+                            primary={currency(ventas.objective)}
+                            secondary="Objetivo anual de ventas"
+                          />
+                        </ListItem>
+                      </List>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
               <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <MultipleLineChartContainer title="Ingresos" categories={mesesGraficaMultiple} data={datosGraficaMultiple} />
@@ -219,7 +234,7 @@ class Ventas extends Component {
             <div className="row">
               <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <h2>Ventas Totales Catálogo</h2>
-                <DonutChartContainer data={productoCantidad}
+                <DonutChartContainer data={this.datosIngresosProductos}
                   categoryField="tipo" field="cantidad" />
                 <List>
                   <ListItem>
@@ -236,7 +251,7 @@ class Ventas extends Component {
               </div>
               <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <h2>Desempeño Empleados</h2>
-                <DonutChartContainer data={empleadoTotalVentas} categoryField="nombre" field="ventas" />
+                <DonutChartContainer data={this.datosEmpleadoVentas} categoryField="nombre" field="ventas" />
                 <List>
                   <ListItem>
                     <ListItemText

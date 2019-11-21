@@ -32,7 +32,7 @@ import { empleadoTotalVentas, empleadoMasVentas, empleadoMenosVentas } from '../
 import { datosSucursalDineroGenerado, sucursalMasVentas, sucursalMenosVentas } from '../data/sucursalDineroGenerado';
 import { pruebaMultiplesDatos, pruebaDatosMultiplesDatos } from '../data/appData';
 import { mesesGraficaMultiple, datosEgresosGraficaMultiple } from '../data/datosGraficaMultiple';
-import { generarNombres, generarTotalInsumos, totalGastado, insumoPorcentaje, construirDataSet, insumoMasComprado, insumoMenosComprado } from '../data/datosEgresosInsumo';
+import { generarNombresInsumo, generarTotalInsumos, totalGastado, insumoPorcentaje, construirDataSetInsumo, insumoMasComprado, insumoMenosComprado } from '../data/datosEgresosInsumo';
 import { currency, report } from '../data/appData';
 import RadialGaugeContainer from '../components/RadialGaugeContainer';
 import { Insumo } from '../data/insumo';
@@ -59,12 +59,12 @@ class Gastos extends Component {
     sucursalMasDato = 2385;
     sucursalMenosDato = 1100;
 
-    arrNombres = []
-    nombresInsumo = generarNombres(Insumo, this.arrNombres);
-    totalInsumos = generarTotalInsumos(DetalleGasto);
+
+    nombresInsumo = generarNombresInsumo(Insumo);
+    totalInsumos = generarTotalInsumos(DetalleGasto, Insumo.length);
     gastoTotal = totalGastado(this.totalInsumos);
     porcentajeInsumos = insumoPorcentaje(this.totalInsumos, this.gastoTotal);
-    datosEgresosInsumos = construirDataSet(this.nombresInsumo, this.porcentajeInsumos);
+    datosEgresosInsumos = construirDataSetInsumo(this.nombresInsumo, this.porcentajeInsumos);
     insumoCompradoMas = insumoMasComprado(this.datosEgresosInsumos);
     insumoCompradoMenos = insumoMenosComprado(this.datosEgresosInsumos);
 

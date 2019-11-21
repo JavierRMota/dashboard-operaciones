@@ -6,23 +6,29 @@
 //export var cantidadTotalInsumos = new Array();
 //cantidadTotalInsumos[dataSetLength] = 0;
 
-export var generarNombres = (data, arr) => {
+export var generarNombresInsumo = (data) => {
+    var arr = [];
     for (let h = 0; h < data.length; h++) {
         arr.push(data[h].Descripcion);
     }
     return arr;
 }
 
-export var generarTotalInsumos = (data) => {
+export var generarTotalInsumos = (data, length) => {
     let temp = 0;
-    let arr = []
+    let arr = [];
+
+    for (let a = 0; a < length; a++) {
+        arr[a] = 0.0;
+    }
+
     for (let i = 0; i < data.length; i++) {
         temp = arr[(data[i].Id_Insumo) - 1];
         if (temp !== undefined) {
             arr[(data[i].Id_Insumo) - 1] = temp + data[i].Gasto;
         }
         else {
-            arr.splice(data[i].Id_Insumo, (data[i].Id_Insumo - 1), 0.0)
+            arr.splice(data[i].Id_Insumo, (data[i].Id_Insumo - 1), 0.0);
         }
     }
     console.log(arr);
@@ -48,7 +54,7 @@ export var insumoPorcentaje = (arr, totalGastado) => {
     return arr;
 }
 
-export var construirDataSet = (arr1, arr2) => {
+export var construirDataSetInsumo = (arr1, arr2) => {
     let arrResultante = [];
     for (let i = 0; i < arr1.length; i++) {
         var json = { "insumo": arr1[i], "totalGastado": arr2[i] };
