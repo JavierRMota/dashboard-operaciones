@@ -32,16 +32,18 @@ import CardContent from '@material-ui/core/CardContent';
 //Dummy data
 import { donutChartProductsData } from '../data/appData';
 import { barChartVentas, barCharVentasProductos } from '../data/appData';
-import { generarNombresProducto, generarVentasProductos, totalGenerado, ingresoPorcentaje, construirDataSet, productoMasVendido, productoMenosVendido } from '../data/productoCantidad';
+import { generarNombresProducto, generarVentasProductos, totalGenerado, ingresoPorcentaje, construirDataSetProducto, productoMasVendido, productoMenosVendido } from '../data/productoCantidad';
 import { generarNombresEmpleado, generarEmpleadoVentas, totalVentasEmpleados, ventasEmpleadoPorcentaje, construirDataSetEmpleado, empleadoMasVentas, empleadoMenosVentas } from '../data/ventaEmpleado';
-import { datosSucursalDineroGenerado, sucursalMasVentas, sucursalMenosVentas } from '../data/sucursalDineroGenerado';
+import { generarNombresSucursales, generarVentasSucursales, totalIngresosSucursales, ingresoSucursalPorcentaje, construirDataSetSucursal, sucursalMasVentas, sucursalMenosVentas } from '../data/sucursalDineroGenerado';
 import { pruebaMultiplesDatos, pruebaDatosMultiplesDatos } from '../data/appData';
 import { mesesGraficaMultiple, datosGraficaMultiple } from '../data/datosGraficaMultiple';
-import { clientesTipicos, clienteMasAsiste, clienteMenosAsiste } from '../data/datosTipoClientela';
+import { generarTipoCliente, generarFrecuenciaCliente, frecuenciaTotalClientes, frecuenciaClientePorcentaje, construirDataSetCliente, clienteMasAsiste, clienteMenosAsiste } from '../data/datosTipoClientela';
 import { Catalogo } from '../data/catalogo';
 import { Requisicion } from '../data/requisicion';
 import { Vendedor } from '../data/vendedor';
 import { Liquidacion } from '../data/liquidacion';
+import { Sucursal } from '../data/sucursal';
+import { Cliente } from '../data/cliente';
 
 import { currency, report } from '../data/appData';
 import RadialGaugeContainer from '../components/RadialGaugeContainer';
@@ -64,7 +66,7 @@ class Ventas extends Component {
   totalVentas = generarVentasProductos(Requisicion, Catalogo.length);
   ventasTotalesProductos = totalGenerado(this.totalVentas);
   porcentajeIngreso = ingresoPorcentaje(this.totalVentas, this.ventasTotalesProductos);
-  datosIngresosProductos = construirDataSet(this.nombresProducto, this.porcentajeIngreso);
+  datosIngresosProductos = construirDataSetProducto(this.nombresProducto, this.porcentajeIngreso);
   catalogoMasVendido = productoMasVendido(this.datosIngresosProductos);
   catalogoMenosVendido = productoMenosVendido(this.datosIngresosProductos);
 
@@ -75,12 +77,22 @@ class Ventas extends Component {
   datosEmpleadoVentas = construirDataSetEmpleado(this.nombresEmpleados, this.porcentajeVentasEmpleado);
   empleadoMas = empleadoMasVentas(this.datosEmpleadoVentas);
   empleadoMenos = empleadoMenosVentas(this.datosEmpleadoVentas);
-  sucursalMas = sucursalMasVentas(datosSucursalDineroGenerado);
-  sucursalMenos = sucursalMenosVentas(datosSucursalDineroGenerado);
-  sucursalMasDato = 2385;
-  sucursalMenosDato = 1100;
-  clienteFrecuenciaMaxima = clienteMasAsiste(clientesTipicos);
-  clienteFrecuenciaMinima = clienteMenosAsiste(clientesTipicos);
+
+  nombresSucursal = generarNombresSucursales(Sucursal);
+  ventasSucursal = generarVentasSucursales(Liquidacion, Sucursal.length);
+  ventasTotalesSucursal = totalIngresosSucursales(this.ventasSucursal);
+  porcentajeVentasSucursal = ingresoSucursalPorcentaje(this.ventasSucursal, this.ventasTotalesSucursal);
+  datosSucursalVentas = construirDataSetSucursal(this.nombresSucursal, this.porcentajeVentasSucursal);
+  sucursalMas = sucursalMasVentas(this.datosSucursalVentas);
+  sucursalMenos = sucursalMenosVentas(this.datosSucursalVentas);
+
+  nombresClientes = generarTipoCliente(Cliente);
+  frecuenciaCliente = generarFrecuenciaCliente(Liquidacion, Cliente.length);
+  sumaFrecuenciasCliente = frecuenciaTotalClientes(this.frecuenciaCliente);
+  porcentajeFrecuencia = frecuenciaClientePorcentaje(this.frecuenciaCliente, this.sumaFrecuenciasCliente);
+  datosFrecuenciaCliente = construirDataSetCliente(this.nombresClientes, this.porcentajeFrecuencia);
+  clienteFrecuenciaMaxima = clienteMasAsiste(this.datosFrecuenciaCliente);
+  clienteFrecuenciaMinima = clienteMenosAsiste(this.datosFrecuenciaCliente);
 
   handlePDFExport = () => {
     savePDF(ReactDOM.findDOMNode(this.appContainer), { paperSize: 'auto' });
@@ -269,7 +281,7 @@ class Ventas extends Component {
             <div className="row">
               <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <h2>Ventas Sucursales</h2>
-                <DonutChartContainer data={datosSucursalDineroGenerado} categoryField="sucursal" field="dineroGenerado" />
+                <DonutChartContainer data={this.datosSucursalVentas} categoryField="sucursal" field="dineroGenerado" />
                 <List>
                   <ListItem>
                     <ListItemText
@@ -281,21 +293,11 @@ class Ventas extends Component {
                       secondary={this.sucursalMenos}
                     />
                   </ListItem>
-                  <ListItem>
-                    <ListItemText
-                      primary="Ingresos"
-                      secondary={'$ ' + this.sucursalMasDato}
-                    />
-                    <ListItemText
-                      primary="Ingresos"
-                      secondary={'$ ' + this.sucursalMenosDato}
-                    />
-                  </ListItem>
                 </List>
               </div>
               <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <h2>Tipo de Clientela</h2>
-                <DonutChartContainer data={clientesTipicos}
+                <DonutChartContainer data={this.datosFrecuenciaCliente}
                   categoryField="tipoCliente" field="cantidad" />
                 <List>
                   <ListItem>

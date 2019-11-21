@@ -65,7 +65,7 @@ export var ingresoPorcentaje = (arr, totalGenerado) => {
     return arr;
 }
 
-export var construirDataSet = (arr1, arr2) => {
+export var construirDataSetProducto = (arr1, arr2) => {
     let arrResultante = [];
     for (let i = 0; i < arr1.length; i++) {
         var json = { "tipo": arr1[i], "cantidad": arr2[i] };
