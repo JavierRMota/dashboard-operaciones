@@ -33,10 +33,12 @@ import { datosSucursalDineroGenerado, sucursalMasVentas, sucursalMenosVentas } f
 import { pruebaMultiplesDatos, pruebaDatosMultiplesDatos } from '../data/appData';
 import { mesesGraficaMultiple, datosEgresosGraficaMultiple } from '../data/datosGraficaMultiple';
 import { generarNombresInsumo, generarTotalInsumos, totalGastado, insumoPorcentaje, construirDataSetInsumo, insumoMasComprado, insumoMenosComprado } from '../data/datosEgresosInsumo';
+import { generarNombresProveedor, generarTotalProveedor, totalGastadoProveedor, proveedorPorcentaje, construirDataSetProveedor, proveedorMasComprado, proveedorMenosComprado } from '../data/gastosProveedores';
 import { currency, report } from '../data/appData';
 import RadialGaugeContainer from '../components/RadialGaugeContainer';
 import { Insumo } from '../data/insumo';
 import { DetalleGasto } from '../data/detalleGasto';
+import { Proveedor } from '../data/proveedor';
 
 
 
@@ -67,6 +69,14 @@ class Gastos extends Component {
     datosEgresosInsumos = construirDataSetInsumo(this.nombresInsumo, this.porcentajeInsumos);
     insumoCompradoMas = insumoMasComprado(this.datosEgresosInsumos);
     insumoCompradoMenos = insumoMenosComprado(this.datosEgresosInsumos);
+
+    nombresProveedor = generarNombresProveedor(Proveedor);
+    totalProveedor = generarTotalProveedor(DetalleGasto, Proveedor.length);
+    proveedorGastoTotal = totalGastadoProveedor(this.totalProveedor);
+    porcentajeProveedor = proveedorPorcentaje(this.totalProveedor, this.proveedorGastoTotal);
+    datosEgresoProveedor = construirDataSetProveedor(this.nombresProveedor, this.porcentajeProveedor);
+    proveedorCompradoMas = proveedorMasComprado(this.datosEgresoProveedor);
+    proveedorCompradoMenos = proveedorMenosComprado(this.datosEgresoProveedor);
 
     handlePDFExport = () => {
         savePDF(ReactDOM.findDOMNode(this.appContainer), { paperSize: 'auto' });
@@ -230,27 +240,17 @@ class Gastos extends Component {
                                 </List>
                             </div>
                             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                <h2>Gastos Sucursales</h2>
-                                <DonutChartContainer data={datosSucursalDineroGenerado} categoryField="sucursal" field="dineroGenerado" />
+                                <h2>Egresos Proveedores</h2>
+                                <DonutChartContainer data={this.datosEgresoProveedor} categoryField="proveedor" field="totalGastado" />
                                 <List>
                                     <ListItem>
                                         <ListItemText
-                                            primary="Sucursal con más gastos"
-                                            secondary={this.sucursalMas}
+                                            primary="Proveedor con mayores gastos"
+                                            secondary={this.proveedorCompradoMas}
                                         />
                                         <ListItemText
-                                            primary="Sucursal con menos gastos"
-                                            secondary={this.sucursalMenos}
-                                        />
-                                    </ListItem>
-                                    <ListItem>
-                                        <ListItemText
-                                            primary="Egresos"
-                                            secondary={'$ ' + this.sucursalMasDato}
-                                        />
-                                        <ListItemText
-                                            primary="Egresos"
-                                            secondary={'$ ' + this.sucursalMenosDato}
+                                            primary="Proveedor con menores gastos"
+                                            secondary={this.proveedorCompradoMenos}
                                         />
                                     </ListItem>
                                 </List>

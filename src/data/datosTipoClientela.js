@@ -9,6 +9,64 @@ export const clientesTipicos = [
     { tipoCliente: "Familia adultos", cantidad: 6.67 } //cantidad=1 total= 15
 ];
 
+export var generarTipoCliente = (data) => {
+    var arr = [];
+    for (let h = 0; h < data.length; h++) {
+        arr.push(data[h].Descripcion);
+    }
+    return arr;
+}
+
+export var generarFrecuenciaCliente = (data, length) => {
+    let temp = 0;
+    let arr = [];
+
+    for (let a = 0; a < length; a++) {
+        arr[a] = 0.0;
+    }
+
+    for (let i = 0; i < data.length; i++) {
+        temp = arr[(data[i].Id_Cliente) - 1];
+        if (temp !== undefined) {
+            arr[(data[i].Id_Cliente - 1)] = temp + 1;
+        }
+        else {
+            arr.splice(data[i].Id_Cliente, (data[i].Id_Cliente - 1), 0.0);
+        }
+    }
+    console.log(arr);
+    return arr;
+}
+
+export var frecuenciaTotalClientes = (arr) => {
+    let frecuanciaClientela = 0;
+    for (let j = 0; j < arr.length; j++) {
+        frecuanciaClientela += arr[j];
+    }
+    console.log(frecuanciaClientela);
+    return frecuanciaClientela;
+}
+
+export var frecuenciaClientePorcentaje = (arr, frecuenciaClientela) => {
+    let temp = 0;
+    for (let k = 0; k < arr.length; k++) {
+        temp = ((arr[k] * 100) / frecuenciaClientela);
+        arr[k] = temp;
+    }
+    console.log(arr);
+    return arr;
+}
+
+export var construirDataSetCliente = (arr1, arr2) => {
+    let arrResultante = [];
+    for (let i = 0; i < arr1.length; i++) {
+        var json = { "tipoCliente": arr1[i], "cantidad": arr2[i] };
+        arrResultante.push(json);
+    }
+    console.log(arrResultante);
+    return arrResultante;
+}
+
 export var clienteMasAsiste = (data) => {
     let clienteMasFrecuente = data[0].cantidad;
     let nombreClienteMasFrecuente = data[0].tipoCliente;
