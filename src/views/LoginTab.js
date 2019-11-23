@@ -18,13 +18,10 @@ import "../App.css";
 class LoginTab extends Component {
   handleSubmit = event => {
     event.preventDefault();
-    console.log();
-
     const usuario = {
       mail: document.getElementById("standard-name").value,
       password: document.getElementById("standard-pass").value
     };
-    console.log(usuario);
     axios.post(`http://localhost:8080/api/compania/login`, { usuario }).then(
       response => {
         if (response.data === "welcome") {

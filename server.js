@@ -25,10 +25,14 @@ db.on("error", console.error.bind(console, "Error en la conexión"));
 db.once("open", function() {
   db.dropDatabase(function(err, result) {});
   /**/
-  adminMod.create({ mail: "femsa@mail.com", password: "Femsa123." }, function(
-    err,
-    doc
-  ) {});
+  adminMod.create(
+    {
+      mail: "a",
+      password: "a",
+      companias: [{ nombre: "nem" }, { nombre: "Facebook" }]
+    },
+    function(err, doc) {}
+  );
 });
 
 app.listen("8080", () => {

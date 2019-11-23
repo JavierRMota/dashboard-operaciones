@@ -2,9 +2,10 @@ const admin = require("../models/admin");
 const compania = require("../models/compania");
 
 exports.crearCompania = (req, res) => {
+  console.log(req.body);
   if (req.body.compania.name === req.body.compania.nameConfirm) {
     var companiaNueva = new compania({
-      nombre: req.body.name
+      nombre: req.body.compania.name
     });
     admin.find().then(data => {
       var compArr = data[0].companias;
@@ -25,12 +26,23 @@ exports.crearCompania = (req, res) => {
 exports.eliminarCompania = (req, res) => {
   admin.update(
     {},
-    { $pull: { companias: { nombre: req.body.nombre } } },
+    { $pull: { companias: { nombre: req.body.name } } },
     function(err) {
       if (err) res.send(err);
       res.send("exito");
     }
   );
+};
+
+exports.consultarCompanias = (req, res) => {
+  var comp = [];
+  admin.find().then(data => {
+    data[0].companias.forEach(element => {
+      comp.push({ name: element.nombre });
+    });
+    //console.log(comp);
+    res.send(comp);
+  });
 };
 
 exports.loginAdmin = (req, res) => {
