@@ -3,7 +3,7 @@ const Schema = mng.Schema;
 
 var gastoSchema = new Schema({
   fecha: Date,
-  fijo: Boolean,
+  fijo: Number,
   cantidad: Number,
   concepto: String
 });

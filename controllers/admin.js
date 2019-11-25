@@ -23,6 +23,105 @@ exports.crearCompania = (req, res) => {
   } else res.send("error");
 };
 
+exports.guardarSucursales = (req, res) => {
+  admin.update(
+    { "companias.nombre": req.params.compania },
+    { $set: { "companias.$.sucursales": req.body } },
+    function(err, up) {
+      if (err) res.send("error");
+      else res.send("sucursales guardadas");
+    }
+  );
+};
+
+exports.guardarObjetivos = (req, res) => {
+  admin.update(
+    { "companias.nombre": req.params.compania },
+    { $set: { "companias.$.planMensual": req.body } },
+    function(err, up) {
+      if (err) res.send("error");
+      else res.send("objetivos actualizados");
+    }
+  );
+};
+
+exports.guardarGastosVariables = (req, res) => {
+  admin.update(
+    { "companias.nombre": req.params.compania },
+    { $set: { "companias.$.gastosVariables": req.body } },
+    function(err, up) {
+      if (err) res.send("error");
+      else res.send("gastos variables actualizados");
+    }
+  );
+};
+
+exports.guardarGastosFijos = (req, res) => {
+  admin.update(
+    { "companias.nombre": req.params.compania },
+    { $set: { "companias.$.gastosFijos": req.body } },
+    function(err, up) {
+      if (err) res.send("error");
+      else res.send("gastos fijos actualizados");
+    }
+  );
+};
+
+exports.guardarCatalogo = (req, res) => {
+  admin.update(
+    { "companias.nombre": req.params.compania },
+    { $set: { "companias.$.catalogo": req.body } },
+    function(err, up) {
+      if (err) res.send("error");
+      else res.send("catalogo actualizado");
+    }
+  );
+};
+
+exports.guardarVendedores = (req, res) => {
+  admin.update(
+    { "companias.nombre": req.params.compania },
+    { $set: { "companias.$.vendedores": req.body } },
+    function(err, up) {
+      if (err) res.send("error");
+      else res.send("vendedores actualizados");
+    }
+  );
+};
+
+exports.guardarClientes = (req, res) => {
+  admin.update(
+    { "companias.nombre": req.params.compania },
+    { $set: { "companias.$.clientes": req.body } },
+    function(err, up) {
+      if (err) res.send("error");
+      else res.send("clientes actualizados");
+    }
+  );
+};
+
+exports.guardarDetalles = (req, res) => {
+  admin.update(
+    { "companias.nombre": req.params.compania },
+    { $set: { "companias.$.detallesGasto": req.body } },
+    function(err, up) {
+      if (err) res.send("error");
+      else res.send("detalles actualizados");
+    }
+  );
+};
+
+exports.guardarInsumos = (req, res) => {
+  admin.update(
+    { "companias.nombre": req.params.compania },
+    { $set: { "companias.$.insumos": req.body } },
+    function(err, up) {
+      if (err) res.send("error");
+      else res.send("insumos actualizados");
+    }
+  );
+};
+
 exports.eliminarCompania = (req, res) => {
   admin.update(
     {},

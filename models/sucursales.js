@@ -2,9 +2,9 @@ const mng = require("mongoose");
 const Schema = mng.Schema;
 
 var sucSchema = new Schema({
-  sucursal: String,
-  direccion: String,
-  geolocalizacion: String,
+  Id_Sucursal: String,
+  Sucursal: String,
+  Direccion: String,
   empleados: [
     {
       type: mng.Schema.Types.ObjectId,
