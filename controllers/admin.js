@@ -122,6 +122,105 @@ exports.guardarInsumos = (req, res) => {
   );
 };
 
+exports.consultarSucursales = (req, res) => {
+  admin.find({}).then(data => {
+    data[0].companias.forEach(compania => {
+      console.log(compania);
+      if (compania.nombre === req.params.compania) {
+        res.send(compania.sucursales);
+      }
+    });
+  });
+};
+
+exports.consultarObjetivos = (req, res) => {
+  admin.find({}).then(data => {
+    data[0].companias.forEach(compania => {
+      console.log(compania);
+      if (compania.nombre === req.params.compania) {
+        res.send(compania.planMensual);
+      }
+    });
+  });
+};
+
+exports.consultarVendedores = (req, res) => {
+  admin.find({}).then(data => {
+    data[0].companias.forEach(compania => {
+      console.log(compania);
+      if (compania.nombre === req.params.compania) {
+        res.send(compania.vendedores);
+      }
+    });
+  });
+};
+
+exports.consultarCatalogo = (req, res) => {
+  admin.find({}).then(data => {
+    data[0].companias.forEach(compania => {
+      console.log(compania);
+      if (compania.nombre === req.params.compania) {
+        res.send(compania.catalogo);
+      }
+    });
+  });
+};
+
+exports.consultarGastosVariables = (req, res) => {
+  admin.find({}).then(data => {
+    data[0].companias.forEach(compania => {
+      console.log(compania);
+      if (compania.nombre === req.params.compania) {
+        res.send(compania.gastosVariables);
+      }
+    });
+  });
+};
+
+exports.consultarGastosFijos = (req, res) => {
+  admin.find({}).then(data => {
+    data[0].companias.forEach(compania => {
+      console.log(compania);
+      if (compania.nombre === req.params.compania) {
+        res.send(compania.gastosFijos);
+      }
+    });
+  });
+};
+
+exports.consultarClientes = (req, res) => {
+  admin.find({}).then(data => {
+    data[0].companias.forEach(compania => {
+      console.log(compania);
+      if (compania.nombre === req.params.compania) {
+        res.send(compania.clientes);
+      }
+    });
+  });
+};
+
+exports.consultarDetalles = (req, res) => {
+  admin.find({}).then(data => {
+    data[0].companias.forEach(compania => {
+      console.log(compania);
+      if (compania.nombre === req.params.compania) {
+        res.send(compania.detallesGasto);
+      }
+    });
+  });
+};
+
+exports.consultarInsumos = (req, res) => {
+  admin.find({}).then(data => {
+    data[0].companias.forEach(compania => {
+      console.log(compania);
+      if (compania.nombre === req.params.compania) {
+        res.send(compania.insumos);
+      }
+    });
+  });
+};
+
 exports.eliminarCompania = (req, res) => {
   admin.update(
     {},
