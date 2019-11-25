@@ -243,6 +243,16 @@ exports.consultarCompanias = (req, res) => {
   });
 };
 
+exports.consultarCompania = (req, res) => {
+  admin.find().then(data => {
+    data[0].companias.forEach(element => {
+      if (element.nombre === req.params.compania) {
+        res.send(element);
+      }
+    });
+  });
+};
+
 exports.loginAdmin = (req, res) => {
   console.log(req.body);
   if (req.body.usuario.password != "") {

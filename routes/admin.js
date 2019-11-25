@@ -30,5 +30,6 @@ router.get("/:compania/gastosFijos", adminController.consultarGastosFijos);
 router.get("/:compania/clientes", adminController.consultarClientes);
 router.get("/:compania/detalles", adminController.consultarDetalles);
 router.get("/:compania/insumos", adminController.consultarInsumos);
+router.get("/:compania", adminController.consultarCompania);
 router.get("/consultarCompanias", adminController.consultarCompanias);
 module.exports = router;
