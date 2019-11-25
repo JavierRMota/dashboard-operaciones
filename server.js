@@ -1,5 +1,6 @@
 const express = require("express");
-const admin = require("./routes/admin");
+const adminPosts = require("./routes/adminPosts");
+const adminGets = require("./routes/adminGets");
 const adminMod = require("./models/admin");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -20,7 +21,8 @@ mongoose.connect(db_url, { userNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 
-app.use("/api/compania", admin);
+app.use("/api/compania", adminPosts);
+app.use("/api/compania", adminGets);
 db.on("error", console.error.bind(console, "Error en la conexión"));
 db.once("open", function() {
   db.dropDatabase(function(err, result) {});

@@ -33,9 +33,11 @@ class Options extends Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:8080/api/compania/consultarCompanias")
+    fetch("http://localhost:8080/api/compania/")
       .then(response => response.json())
-      .then(data => this.setState({ companies: data }));
+      .then(data => {
+        this.setState({ companies: data });
+      });
   }
 
   onSubmit = e => {
