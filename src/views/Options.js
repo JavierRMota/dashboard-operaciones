@@ -52,7 +52,12 @@ class Options extends Component {
           if (response.data === "compania creada") {
             e.preventDefault();
             this.redirectToHome();
-            window.location.reload();
+
+            fetch("http://localhost:8080/api/compania/")
+              .then(response => response.json())
+              .then(data => {
+                this.setState({ companies: data });
+              });
           } else alert("Hubo un error creando la compania");
         },
         error => {
@@ -64,7 +69,6 @@ class Options extends Component {
     this.setState({
       name: "",
       nameConfirm: "",
-      companies: []
     });
   };
 
