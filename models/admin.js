@@ -9,7 +9,7 @@ var inSchema = new Schema({
 });
 
 var detSchema = new Schema({
-  Fecha: Date,
+  Fecha: String,
   Id_Insumo: Number,
   Insumo_Categoria: String,
   Id_Proveedor: Number,
@@ -25,8 +25,8 @@ var empSchema = new Schema({
   Id_Vendedor: String,
   Nombre: String,
   Genero: String,
-  FechaDeNacimiento: Date,
-  FechaDeIngreso: Date
+  FechaDeNacimiento: String,
+  FechaDeIngreso: String
 });
 
 var catSchema = new Schema({
@@ -42,14 +42,14 @@ var sucSchema = new Schema({
 });
 
 var planMensualSchema = new Schema({
-  Fecha: Date,
+  Fecha: String,
   Ingreso_Plan: Number,
   Egreso_Plan: Number,
   Margen: Number
 });
 
 var gastoVariableSchema = new Schema({
-  Fecha: Date,
+  Fecha: String,
   Tortillas: Number,
   Vegetales: Number,
   Carne: Number,
@@ -58,7 +58,7 @@ var gastoVariableSchema = new Schema({
 });
 
 var gastoFijoSchema = new Schema({
-  Fecha: Date,
+  Fecha: String,
   Renta: Number,
   Agua: Number,
   Luz: Number,
@@ -105,8 +105,8 @@ adminSchema.pre("save", function(next) {
   });
 });
 
-adminSchema.methods.comparePassword = function(candidatePassword, cb) {
-  bc.compare(candidatePassword, this.password, function(err, isMatch) {
+adminSchema.methods.comparePassword = function(candiStringPassword, cb) {
+  bc.compare(candiStringPassword, this.password, function(err, isMatch) {
     if (err) return cb(err);
     cb(null, isMatch);
   });
