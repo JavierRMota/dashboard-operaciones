@@ -59,39 +59,72 @@ class Ventas extends Component {
       report: props.report,
       ventas: report.gauges[0],
     };
+    this.report = props.report
+    this.nombresProducto = generarNombresProducto(this.report.catalogo);
+    this.totalVentas = generarVentasProductos(this.report.requisiciones, this.report.catalogo.length);
+    this.ventasTotalesProductos = totalGenerado(this.totalVentas);
+    this.porcentajeIngreso = ingresoPorcentaje(this.totalVentas, this.ventasTotalesProductos);
+    this.datosIngresosProductos = construirDataSetProducto(this.nombresProducto, this.porcentajeIngreso);
+    this.catalogoMasVendido = productoMasVendido(this.datosIngresosProductos);
+    this.catalogoMenosVendido = productoMenosVendido(this.datosIngresosProductos);
+
+    this.nombresEmpleados = generarNombresEmpleado(Vendedor);
+    this.ventasEmpleados = generarEmpleadoVentas(Liquidacion, Vendedor.length);
+    this.ventasTotalesEmpleados = totalVentasEmpleados(this.ventasEmpleados);
+    this.porcentajeVentasEmpleado = ventasEmpleadoPorcentaje(this.ventasEmpleados, this.ventasTotalesEmpleados);
+    this.datosEmpleadoVentas = construirDataSetEmpleado(this.nombresEmpleados, this.porcentajeVentasEmpleado);
+    this.empleadoMas = empleadoMasVentas(this.datosEmpleadoVentas);
+    this.empleadoMenos = empleadoMenosVentas(this.datosEmpleadoVentas);
+
+    this.nombresSucursal = generarNombresSucursales(Sucursal);
+    this.ventasSucursal = generarVentasSucursales(Liquidacion, Sucursal.length);
+    this.ventasTotalesSucursal = totalIngresosSucursales(this.ventasSucursal);
+    this.porcentajeVentasSucursal = ingresoSucursalPorcentaje(this.ventasSucursal, this.ventasTotalesSucursal);
+    this.datosSucursalVentas = construirDataSetSucursal(this.nombresSucursal, this.porcentajeVentasSucursal);
+    this.sucursalMas = sucursalMasVentas(this.datosSucursalVentas);
+    this.sucursalMenos = sucursalMenosVentas(this.datosSucursalVentas);
+
+    this.nombresClientes = generarTipoCliente(Cliente);
+    this.frecuenciaCliente = generarFrecuenciaCliente(Liquidacion, Cliente.length);
+    this.sumaFrecuenciasCliente = frecuenciaTotalClientes(this.frecuenciaCliente);
+    this.porcentajeFrecuencia = frecuenciaClientePorcentaje(this.frecuenciaCliente, this.sumaFrecuenciasCliente);
+    this.datosFrecuenciaCliente = construirDataSetCliente(this.nombresClientes, this.porcentajeFrecuencia);
+    this.clienteFrecuenciaMaxima = clienteMasAsiste(this.datosFrecuenciaCliente);
+    this.clienteFrecuenciaMinima = clienteMenosAsiste(this.datosFrecuenciaCliente);
   }
 
-  nombresProducto = generarNombresProducto(Catalogo);
-  totalVentas = generarVentasProductos(Requisicion, Catalogo.length);
-  ventasTotalesProductos = totalGenerado(this.totalVentas);
-  porcentajeIngreso = ingresoPorcentaje(this.totalVentas, this.ventasTotalesProductos);
-  datosIngresosProductos = construirDataSetProducto(this.nombresProducto, this.porcentajeIngreso);
-  catalogoMasVendido = productoMasVendido(this.datosIngresosProductos);
-  catalogoMenosVendido = productoMenosVendido(this.datosIngresosProductos);
+  report;
+  nombresProducto;
+  totalVentas;
+  ventasTotalesProductos;
+  porcentajeIngreso;
+  datosIngresosProductos;
+  catalogoMasVendido;
+  catalogoMenosVendido;
 
-  nombresEmpleados = generarNombresEmpleado(Vendedor);
-  ventasEmpleados = generarEmpleadoVentas(Liquidacion, Vendedor.length);
-  ventasTotalesEmpleados = totalVentasEmpleados(this.ventasEmpleados);
-  porcentajeVentasEmpleado = ventasEmpleadoPorcentaje(this.ventasEmpleados, this.ventasTotalesEmpleados);
-  datosEmpleadoVentas = construirDataSetEmpleado(this.nombresEmpleados, this.porcentajeVentasEmpleado);
-  empleadoMas = empleadoMasVentas(this.datosEmpleadoVentas);
-  empleadoMenos = empleadoMenosVentas(this.datosEmpleadoVentas);
+  nombresEmpleados;
+  ventasEmpleados;
+  ventasTotalesEmpleados;
+  porcentajeVentasEmpleado;
+  datosEmpleadoVentas;
+  empleadoMas;
+  empleadoMenos;
 
-  nombresSucursal = generarNombresSucursales(Sucursal);
-  ventasSucursal = generarVentasSucursales(Liquidacion, Sucursal.length);
-  ventasTotalesSucursal = totalIngresosSucursales(this.ventasSucursal);
-  porcentajeVentasSucursal = ingresoSucursalPorcentaje(this.ventasSucursal, this.ventasTotalesSucursal);
-  datosSucursalVentas = construirDataSetSucursal(this.nombresSucursal, this.porcentajeVentasSucursal);
-  sucursalMas = sucursalMasVentas(this.datosSucursalVentas);
-  sucursalMenos = sucursalMenosVentas(this.datosSucursalVentas);
+  nombresSucursal;
+  ventasSucursal;
+  ventasTotalesSucursal;
+  porcentajeVentasSucursal;
+  datosSucursalVentas;
+  sucursalMas;
+  sucursalMenos;
 
-  nombresClientes = generarTipoCliente(Cliente);
-  frecuenciaCliente = generarFrecuenciaCliente(Liquidacion, Cliente.length);
-  sumaFrecuenciasCliente = frecuenciaTotalClientes(this.frecuenciaCliente);
-  porcentajeFrecuencia = frecuenciaClientePorcentaje(this.frecuenciaCliente, this.sumaFrecuenciasCliente);
-  datosFrecuenciaCliente = construirDataSetCliente(this.nombresClientes, this.porcentajeFrecuencia);
-  clienteFrecuenciaMaxima = clienteMasAsiste(this.datosFrecuenciaCliente);
-  clienteFrecuenciaMinima = clienteMenosAsiste(this.datosFrecuenciaCliente);
+  nombresClientes;
+  frecuenciaCliente;
+  sumaFrecuenciasCliente;
+  porcentajeFrecuencia;
+  datosFrecuenciaCliente;
+  clienteFrecuenciaMaxima;
+  clienteFrecuenciaMinima;
 
   handlePDFExport = () => {
     savePDF(ReactDOM.findDOMNode(this.appContainer), { paperSize: 'auto', fileName: 'ventas.pdf' });
