@@ -38,7 +38,7 @@ exports.crearCompania = (req, res) => {
 exports.guardarSucursales = (req, res) => {
   admin.update(
     { "companias.nombre": req.params.compania },
-    { $set: { "companias.$.sucursales": req.body } },
+    { $set: { "companias.$.sucursales": req.body.result } },
     function(err, up) {
       if (err) res.send("error");
       else res.send("sucursales guardadas");
@@ -49,7 +49,7 @@ exports.guardarSucursales = (req, res) => {
 exports.guardarObjetivos = (req, res) => {
   admin.update(
     { "companias.nombre": req.params.compania },
-    { $set: { "companias.$.planMensual": req.body } },
+    { $set: { "companias.$.planMensual": req.body.result } },
     function(err, up) {
       if (err) res.send("error");
       else res.send("objetivos actualizados");
@@ -60,7 +60,7 @@ exports.guardarObjetivos = (req, res) => {
 exports.guardarGastosVariables = (req, res) => {
   admin.update(
     { "companias.nombre": req.params.compania },
-    { $set: { "companias.$.gastosVariables": req.body } },
+    { $set: { "companias.$.gastosVariables": req.body.result } },
     function(err, up) {
       if (err) res.send("error");
       else res.send("gastos variables actualizados");
@@ -71,7 +71,7 @@ exports.guardarGastosVariables = (req, res) => {
 exports.guardarGastosFijos = (req, res) => {
   admin.update(
     { "companias.nombre": req.params.compania },
-    { $set: { "companias.$.gastosFijos": req.body } },
+    { $set: { "companias.$.gastosFijos": req.body.result } },
     function(err, up) {
       if (err) res.send("error");
       else res.send("gastos fijos actualizados");
@@ -82,7 +82,7 @@ exports.guardarGastosFijos = (req, res) => {
 exports.guardarCatalogo = (req, res) => {
   admin.update(
     { "companias.nombre": req.params.compania },
-    { $set: { "companias.$.catalogo": req.body } },
+    { $set: { "companias.$.catalogo": req.body.result } },
     function(err, up) {
       if (err) res.send("error");
       else res.send("catalogo actualizado");
@@ -93,7 +93,7 @@ exports.guardarCatalogo = (req, res) => {
 exports.guardarVendedores = (req, res) => {
   admin.update(
     { "companias.nombre": req.params.compania },
-    { $set: { "companias.$.vendedores": req.body } },
+    { $set: { "companias.$.vendedores": req.body.result } },
     function(err, up) {
       if (err) res.send("error");
       else res.send("vendedores actualizados");
@@ -104,7 +104,7 @@ exports.guardarVendedores = (req, res) => {
 exports.guardarClientes = (req, res) => {
   admin.update(
     { "companias.nombre": req.params.compania },
-    { $set: { "companias.$.clientes": req.body } },
+    { $set: { "companias.$.clientes": req.body.result } },
     function(err, up) {
       if (err) res.send("error");
       else res.send("clientes actualizados");
@@ -115,7 +115,7 @@ exports.guardarClientes = (req, res) => {
 exports.guardarDetalles = (req, res) => {
   admin.update(
     { "companias.nombre": req.params.compania },
-    { $set: { "companias.$.detallesGasto": req.body } },
+    { $set: { "companias.$.detallesGasto": req.body.result } },
     function(err, up) {
       if (err) res.send("error");
       else res.send("detalles actualizados");
@@ -126,7 +126,7 @@ exports.guardarDetalles = (req, res) => {
 exports.guardarInsumos = (req, res) => {
   admin.update(
     { "companias.nombre": req.params.compania },
-    { $set: { "companias.$.insumos": req.body } },
+    { $set: { "companias.$.insumos": req.body.result } },
     function(err, up) {
       if (err) res.send("error");
       else res.send("insumos actualizados");

@@ -26,6 +26,7 @@ import { TabStrip, TabStripTab } from '@progress/kendo-react-layout'
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import ReactFileReader from 'react-file-reader';
+import axios from "axios";
 
 
 class Dashboard extends Component {
@@ -56,6 +57,7 @@ class Dashboard extends Component {
 
   csv2JSON = (csv) => {
     var lines = csv.split("\n");
+    var empty = true
     var result = [];
     var headers = lines[0].replace("\r", "").split(",");
     for (var i = 1; i < lines.length; i++) {
@@ -63,10 +65,14 @@ class Dashboard extends Component {
       var currentline = lines[i].replace("\r", "").split(",");
       for (var j = 0; j < headers.length; j++) {
         if (currentline[j]) {
+          empty = false
           obj[headers[j]] = currentline[j];
         }
       }
-      result.push(obj);
+      if (!empty) {
+        result.push(obj);
+      }
+      empty = true
     }
     return result; //JavaScript object
     //return JSON.stringify(result); //JSON
@@ -77,8 +83,24 @@ class Dashboard extends Component {
     reader.onload = (e) => {
       // Use reader.result
       var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' elementos del catálogo. ');
-      console.log(result);
+      axios.post(`http://localhost:8080/api/compania/${this.state.name}/catalogo`, { result }).then(
+        response => {
+          if (response.data === "catalogo actualizado") {
+            e.preventDefault();
+            fetch(`http://localhost:8080/api/compania/${this.state.name}`)
+              .then(response => response.json())
+              .then(data => {
+                this.setState({
+                  report: data,
+                });
+              });
+            alert('Se han registrado ' + (result.length) + ' catalogo. ');
+          } else alert("Hubo un error subiendo catalogo");
+        },
+        error => {
+          console.log(error);
+        }
+      );
     };
     reader.readAsText(files[0]);
   };
@@ -88,8 +110,24 @@ class Dashboard extends Component {
     reader.onload = (e) => {
       // Use reader.result
       var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' clientes. ');
-      console.log(result);
+      axios.post(`http://localhost:8080/api/compania/${this.state.name}/clientes`, { result }).then(
+        response => {
+          if (response.data === "clientes actualizados") {
+            e.preventDefault();
+            fetch(`http://localhost:8080/api/compania/${this.state.name}`)
+              .then(response => response.json())
+              .then(data => {
+                this.setState({
+                  report: data,
+                });
+              });
+            alert('Se han registrado ' + (result.length) + ' clientes. ');
+          } else alert("Hubo un error subiendo clientes");
+        },
+        error => {
+          console.log(error);
+        }
+      );
     };
     reader.readAsText(files[0]);
   };
@@ -99,8 +137,24 @@ class Dashboard extends Component {
     reader.onload = (e) => {
       // Use reader.result
       var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' gastos detallados. ');
-      console.log(result);
+      axios.post(`http://localhost:8080/api/compania/${this.state.name}/detalles`, { result }).then(
+        response => {
+          if (response.data === "detalles actualizados") {
+            e.preventDefault();
+            fetch(`http://localhost:8080/api/compania/${this.state.name}`)
+              .then(response => response.json())
+              .then(data => {
+                this.setState({
+                  report: data,
+                });
+              });
+            alert('Se han registrado ' + (result.length) + ' gastos detallados. ');
+          } else alert("Hubo un error subiendo gastos detallados");
+        },
+        error => {
+          console.log(error);
+        }
+      );
     };
     reader.readAsText(files[0]);
   };
@@ -110,8 +164,24 @@ class Dashboard extends Component {
     reader.onload = (e) => {
       // Use reader.result
       var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' gastos fijos. ');
-      console.log(result);
+      axios.post(`http://localhost:8080/api/compania/${this.state.name}/gastosFijos`, { result }).then(
+        response => {
+          if (response.data === "gastos fijos actualizados") {
+            e.preventDefault();
+            fetch(`http://localhost:8080/api/compania/${this.state.name}`)
+              .then(response => response.json())
+              .then(data => {
+                this.setState({
+                  report: data,
+                });
+              });
+            alert('Se han registrado ' + (result.length) + ' gastos fijos. ');
+          } else alert("Hubo un error subiendo gastos fijos");
+        },
+        error => {
+          console.log(error);
+        }
+      );
     };
     reader.readAsText(files[0]);
   };
@@ -121,8 +191,25 @@ class Dashboard extends Component {
     reader.onload = (e) => {
       // Use reader.result
       var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' gastos variables. ');
-      console.log(result);
+      axios.post(`http://localhost:8080/api/compania/${this.state.name}/gastosVariables`, { result }).then(
+        response => {
+          console.log(response.data)
+          if (response.data === "gastos variables actualizados") {
+            e.preventDefault();
+            fetch(`http://localhost:8080/api/compania/${this.state.name}`)
+              .then(response => response.json())
+              .then(data => {
+                this.setState({
+                  report: data,
+                });
+              });
+            alert('Se han registrado ' + (result.length) + ' gastos variables. ');
+          } else alert("Hubo un error subiendo gastos variables");
+        },
+        error => {
+          console.log(error);
+        }
+      );
     };
     reader.readAsText(files[0]);
   };
@@ -133,7 +220,24 @@ class Dashboard extends Component {
       // Use reader.result
       var result = this.csv2JSON(reader.result);
       alert('Se han registrado ' + (result.length - 1) + ' insumos. ');
-      console.log(result);
+      axios.post(`http://localhost:8080/api/compania/${this.state.name}/insumos`, { result }).then(
+        response => {
+          if (response.data === "insumos actualizados") {
+            e.preventDefault();
+            fetch(`http://localhost:8080/api/compania/${this.state.name}`)
+              .then(response => response.json())
+              .then(data => {
+                this.setState({
+                  report: data,
+                });
+              });
+            alert('Se han registrado ' + (result.length) + ' insumos. ');
+          } else alert("Hubo un error subiendo insumos");
+        },
+        error => {
+          console.log(error);
+        }
+      );
     };
     reader.readAsText(files[0]);
   };
@@ -143,8 +247,24 @@ class Dashboard extends Component {
     reader.onload = (e) => {
       // Use reader.result
       var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' liquidaciones. ');
-      console.log(result);
+      axios.post(`http://localhost:8080/api/compania/${this.state.name}/liquidaciones`, { result }).then(
+        response => {
+          if (response.data === "liquidaciones guardadas") {
+            e.preventDefault();
+            fetch(`http://localhost:8080/api/compania/${this.state.name}`)
+              .then(response => response.json())
+              .then(data => {
+                this.setState({
+                  report: data,
+                });
+              });
+            alert('Se han registrado ' + (result.length) + ' liquidaciones. ');
+          } else alert("Hubo un error subiendo liquidaciones");
+        },
+        error => {
+          console.log(error);
+        }
+      );
     };
     reader.readAsText(files[0]);
   };
@@ -154,8 +274,24 @@ class Dashboard extends Component {
     reader.onload = (e) => {
       // Use reader.result
       var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' objetivos. ');
-      console.log(result);
+      axios.post(`http://localhost:8080/api/compania/${this.state.name}/objetivos`, { result }).then(
+        response => {
+          if (response.data === "objetivos actualizados") {
+            e.preventDefault();
+            fetch(`http://localhost:8080/api/compania/${this.state.name}`)
+              .then(response => response.json())
+              .then(data => {
+                this.setState({
+                  report: data,
+                });
+              });
+            alert('Se han registrado ' + (result.length) + ' objetivos. ');
+          } else alert("Hubo un error subiendo objetivos");
+        },
+        error => {
+          console.log(error);
+        }
+      );
     };
     reader.readAsText(files[0]);
   };
@@ -165,8 +301,24 @@ class Dashboard extends Component {
     reader.onload = (e) => {
       // Use reader.result
       var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' proveedores. ');
-      console.log(result);
+      axios.post(`http://localhost:8080/api/compania/${this.state.name}/proveedores`, { result }).then(
+        response => {
+          if (response.data === "proveedores actualizados") {
+            e.preventDefault();
+            fetch(`http://localhost:8080/api/compania/${this.state.name}`)
+              .then(response => response.json())
+              .then(data => {
+                this.setState({
+                  report: data,
+                });
+              });
+            alert('Se han registrado ' + (result.length) + ' proveedores. ');
+          } else alert("Hubo un error subiendo proveedores");
+        },
+        error => {
+          console.log(error);
+        }
+      );
     };
     reader.readAsText(files[0]);
   };
@@ -176,8 +328,24 @@ class Dashboard extends Component {
     reader.onload = (e) => {
       // Use reader.result
       var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' requisiciones. ');
-      console.log(result);
+      axios.post(`http://localhost:8080/api/compania/${this.state.name}/requisiciones`, { result }).then(
+        response => {
+          if (response.data === "requisiciones actualizados") {
+            e.preventDefault();
+            fetch(`http://localhost:8080/api/compania/${this.state.name}`)
+              .then(response => response.json())
+              .then(data => {
+                this.setState({
+                  report: data,
+                });
+              });
+            alert('Se han registrado ' + (result.length) + ' requisiciones. ');
+          } else alert("Hubo un error subiendo requisiciones");
+        },
+        error => {
+          console.log(error);
+        }
+      );
     };
     reader.readAsText(files[0]);
   };
@@ -187,8 +355,24 @@ class Dashboard extends Component {
     reader.onload = (e) => {
       // Use reader.result
       var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' sucursales. ');
-      console.log(result);
+      axios.post(`http://localhost:8080/api/compania/${this.state.name}/sucursales`, { result }).then(
+        response => {
+          if (response.data === "sucursales guardadas") {
+            e.preventDefault();
+            fetch(`http://localhost:8080/api/compania/${this.state.name}`)
+              .then(response => response.json())
+              .then(data => {
+                this.setState({
+                  report: data,
+                });
+              });
+            alert('Se han registrado ' + (result.length) + ' sucursales. ');
+          } else alert("Hubo un error subiendo sucursales");
+        },
+        error => {
+          console.log(error);
+        }
+      );
     };
     reader.readAsText(files[0]);
   };
@@ -198,8 +382,24 @@ class Dashboard extends Component {
     reader.onload = (e) => {
       // Use reader.result
       var result = this.csv2JSON(reader.result);
-      alert('Se han registrado ' + (result.length - 1) + ' vendedores. ');
-      console.log(result);
+      axios.post(`http://localhost:8080/api/compania/${this.state.name}/vendedores`, { result }).then(
+        response => {
+          if (response.data === "vendedores actualizados") {
+            e.preventDefault();
+            fetch(`http://localhost:8080/api/compania/${this.state.name}`)
+              .then(response => response.json())
+              .then(data => {
+                this.setState({
+                  report: data,
+                });
+              });
+            alert('Se han registrado ' + (result.length) + ' vendedores. ');
+          } else alert("Hubo un error subiendo vendedores");
+        },
+        error => {
+          console.log(error);
+        }
+      );
     };
     reader.readAsText(files[0]);
   };
@@ -227,6 +427,19 @@ class Dashboard extends Component {
       width: 100,
     },
   }));
+
+  componentDidMount() {
+    const path = window.location.pathname.split("/").splice(-1)[0]
+    fetch(`http://localhost:8080/api/compania/${path}`)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          report: data,
+          name: path
+        });
+        console.log(data)
+      });
+  }
 
   render() {
 

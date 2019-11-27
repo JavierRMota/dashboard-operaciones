@@ -82,7 +82,7 @@ class Options extends Component {
     var company = this.state.companies.map((item, key) => (
       <div>
         <Divider />
-        <Link to="/reporte" className="link">
+        <Link to={'/reporte/'+item.name} className="link">
           <ListItem button className="k-button k-primary mt-3 mb-1">
             <ListItemText primary={item.name} />
           </ListItem>
