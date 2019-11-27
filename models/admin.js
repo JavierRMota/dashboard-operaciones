@@ -2,6 +2,36 @@ const mng = require("mongoose");
 const Schema = mng.Schema;
 const bc = require("bcrypt");
 
+var provSchema = new Schema({
+  ID_Proveedor: Number,
+  Nombre: String
+});
+
+var liqSchema = new Schema({
+  Id_Liquidacion: Number,
+  Id_Requisicion: Number,
+  Id_Sucursal: Number,
+  Id_Vendedor: Number,
+  Id_Cliente: Number,
+  Cliente_Genero: String,
+  Cliente_Edad: Number,
+  Cliente_Cantidad: Number,
+  Cliente_Ubicacion: Number,
+  Forma_de_Pago: String,
+  Total_Liquidacion: Number
+});
+
+var reqSchema = new Schema({
+  Id_Requisicion: Number,
+  Id_Sucursal: Number,
+  Id_Vendedor: Number,
+  Id_Catalogo: Number,
+  Cantidad: Number,
+  Fecha_Requisicion: String,
+  Fecha_Entrega: String,
+  Total: String
+});
+
 var inSchema = new Schema({
   Id_Insumo: Number,
   Descripcion: String,
@@ -76,7 +106,10 @@ var compSchema = new Schema({
   catalogo: [catSchema],
   clientes: [clientSchema],
   detallesGasto: [detSchema],
-  insumos: [inSchema]
+  insumos: [inSchema],
+  requisiciones: [reqSchema],
+  provedores: [provSchema],
+  liquidaciones: [liqSchema]
 });
 
 var adminSchema = new Schema({

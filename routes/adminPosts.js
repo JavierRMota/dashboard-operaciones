@@ -18,5 +18,8 @@ router.post("/:compania/gastosFijos", adminController.guardarGastosFijos);
 router.post("/:compania/clientes", adminController.guardarClientes);
 router.post("/:compania/detalles", adminController.guardarDetalles);
 router.post("/:compania/insumos", adminController.guardarInsumos);
+router.post("/:compania/requisiciones", adminController.guardarRequisiciones);
+router.post("/:compania/liquidaciones", adminController.guardarLiquidaciones);
+router.post("/:compania/proveedores", adminController.guardarProvedores);
 
 module.exports = router;

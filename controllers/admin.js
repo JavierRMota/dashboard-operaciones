@@ -46,6 +46,39 @@ exports.guardarSucursales = (req, res) => {
   );
 };
 
+exports.guardarLiquidaciones = (req, res) => {
+  admin.update(
+    { "companias.nombre": req.params.compania },
+    { $set: { "companias.$.liquidaciones": req.body.result } },
+    function(err, up) {
+      if (err) res.send("error");
+      else res.send("liquidaciones guardadas");
+    }
+  );
+};
+
+exports.guardarProvedores = (req, res) => {
+  admin.update(
+    { "companias.nombre": req.params.compania },
+    { $set: { "companias.$.provedores": req.body.result } },
+    function(err, up) {
+      if (err) res.send("error");
+      else res.send("provedores guardadas");
+    }
+  );
+};
+
+exports.guardarRequisiciones = (req, res) => {
+  admin.update(
+    { "companias.nombre": req.params.compania },
+    { $set: { "companias.$.requisiciones": req.body.result } },
+    function(err, up) {
+      if (err) res.send("error");
+      else res.send("requisiciones guardadas");
+    }
+  );
+};
+
 exports.guardarObjetivos = (req, res) => {
   admin.update(
     { "companias.nombre": req.params.compania },
@@ -137,7 +170,6 @@ exports.guardarInsumos = (req, res) => {
 exports.consultarSucursales = (req, res) => {
   admin.find({}).then(data => {
     data[0].companias.forEach(compania => {
-      console.log(compania);
       if (compania.nombre === req.params.compania) {
         res.send(compania.sucursales);
       }
@@ -148,9 +180,18 @@ exports.consultarSucursales = (req, res) => {
 exports.consultarObjetivos = (req, res) => {
   admin.find({}).then(data => {
     data[0].companias.forEach(compania => {
-      console.log(compania);
       if (compania.nombre === req.params.compania) {
         res.send(compania.planMensual);
+      }
+    });
+  });
+};
+
+exports.consultarRequisiciones = (req, res) => {
+  admin.find({}).then(data => {
+    data[0].companias.forEach(compania => {
+      if (compania.nombre === req.params.compania) {
+        res.send(compania.requisiciones);
       }
     });
   });
@@ -159,9 +200,28 @@ exports.consultarObjetivos = (req, res) => {
 exports.consultarVendedores = (req, res) => {
   admin.find({}).then(data => {
     data[0].companias.forEach(compania => {
-      console.log(compania);
       if (compania.nombre === req.params.compania) {
         res.send(compania.vendedores);
+      }
+    });
+  });
+};
+
+exports.consultarProvedores = (req, res) => {
+  admin.find({}).then(data => {
+    data[0].companias.forEach(compania => {
+      if (compania.nombre === req.params.compania) {
+        res.send(compania.provedores);
+      }
+    });
+  });
+};
+
+exports.consultarLiquidaciones = (req, res) => {
+  admin.find({}).then(data => {
+    data[0].companias.forEach(compania => {
+      if (compania.nombre === req.params.compania) {
+        res.send(compania.liquidaciones);
       }
     });
   });
@@ -170,7 +230,6 @@ exports.consultarVendedores = (req, res) => {
 exports.consultarCatalogo = (req, res) => {
   admin.find({}).then(data => {
     data[0].companias.forEach(compania => {
-      console.log(compania);
       if (compania.nombre === req.params.compania) {
         res.send(compania.catalogo);
       }
@@ -181,7 +240,6 @@ exports.consultarCatalogo = (req, res) => {
 exports.consultarGastosVariables = (req, res) => {
   admin.find({}).then(data => {
     data[0].companias.forEach(compania => {
-      console.log(compania);
       if (compania.nombre === req.params.compania) {
         res.send(compania.gastosVariables);
       }
@@ -192,7 +250,6 @@ exports.consultarGastosVariables = (req, res) => {
 exports.consultarGastosFijos = (req, res) => {
   admin.find({}).then(data => {
     data[0].companias.forEach(compania => {
-      console.log(compania);
       if (compania.nombre === req.params.compania) {
         res.send(compania.gastosFijos);
       }
@@ -203,7 +260,6 @@ exports.consultarGastosFijos = (req, res) => {
 exports.consultarClientes = (req, res) => {
   admin.find({}).then(data => {
     data[0].companias.forEach(compania => {
-      console.log(compania);
       if (compania.nombre === req.params.compania) {
         res.send(compania.clientes);
       }
@@ -214,7 +270,6 @@ exports.consultarClientes = (req, res) => {
 exports.consultarDetalles = (req, res) => {
   admin.find({}).then(data => {
     data[0].companias.forEach(compania => {
-      console.log(compania);
       if (compania.nombre === req.params.compania) {
         res.send(compania.detallesGasto);
       }
@@ -225,7 +280,6 @@ exports.consultarDetalles = (req, res) => {
 exports.consultarInsumos = (req, res) => {
   admin.find({}).then(data => {
     data[0].companias.forEach(compania => {
-      console.log(compania);
       if (compania.nombre === req.params.compania) {
         res.send(compania.insumos);
       }
