@@ -131,3 +131,72 @@ import { pruebaMultiplesDatos, pruebaDatosMultiplesDatos } from '../data/appData
       </TableHead>
     </Table>
   </div>
+
+  <div className="col-sm-1 col-md-1">
+    <div class="row">
+      <TextField
+        id="outlined-select-currency"
+        select
+        label="Año"
+        className={this.classes.textField}
+        SelectProps={{
+          MenuProps: {
+            className: this.classes.menu
+          }
+        }}
+        onChange={this.handleChange("year")}
+        value={this.state.year}
+        margin="normal"
+        variant="outlined"
+      >
+        {this.years.map(option => (
+          <MenuItem key={option} value={option}>
+            {option}
+          </MenuItem>
+        ))}
+      </TextField>
+    </div>
+    <div class="row">
+      <TextField
+        id="outlined-select-currency"
+        select
+        label="Mes"
+        className={this.classes.textField}
+        SelectProps={{
+          MenuProps: {
+            className: this.classes.menu
+          }
+        }}
+        onChange={this.handleChange("month")}
+        value={this.state.month}
+        margin="normal"
+        variant="outlined"
+      >
+        {this.month.map(option => (
+          <MenuItem key={option} value={option}>
+            {option}
+          </MenuItem>
+        ))}
+      </TextField>
+    </div>
+  </div>
+
+  STATE:
+  year: "Todos",
+  month: "Todos",
+
+  years = [2016, 2017, 2018, 2019, "Todos"];
+  month = [
+    "enero",
+    "febrero",
+    "marzo",
+    "abril",
+    "mayo",
+    "junio",
+    "julio",
+    "Todos"
+  ];
+
+  handleChange = name => event => {
+    this.setState({ [name]: event.target.value });
+  };

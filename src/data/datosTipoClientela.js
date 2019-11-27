@@ -34,7 +34,6 @@ export var generarFrecuenciaCliente = (data, length) => {
             arr.splice(data[i].Id_Cliente, (data[i].Id_Cliente - 1), 0.0);
         }
     }
-    console.log(arr);
     return arr;
 }
 
@@ -43,7 +42,6 @@ export var frecuenciaTotalClientes = (arr) => {
     for (let j = 0; j < arr.length; j++) {
         frecuanciaClientela += arr[j];
     }
-    console.log(frecuanciaClientela);
     return frecuanciaClientela;
 }
 
@@ -53,7 +51,6 @@ export var frecuenciaClientePorcentaje = (arr, frecuenciaClientela) => {
         temp = ((arr[k] * 100) / frecuenciaClientela);
         arr[k] = temp;
     }
-    console.log(arr);
     return arr;
 }
 
@@ -63,7 +60,6 @@ export var construirDataSetCliente = (arr1, arr2) => {
         var json = { "tipoCliente": arr1[i], "cantidad": arr2[i] };
         arrResultante.push(json);
     }
-    console.log(arrResultante);
     return arrResultante;
 }
 

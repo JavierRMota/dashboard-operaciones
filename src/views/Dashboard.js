@@ -26,17 +26,19 @@ import { TabStrip, TabStripTab } from "@progress/kendo-react-layout";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import ReactFileReader from "react-file-reader";
+import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from "axios";
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
+    const name = props.compania
     this.appContainer = React.createRef();
     this.state = {
       showDialog: false,
-      year: "Todos",
-      month: "Todos",
-      selected: 0
+      selected: 0,
+      process: true,
+      name: name
     };
   }
 
@@ -81,6 +83,9 @@ class Dashboard extends Component {
   };
 
   handleCatalogo = files => {
+    this.setState({
+      process: true
+    });
     var reader = new FileReader();
     reader.onload = e => {
       // Use reader.result
@@ -98,7 +103,8 @@ class Dashboard extends Component {
                 .then(response => response.json())
                 .then(data => {
                   this.setState({
-                    report: data
+                    report: data,
+                    process: false
                   });
                 });
               alert("Se han registrado " + result.length + " catalogo. ");
@@ -113,6 +119,9 @@ class Dashboard extends Component {
   };
 
   handleClientes = files => {
+    this.setState({
+      process: true
+    });
     var reader = new FileReader();
     reader.onload = e => {
       // Use reader.result
@@ -130,7 +139,8 @@ class Dashboard extends Component {
                 .then(response => response.json())
                 .then(data => {
                   this.setState({
-                    report: data
+                    report: data,
+                    process: false
                   });
                 });
               alert("Se han registrado " + result.length + " clientes. ");
@@ -145,6 +155,9 @@ class Dashboard extends Component {
   };
 
   handleGastosDetallados = files => {
+    this.setState({
+      process: true
+    });
     var reader = new FileReader();
     reader.onload = e => {
       // Use reader.result
@@ -162,7 +175,8 @@ class Dashboard extends Component {
                 .then(response => response.json())
                 .then(data => {
                   this.setState({
-                    report: data
+                    report: data,
+                    process: false
                   });
                 });
               alert(
@@ -179,6 +193,9 @@ class Dashboard extends Component {
   };
 
   handleGastosFijos = files => {
+    this.setState({
+      process: true
+    });
     var reader = new FileReader();
     reader.onload = e => {
       // Use reader.result
@@ -196,7 +213,8 @@ class Dashboard extends Component {
                 .then(response => response.json())
                 .then(data => {
                   this.setState({
-                    report: data
+                    report: data,
+                    process: false
                   });
                 });
               alert("Se han registrado " + result.length + " gastos fijos. ");
@@ -211,6 +229,9 @@ class Dashboard extends Component {
   };
 
   handleGastosVariables = files => {
+    this.setState({
+      process: true
+    });
     var reader = new FileReader();
     reader.onload = e => {
       // Use reader.result
@@ -229,7 +250,8 @@ class Dashboard extends Component {
                 .then(response => response.json())
                 .then(data => {
                   this.setState({
-                    report: data
+                    report: data,
+                    process: false
                   });
                 });
               alert(
@@ -246,11 +268,13 @@ class Dashboard extends Component {
   };
 
   handleInsumos = files => {
+    this.setState({
+      process: true
+    });
     var reader = new FileReader();
     reader.onload = e => {
       // Use reader.result
       var result = this.csv2JSON(reader.result);
-      alert("Se han registrado " + (result.length - 1) + " insumos. ");
       axios
         .post(`http://localhost:8080/api/compania/${this.state.name}/insumos`, {
           result
@@ -263,7 +287,8 @@ class Dashboard extends Component {
                 .then(response => response.json())
                 .then(data => {
                   this.setState({
-                    report: data
+                    report: data,
+                    process: false
                   });
                 });
               alert("Se han registrado " + result.length + " insumos. ");
@@ -278,6 +303,9 @@ class Dashboard extends Component {
   };
 
   handleLiquidacion = files => {
+    this.setState({
+      process: true
+    });
     var reader = new FileReader();
     reader.onload = e => {
       // Use reader.result
@@ -295,7 +323,8 @@ class Dashboard extends Component {
                 .then(response => response.json())
                 .then(data => {
                   this.setState({
-                    report: data
+                    report: data,
+                    process: false
                   });
                 });
               alert("Se han registrado " + result.length + " liquidaciones. ");
@@ -310,6 +339,9 @@ class Dashboard extends Component {
   };
 
   handleObjetivos = files => {
+    this.setState({
+      process: true
+    });
     var reader = new FileReader();
     reader.onload = e => {
       // Use reader.result
@@ -327,7 +359,8 @@ class Dashboard extends Component {
                 .then(response => response.json())
                 .then(data => {
                   this.setState({
-                    report: data
+                    report: data,
+                    process: false
                   });
                 });
               alert("Se han registrado " + result.length + " objetivos. ");
@@ -342,6 +375,9 @@ class Dashboard extends Component {
   };
 
   handleProveedores = files => {
+    this.setState({
+      process: true
+    });
     var reader = new FileReader();
     reader.onload = e => {
       // Use reader.result
@@ -359,7 +395,8 @@ class Dashboard extends Component {
                 .then(response => response.json())
                 .then(data => {
                   this.setState({
-                    report: data
+                    report: data,
+                    process: false
                   });
                 });
               alert("Se han registrado " + result.length + " proveedores. ");
@@ -374,6 +411,9 @@ class Dashboard extends Component {
   };
 
   handleRequisicion = files => {
+    this.setState({
+      process: true
+    });
     var reader = new FileReader();
     reader.onload = e => {
       // Use reader.result
@@ -391,7 +431,8 @@ class Dashboard extends Component {
                 .then(response => response.json())
                 .then(data => {
                   this.setState({
-                    report: data
+                    report: data,
+                    process: false
                   });
                 });
               alert("Se han registrado " + result.length + " requisiciones. ");
@@ -406,6 +447,9 @@ class Dashboard extends Component {
   };
 
   handleSucursales = files => {
+    this.setState({
+      process: true
+    });
     var reader = new FileReader();
     reader.onload = e => {
       // Use reader.result
@@ -423,7 +467,8 @@ class Dashboard extends Component {
                 .then(response => response.json())
                 .then(data => {
                   this.setState({
-                    report: data
+                    report: data,
+                    process: false
                   });
                 });
               alert("Se han registrado " + result.length + " sucursales. ");
@@ -438,6 +483,9 @@ class Dashboard extends Component {
   };
 
   handleVendedores = files => {
+    this.setState({
+      process: true
+    });
     var reader = new FileReader();
     reader.onload = e => {
       // Use reader.result
@@ -455,7 +503,8 @@ class Dashboard extends Component {
                 .then(response => response.json())
                 .then(data => {
                   this.setState({
-                    report: data
+                    report: data,
+                    process: false
                   });
                 });
               alert("Se han registrado " + result.length + " vendedores. ");
@@ -467,22 +516,6 @@ class Dashboard extends Component {
         );
     };
     reader.readAsText(files[0]);
-  };
-
-  years = [2016, 2017, 2018, 2019, "Todos"];
-  month = [
-    "enero",
-    "febrero",
-    "marzo",
-    "abril",
-    "mayo",
-    "junio",
-    "julio",
-    "Todos"
-  ];
-
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
   };
 
   classes = makeStyles(theme => ({
@@ -503,15 +536,15 @@ class Dashboard extends Component {
   }));
 
   componentDidMount() {
-    const path = window.location.pathname.split("/").splice(-1)[0];
+    const path = this.state.name
     fetch(`http://localhost:8080/api/compania/${path}`)
       .then(response => response.json())
       .then(data => {
         this.setState({
           report: data,
-          name: path
+          name: path,
+          process: false
         });
-        console.log(data);
       });
   }
 
@@ -522,7 +555,7 @@ class Dashboard extends Component {
           <CardContent>
             <div>
               <div align="center">
-                <Link to={item.path} className="link">
+                <Link to={{ pathname: item.path +'/'+this.state.name, report: this.state.report }} className="link">
                   <Button primary={true} look="flat">
                     <u>
                       <b>{item.title}</b>
@@ -592,6 +625,7 @@ class Dashboard extends Component {
             className="app-container container"
             ref={el => (this.appContainer = el)}
           >
+          {this.state.process && (<CircularProgress />)}
             <div className="row">
               <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <h1>Empresa | Reporte de operaciones</h1>
@@ -605,58 +639,12 @@ class Dashboard extends Component {
             </div>
 
             <div class="row">
-              <div className="col-sm-1 col-md-1">
-                <div class="row">
-                  <TextField
-                    id="outlined-select-currency"
-                    select
-                    label="Año"
-                    className={this.classes.textField}
-                    SelectProps={{
-                      MenuProps: {
-                        className: this.classes.menu
-                      }
-                    }}
-                    onChange={this.handleChange("year")}
-                    value={this.state.year}
-                    margin="normal"
-                    variant="outlined"
-                  >
-                    {this.years.map(option => (
-                      <MenuItem key={option} value={option}>
-                        {option}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </div>
-                <div class="row">
-                  <TextField
-                    id="outlined-select-currency"
-                    select
-                    label="Mes"
-                    className={this.classes.textField}
-                    SelectProps={{
-                      MenuProps: {
-                        className: this.classes.menu
-                      }
-                    }}
-                    onChange={this.handleChange("month")}
-                    value={this.state.month}
-                    margin="normal"
-                    variant="outlined"
-                  >
-                    {this.month.map(option => (
-                      <MenuItem key={option} value={option}>
-                        {option}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </div>
-              </div>
-              <div class="col-md-11 col-lg-11">{gauges}</div>
+
+              <div class="col-md-12 col-lg-12">{gauges}</div>
             </div>
             {this.state.showDialog && (
               <Dialog title={"Subir documentos"} onClose={this.handleUpload}>
+              {this.state.process && (<CircularProgress />)}
                 <TabStrip
                   selected={this.state.selected}
                   onSelect={this.handleSelect}

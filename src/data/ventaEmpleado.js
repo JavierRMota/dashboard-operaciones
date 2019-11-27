@@ -4,7 +4,7 @@ export const empleadoTotalVentas = [
     { nombre: "Luis", ventas: 6.67 }, //id=3 count=1
     { nombre: "Mary", ventas: 26.67 }, //id=4 count=4
     { nombre: "Julia", ventas: 13.33 }, //id=5 count=2
-    { nombre: "Elizabeth", ventas: 13.33 }, //id=6 count=2 total= 15 
+    { nombre: "Elizabeth", ventas: 13.33 }, //id=6 count=2 total= 15
 ]
 
 export var generarNombresEmpleado = (data) => {
@@ -32,7 +32,6 @@ export var generarEmpleadoVentas = (data, length) => {
             arr.splice(data[i].Id_Vendedor, (data[i].Id_Vendedor - 1), 0.0);
         }
     }
-    console.log(arr);
     return arr;
 }
 
@@ -41,7 +40,6 @@ export var totalVentasEmpleados = (arr) => {
     for (let j = 0; j < arr.length; j++) {
         totalVentas += arr[j];
     }
-    console.log(totalVentas);
     return totalVentas;
 }
 
@@ -51,7 +49,6 @@ export var ventasEmpleadoPorcentaje = (arr, totalVentas) => {
         temp = ((arr[k] * 100) / totalVentas);
         arr[k] = temp;
     }
-    console.log(arr);
     return arr;
 }
 
@@ -61,7 +58,6 @@ export var construirDataSetEmpleado = (arr1, arr2) => {
         var json = { "nombre": arr1[i], "ventas": arr2[i] };
         arrResultante.push(json);
     }
-    console.log(arrResultante);
     return arrResultante;
 }
 

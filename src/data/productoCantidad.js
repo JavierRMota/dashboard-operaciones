@@ -1,4 +1,4 @@
-/* 
+/*
 Ejemplo de como necesito los datos para DonutChart.
 Los datos los obtienes de catalogo.js campo Nombre accedes a el por medio del id o como gustes.
 El dato de cantidad los obtuve de requisicion.js campo Cantidad donde usas el id del producto del catálogo para acceder a él.
@@ -42,7 +42,6 @@ export var generarVentasProductos = (data, length) => {
             arr.splice(data[i].Id_Catalogo, (data[i].Id_Catalogo - 1), 0.0);
         }
     }
-    console.log(arr);
     return arr;
 }
 
@@ -51,7 +50,6 @@ export var totalGenerado = (arr) => {
     for (let j = 0; j < arr.length; j++) {
         totalGenerado += arr[j];
     }
-    console.log(totalGenerado);
     return totalGenerado;
 }
 
@@ -61,7 +59,6 @@ export var ingresoPorcentaje = (arr, totalGenerado) => {
         temp = ((arr[k] * 100) / totalGenerado);
         arr[k] = temp;
     }
-    console.log(arr);
     return arr;
 }
 
@@ -71,7 +68,6 @@ export var construirDataSetProducto = (arr1, arr2) => {
         var json = { "tipo": arr1[i], "cantidad": arr2[i] };
         arrResultante.push(json);
     }
-    console.log(arrResultante);
     return arrResultante;
 }
 

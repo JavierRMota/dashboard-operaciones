@@ -56,8 +56,7 @@ class Ventas extends Component {
     this.appContainer = React.createRef();
     this.state = {
       showDialog: false,
-      year: 'Todos',
-      month: 'Todos',
+      report: props.report,
       ventas: report.gauges[0],
     };
   }
@@ -104,13 +103,6 @@ class Ventas extends Component {
     });
   };
 
-  years = [2016, 2017, 2018, 2019, 'Todos'];
-  month = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'Todos'];
-
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
-  };
-
   classes = makeStyles(theme => ({
     container: {
       display: 'flex',
@@ -128,16 +120,9 @@ class Ventas extends Component {
     },
   }));
 
-  createData = (nombreProducto, ventasEsperadas, ventasReales, porcentaje) => ({ nombreProducto, ventasEsperadas, ventasReales, porcentaje });
-  rows = [
-    this.createData('Coca-Cola', 100000, 75000, 75),
-    this.createData('Nestea', 350000, 315000, 90),
-    this.createData('Powerade', 150000, 180000, 120),
-    this.createData('Sabritas', 23000, 10000, 43.48),
-  ];
-
   render() {
     var ventas = this.state.ventas
+    console.log(this.state.report)
     return (
       <Ripple>
         <div className="bootstrap-wrapper">
@@ -191,56 +176,8 @@ class Ventas extends Component {
                   </CardContent>
                 </Card>
               </div>
-              <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+              <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
                 <MultipleLineChartContainer title="Ingresos" categories={mesesGraficaMultiple} data={datosGraficaMultiple} />
-              </div>
-              <div className="col-sm-2 col-md-2" >
-                <div class="row">
-                  <TextField
-                    id="outlined-select-currency"
-                    select
-                    label="Año"
-                    className={this.classes.textField}
-                    SelectProps={{
-                      MenuProps: {
-                        className: this.classes.menu,
-                      },
-                    }}
-                    onChange={this.handleChange('year')}
-                    value={this.state.year}
-                    margin="normal"
-                    variant="outlined"
-                  >
-                    {this.years.map(option => (
-                      <MenuItem key={option} value={option}>
-                        {option}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </div>
-                <div class="row">
-                  <TextField
-                    id="outlined-select-currency"
-                    select
-                    label="Mes"
-                    className={this.classes.textField}
-                    SelectProps={{
-                      MenuProps: {
-                        className: this.classes.menu,
-                      },
-                    }}
-                    onChange={this.handleChange('month')}
-                    value={this.state.month}
-                    margin="normal"
-                    variant="outlined"
-                  >
-                    {this.month.map(option => (
-                      <MenuItem key={option} value={option}>
-                        {option}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </div>
               </div>
             </div>
             <div className="row">

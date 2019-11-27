@@ -89,8 +89,6 @@ export var obtenerEgresosReales = (gastoVariable, gastoFijo) => {
         }
     }
 
-    console.log(egresosReales);
-
     for (let j = 0; j < gastoFijo.length; j++) {
         let arrDateGF = gastoFijo[j].Fecha.split('/');
         let monthGF = arrDateGF[0];

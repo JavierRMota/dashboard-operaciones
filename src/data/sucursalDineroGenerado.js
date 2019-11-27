@@ -30,7 +30,6 @@ export var generarVentasSucursales = (data, length) => {
             arr.splice(data[i].Id_Sucursal, (data[i].Id_Sucursal - 1), 0.0);
         }
     }
-    console.log(arr);
     return arr;
 }
 
@@ -39,7 +38,6 @@ export var totalIngresosSucursales = (arr) => {
     for (let j = 0; j < arr.length; j++) {
         totalIngresos += arr[j];
     }
-    console.log(totalIngresos);
     return totalIngresos;
 }
 
@@ -49,7 +47,6 @@ export var ingresoSucursalPorcentaje = (arr, totalIngresosSucursales) => {
         temp = ((arr[k] * 100) / totalIngresosSucursales);
         arr[k] = temp;
     }
-    console.log(arr);
     return arr;
 }
 
@@ -59,7 +56,6 @@ export var construirDataSetSucursal = (arr1, arr2) => {
         var json = { "sucursal": arr1[i], "dineroGenerado": arr2[i] };
         arrResultante.push(json);
     }
-    console.log(arrResultante);
     return arrResultante;
 }
 

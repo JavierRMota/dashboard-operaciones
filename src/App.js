@@ -28,47 +28,55 @@ class App extends Component {
               component={LoginTab} />
             <Route
               exact
-              path="/ventas"
-              render={() => <div>
+              path="/ventas/:compania"
+              render={(props) => {
+                const {compania} = props.match.params
+                return <div>
                 <Menu left={
-                  <Link to="/reporte" className="link">
+                  <Link to={`/reporte/${compania}`} className="link">
                     <Button color="inherit" >Regresar</Button>
                   </Link>
                 } />
-                <Ventas />
-              </div>} />
+                <Ventas report={props.location.report}/>
+              </div>}} />
             <Route
               exact
-              path="/gastos"
-              render={() => <div>
+              path="/gastos/:compania"
+              render={(props) => {
+                const {compania} = props.match.params
+                return <div>
                 <Menu left={
-                  <Link to="/reporte" className="link">
+                  <Link to={`/reporte/${compania}`}className="link">
                     <Button color="inherit" >Regresar</Button>
                   </Link>
                 } />
-                <Gastos />
-              </div>} />
+                <Gastos report={props.location.report}/>
+              </div>}} />
             <Route
               exact
-              path="/margen"
-              render={() => <div>
+              path="/margen/:compania"
+              render={(props) => {
+                const {compania} = props.match.params
+                return <div>
                 <Menu left={
-                  <Link to="/reporte" className="link">
+                  <Link to={`/reporte/${compania}`} className="link">
                     <Button color="inherit" >Regresar</Button>
                   </Link>
                 } />
-                <Margen />
-              </div>} />
+                <Margen report={props.location.report}/>
+              </div>}} />
             <Route
-              path="/reporte"
-              render={() => <div>
+              path="/reporte/:compania"
+              render={(props) => {
+                const {compania} = props.match.params
+                return <div>
                 <Menu left={
                   <Link to="/home" className="link">
                     <Button color="inherit" >Regresar</Button>
                   </Link>
                 } />
-                <Dashboard />
-              </div>} />
+                <Dashboard compania={compania} />
+              </div>}} />
           </Switch>
         </div>
       </BrowserRouter>

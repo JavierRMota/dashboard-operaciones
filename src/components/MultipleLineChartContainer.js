@@ -21,7 +21,6 @@ class MultipleLineChartContainer extends Component {
         </ChartCategoryAxis>
         <ChartSeries>
           {this.props.data[0].data.map((item, idx) => {
-            console.log(item)
             return <ChartSeriesItem key={idx} type="line" data={item.data} name={item.name} />
           }
 

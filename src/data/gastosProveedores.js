@@ -31,7 +31,6 @@ export var generarTotalProveedor = (data, length) => {
             arr.splice(data[i].Id_Proveedor, (data[i].Id_Proveedor - 1), 0.0);
         }
     }
-    console.log(arr);
     return arr;
 }
 
@@ -40,7 +39,6 @@ export var totalGastadoProveedor = (arr) => {
     for (let j = 0; j < arr.length; j++) {
         totalGastado += arr[j];
     }
-    console.log(totalGastado);
     return totalGastado;
 }
 
@@ -50,7 +48,6 @@ export var proveedorPorcentaje = (arr, totalGastado) => {
         temp = ((arr[k] * 100.0) / totalGastado);
         arr[k] = temp;
     }
-    console.log(arr)
     return arr;
 }
 
@@ -60,7 +57,6 @@ export var construirDataSetProveedor = (arr1, arr2) => {
         var json = { "proveedor": arr1[i], "totalGastado": arr2[i] };
         arrResultante.push(json);
     }
-    console.log(arrResultante);
     return arrResultante;
 }
 
