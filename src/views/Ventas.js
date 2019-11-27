@@ -95,7 +95,7 @@ class Ventas extends Component {
   clienteFrecuenciaMinima = clienteMenosAsiste(this.datosFrecuenciaCliente);
 
   handlePDFExport = () => {
-    savePDF(ReactDOM.findDOMNode(this.appContainer), { paperSize: 'auto' });
+    savePDF(ReactDOM.findDOMNode(this.appContainer), { paperSize: 'auto', fileName: 'ventas.pdf' });
   };
 
   handleShare = () => {
@@ -245,13 +245,13 @@ class Ventas extends Component {
             </div>
             <div className="row">
               <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                <h2>Ventas Totales Catálogo</h2>
+                <h2>Ventas Totales Catalogo</h2>
                 <DonutChartContainer data={this.datosIngresosProductos}
                   categoryField="tipo" field="cantidad" />
                 <List>
                   <ListItem>
                     <ListItemText
-                      primary="Producto más vendido"
+                      primary="Producto mas vendido"
                       secondary={this.catalogoMasVendido}
                     />
                     <ListItemText
@@ -262,12 +262,12 @@ class Ventas extends Component {
                 </List>
               </div>
               <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                <h2>Desempeño Empleados</h2>
+                <h2>Rendimiento Empleados</h2>
                 <DonutChartContainer data={this.datosEmpleadoVentas} categoryField="nombre" field="ventas" />
                 <List>
                   <ListItem>
                     <ListItemText
-                      primary="Empleado que más vende"
+                      primary="Empleado que mas vende"
                       secondary={this.empleadoMas}
                     />
                     <ListItemText
@@ -285,7 +285,7 @@ class Ventas extends Component {
                 <List>
                   <ListItem>
                     <ListItemText
-                      primary="Sucursal con más ingresos"
+                      primary="Sucursal con mas ingresos"
                       secondary={this.sucursalMas}
                     />
                     <ListItemText
@@ -302,7 +302,7 @@ class Ventas extends Component {
                 <List>
                   <ListItem>
                     <ListItemText
-                      primary="Más frecuente"
+                      primary="Mas frecuente"
                       secondary={this.clienteFrecuenciaMaxima}
                     />
                     <ListItemText

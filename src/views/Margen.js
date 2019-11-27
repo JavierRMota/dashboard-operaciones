@@ -60,7 +60,7 @@ class Margen extends Component {
     sucursalMenosDato = 1100;
 
     handlePDFExport = () => {
-        savePDF(ReactDOM.findDOMNode(this.appContainer), { paperSize: 'auto' });
+        savePDF(ReactDOM.findDOMNode(this.appContainer), { paperSize: 'auto', fileName: 'margen.pdf' });
     };
 
     handleShare = () => {
@@ -200,51 +200,6 @@ class Margen extends Component {
                                         ))}
                                     </TextField>
                                 </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                <h2>Gastos Totales Catálogo</h2>
-                                <DonutChartContainer data={productoCantidad}
-                                    categoryField="tipo" field="cantidad" />
-                                <List>
-                                    <ListItem>
-                                        <ListItemText
-                                            primary="Producto más vendido"
-                                            secondary={this.catalogoMasVendido}
-                                        />
-                                        <ListItemText
-                                            primary="Producto menos vendido"
-                                            secondary={this.catalogoMenosVendido}
-                                        />
-                                    </ListItem>
-                                </List>
-                            </div>
-                            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                <h2>Gastos Sucursales</h2>
-                                <DonutChartContainer data={datosSucursalDineroGenerado} categoryField="sucursal" field="dineroGenerado" />
-                                <List>
-                                    <ListItem>
-                                        <ListItemText
-                                            primary="Sucursal con más gastos"
-                                            secondary={this.sucursalMas}
-                                        />
-                                        <ListItemText
-                                            primary="Sucursal con menos gastos"
-                                            secondary={this.sucursalMenos}
-                                        />
-                                    </ListItem>
-                                    <ListItem>
-                                        <ListItemText
-                                            primary="Egresos"
-                                            secondary={'$ ' + this.sucursalMasDato}
-                                        />
-                                        <ListItemText
-                                            primary="Egresos"
-                                            secondary={'$ ' + this.sucursalMenosDato}
-                                        />
-                                    </ListItem>
-                                </List>
                             </div>
                         </div>
                         {this.state.showDialog &&

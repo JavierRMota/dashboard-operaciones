@@ -47,22 +47,22 @@ class Dashboard extends Component {
   };
 
   handleSelect = (e) => {
-    this.setState({selected: e.selected})
+    this.setState({ selected: e.selected })
   }
 
   handlePDFExport = () => {
-    savePDF(ReactDOM.findDOMNode(this.appContainer), { paperSize: 'auto' });
+    savePDF(ReactDOM.findDOMNode(this.appContainer), { paperSize: 'auto', fileName: 'dashboard.pdf' });
   };
 
   csv2JSON = (csv) => {
-    var lines=csv.split("\n");
+    var lines = csv.split("\n");
     var result = [];
-    var headers=lines[0].replace("\r","").split(",");
-    for(var i=1;i<lines.length;i++){
+    var headers = lines[0].replace("\r", "").split(",");
+    for (var i = 1; i < lines.length; i++) {
       var obj = {};
-      var currentline=lines[i].replace("\r","").split(",");
-      for(var j=0;j<headers.length;j++){
-        if(currentline[j]){
+      var currentline = lines[i].replace("\r", "").split(",");
+      for (var j = 0; j < headers.length; j++) {
+        if (currentline[j]) {
           obj[headers[j]] = currentline[j];
         }
       }
@@ -208,7 +208,7 @@ class Dashboard extends Component {
   month = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'Todos'];
 
   handleChange = name => event => {
-    this.setState({[name]:  event.target.value});
+    this.setState({ [name]: event.target.value });
   };
 
   classes = makeStyles(theme => ({
@@ -231,210 +231,210 @@ class Dashboard extends Component {
   render() {
 
     var gauges = report.gauges.map((item, key) =>
-    <div class="col-md-12 col-lg-12">
-    <Card>
-    <CardContent>
-    <div>
-    <div align="center">
-      <Link to={item.path} className="link">
-        <Button primary = {true} look="flat"><u><b>{item.title}</b></u></Button>
-      </Link>
-    </div>
-    <div class="row">
-    <div class= "col-md-3">
-      <RadialGaugeContainer
-        value={item.value}
-        plan={item.plan}
-        objective={item.objective}/>
-    </div>
-    <div class= "col-md-4">
-      <List>
-        <ListItem>
-          <ListItemText
-            primary={currency(item.value)+" / "+currency(item.plan)}
-            secondary={item.subtitle1 + " / " + item.subtitle2}
-          />
-        </ListItem>
-      </List>
-    </div>
-    <div class= "col-md-3">
-      <List>
-        <ListItem>
-          <ListItemText
-            primary={
-              (item.value - item.plan ? '↑' : '↓') +
-              currency(Math.abs(item.value - item.plan)) + ' | ' +
-              (Math.abs(item.value - item.plan) / item.plan).toFixed(2)
-              + ' %'}
-            secondary={item.subtitle3}
-          />
-        </ListItem>
-      </List>
-    </div>
-    <div class= "col-md-2">
-      <List>
-        <ListItem>
-          <ListItemText
-            primary={currency(item.objective)}
-            secondary={item.subtitle4}
-          />
-        </ListItem>
-      </List>
-    </div>
-    </div>
-    </div>
-    </CardContent>
-    </Card>
-    </div>
+      <div class="col-md-12 col-lg-12">
+        <Card>
+          <CardContent>
+            <div>
+              <div align="center">
+                <Link to={item.path} className="link">
+                  <Button primary={true} look="flat"><u><b>{item.title}</b></u></Button>
+                </Link>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <RadialGaugeContainer
+                    value={item.value}
+                    plan={item.plan}
+                    objective={item.objective} />
+                </div>
+                <div class="col-md-4">
+                  <List>
+                    <ListItem>
+                      <ListItemText
+                        primary={currency(item.value) + " / " + currency(item.plan)}
+                        secondary={item.subtitle1 + " / " + item.subtitle2}
+                      />
+                    </ListItem>
+                  </List>
+                </div>
+                <div class="col-md-3">
+                  <List>
+                    <ListItem>
+                      <ListItemText
+                        primary={
+                          (item.value - item.plan ? '↑' : '↓') +
+                          currency(Math.abs(item.value - item.plan)) + ' | ' +
+                          (Math.abs(item.value - item.plan) / item.plan).toFixed(2)
+                          + ' %'}
+                        secondary={item.subtitle3}
+                      />
+                    </ListItem>
+                  </List>
+                </div>
+                <div class="col-md-2">
+                  <List>
+                    <ListItem>
+                      <ListItemText
+                        primary={currency(item.objective)}
+                        secondary={item.subtitle4}
+                      />
+                    </ListItem>
+                  </List>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     );
 
     return (
-    <Ripple>
-      <div className="bootstrap-wrapper">
-        <div className="app-container container" ref={(el) => this.appContainer = el}>
-          <div className="row">
-            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-              <h1>Empresa | Reporte de operaciones</h1>
+      <Ripple>
+        <div className="bootstrap-wrapper">
+          <div className="app-container container" ref={(el) => this.appContainer = el}>
+            <div className="row">
+              <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <h1>Empresa | Reporte de operaciones</h1>
+              </div>
+              <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 buttons-right">
+                <Button primary={true} onClick={this.handleUpload}>Subir CSV</Button>
+                <Button onClick={this.handlePDFExport}>Exportar a PDF</Button>
+              </div>
             </div>
-            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 buttons-right">
-              <Button primary={true} onClick={this.handleUpload}>Subir CSV</Button>
-              <Button onClick={this.handlePDFExport}>Exportar a PDF</Button>
-            </div>
-          </div>
 
-          <div class="row">
-          <div className="col-sm-1 col-md-1" >
             <div class="row">
-            <TextField
-                id="outlined-select-currency"
-                select
-                label="Año"
-                className={this.classes.textField}
-                SelectProps={{
-                  MenuProps: {
-                    className: this.classes.menu,
-                  },
-                }}
-                onChange={this.handleChange('year')}
-                value={this.state.year}
-                margin="normal"
-                variant="outlined"
-            >
-              {this.years.map(option => (
-                <MenuItem key={option} value={option}>
-                  {option}
-                </MenuItem>
-              ))}
-            </TextField>
-            </div>
-              <div class="row">
-            <TextField
-                id="outlined-select-currency"
-                select
-                label="Mes"
-                className={this.classes.textField}
-                SelectProps={{
-                  MenuProps: {
-                    className: this.classes.menu,
-                  },
-                }}
-                onChange={this.handleChange('month')}
-                value={this.state.month}
-                margin="normal"
-                variant="outlined"
-            >
-              {this.month.map(option => (
-                <MenuItem key={option} value={option}>
-                  {option}
-                </MenuItem>
-              ))}
-            </TextField>
-            </div>
+              <div className="col-sm-1 col-md-1" >
+                <div class="row">
+                  <TextField
+                    id="outlined-select-currency"
+                    select
+                    label="Año"
+                    className={this.classes.textField}
+                    SelectProps={{
+                      MenuProps: {
+                        className: this.classes.menu,
+                      },
+                    }}
+                    onChange={this.handleChange('year')}
+                    value={this.state.year}
+                    margin="normal"
+                    variant="outlined"
+                  >
+                    {this.years.map(option => (
+                      <MenuItem key={option} value={option}>
+                        {option}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </div>
+                <div class="row">
+                  <TextField
+                    id="outlined-select-currency"
+                    select
+                    label="Mes"
+                    className={this.classes.textField}
+                    SelectProps={{
+                      MenuProps: {
+                        className: this.classes.menu,
+                      },
+                    }}
+                    onChange={this.handleChange('month')}
+                    value={this.state.month}
+                    margin="normal"
+                    variant="outlined"
+                  >
+                    {this.month.map(option => (
+                      <MenuItem key={option} value={option}>
+                        {option}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </div>
 
-          </div>
-          <div class="col-md-11 col-lg-11">
-            {gauges}
+              </div>
+              <div class="col-md-11 col-lg-11">
+                {gauges}
+              </div>
+            </div>
+            {this.state.showDialog &&
+              <Dialog title={'Subir documentos'} onClose={this.handleUpload}>
+                <TabStrip selected={this.state.selected} onSelect={this.handleSelect}>
+                  <TabStripTab title="Ventas">
+                    <div>
+                      <ReactFileReader handleFiles={this.handleLiquidacion} fileTypes={'.csv'}>
+                        <Button primary={true}>Liquidación</Button>
+                      </ReactFileReader>
+                      <br />
+                      <ReactFileReader handleFiles={this.handleRequisicion} fileTypes={'.csv'}>
+                        <Button primary={true}>Requisición</Button>
+                      </ReactFileReader>
+                    </div>
+                  </TabStripTab>
+                  <TabStripTab title="Gastos">
+                    <div>
+                      <ReactFileReader handleFiles={this.handleGastosDetallados} fileTypes={'.csv'}>
+                        <Button primary={true}>Gastos Detallados</Button>
+                      </ReactFileReader>
+                      <br />
+                      <ReactFileReader handleFiles={this.handleGastosFijos} fileTypes={'.csv'}>
+                        <Button primary={true}>Gastos Fijos</Button>
+                      </ReactFileReader>
+                      <br />
+                      <ReactFileReader handleFiles={this.handleGastosVariables} fileTypes={'.csv'}>
+                        <Button primary={true}>Gastos Variables</Button>
+                      </ReactFileReader>
+                    </div>
+                  </TabStripTab>
+                  <TabStripTab title="Información">
+                    <div>
+                      <ReactFileReader handleFiles={this.handleObjetivos} fileTypes={'.csv'}>
+                        <Button primary={true}>Objetivos</Button>
+                      </ReactFileReader>
+                      <br />
+                      <ReactFileReader handleFiles={this.handleInsumos} fileTypes={'.csv'}>
+                        <Button primary={true}>Insumos</Button>
+                      </ReactFileReader>
+                      <br />
+                      <ReactFileReader handleFiles={this.handleCatalogo} fileTypes={'.csv'}>
+                        <Button primary={true}>Catálogo</Button>
+                      </ReactFileReader>
+                      <br />
+                      <ReactFileReader handleFiles={this.handleSucursales} fileTypes={'.csv'}>
+                        <Button primary={true}>Sucursales</Button>
+                      </ReactFileReader>
+                    </div>
+                  </TabStripTab>
+                  <TabStripTab title="Gente">
+                    <ReactFileReader handleFiles={this.handleClientes} fileTypes={'.csv'}>
+                      <Button primary={true}>Clientes</Button>
+                    </ReactFileReader>
+                    <br />
+                    <ReactFileReader handleFiles={this.handleProveedores} fileTypes={'.csv'}>
+                      <Button primary={true}>Proveedores</Button>
+                    </ReactFileReader>
+                    <br />
+                    <ReactFileReader handleFiles={this.handleVendedores} fileTypes={'.csv'}>
+                      <Button primary={true}>Vendedores</Button>
+                    </ReactFileReader>
+                  </TabStripTab>
+                </TabStrip>
+                <br />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      value="eraseAndAdd"
+                      color="primary"
+                    />
+                  }
+                  label="Eliminar datos actuales y sobreescribir con los nuevos."
+                />
+                <br />
+                <Button onClick={this.handleUpload}>Cancelar</Button>
+              </Dialog>
+            }
           </div>
         </div>
-        {this.state.showDialog &&
-          <Dialog title={'Subir documentos'} onClose={this.handleUpload}>
-            <TabStrip selected={this.state.selected} onSelect={this.handleSelect}>
-              <TabStripTab title="Ventas">
-                <div>
-                <ReactFileReader handleFiles={this.handleLiquidacion} fileTypes={'.csv'}>
-                  <Button primary={true}>Liquidación</Button>
-                </ReactFileReader>
-                <br/>
-                <ReactFileReader handleFiles={this.handleRequisicion} fileTypes={'.csv'}>
-                  <Button primary={true}>Requisición</Button>
-                </ReactFileReader>
-                </div>
-              </TabStripTab>
-              <TabStripTab title="Gastos">
-                <div>
-                <ReactFileReader handleFiles={this.handleGastosDetallados} fileTypes={'.csv'}>
-                  <Button primary={true}>Gastos Detallados</Button>
-                </ReactFileReader>
-                <br/>
-                <ReactFileReader handleFiles={this.handleGastosFijos} fileTypes={'.csv'}>
-                  <Button primary={true}>Gastos Fijos</Button>
-                </ReactFileReader>
-                <br/>
-                <ReactFileReader handleFiles={this.handleGastosVariables} fileTypes={'.csv'}>
-                  <Button primary={true}>Gastos Variables</Button>
-                </ReactFileReader>
-                </div>
-              </TabStripTab>
-              <TabStripTab title="Información">
-                <div>
-                <ReactFileReader handleFiles={this.handleObjetivos} fileTypes={'.csv'}>
-                  <Button primary={true}>Objetivos</Button>
-                </ReactFileReader>
-                <br/>
-                <ReactFileReader handleFiles={this.handleInsumos} fileTypes={'.csv'}>
-                  <Button primary={true}>Insumos</Button>
-                </ReactFileReader>
-                <br/>
-                <ReactFileReader handleFiles={this.handleCatalogo} fileTypes={'.csv'}>
-                  <Button primary={true}>Catálogo</Button>
-                </ReactFileReader>
-                <br/>
-                <ReactFileReader handleFiles={this.handleSucursales} fileTypes={'.csv'}>
-                  <Button primary={true}>Sucursales</Button>
-                </ReactFileReader>
-                </div>
-              </TabStripTab>
-              <TabStripTab title="Gente">
-              <ReactFileReader handleFiles={this.handleClientes} fileTypes={'.csv'}>
-                <Button primary={true}>Clientes</Button>
-              </ReactFileReader>
-              <br/>
-              <ReactFileReader handleFiles={this.handleProveedores} fileTypes={'.csv'}>
-                <Button primary={true}>Proveedores</Button>
-              </ReactFileReader>
-              <br/>
-              <ReactFileReader handleFiles={this.handleVendedores} fileTypes={'.csv'}>
-                <Button primary={true}>Vendedores</Button>
-              </ReactFileReader>
-              </TabStripTab>
-            </TabStrip>
-            <br/>
-            <FormControlLabel
-                    control={
-                      <Checkbox
-                        value="eraseAndAdd"
-                        color="primary"
-                      />
-                    }
-                    label="Eliminar datos actuales y sobreescribir con los nuevos."
-                  />
-            <br/>
-            <Button onClick={this.handleUpload}>Cancelar</Button>
-          </Dialog>
-        }
-        </div>
-      </div>
-    </Ripple>
+      </Ripple>
     );
   }
 

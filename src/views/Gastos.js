@@ -79,7 +79,7 @@ class Gastos extends Component {
     proveedorCompradoMenos = proveedorMenosComprado(this.datosEgresoProveedor);
 
     handlePDFExport = () => {
-        savePDF(ReactDOM.findDOMNode(this.appContainer), { paperSize: 'auto' });
+        savePDF(ReactDOM.findDOMNode(this.appContainer), { paperSize: 'auto', fileName: 'gastos.pdf' });
     };
 
     handleShare = () => {
