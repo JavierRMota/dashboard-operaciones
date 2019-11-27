@@ -60,7 +60,6 @@ class App extends Component {
                 <Margen />
               </div>} />
             <Route
-              exact
               path="/reporte"
               render={() => <div>
                 <Menu left={
