@@ -29,7 +29,7 @@ var reqSchema = new Schema({
   Cantidad: Number,
   Fecha_Requisicion: String,
   Fecha_Entrega: String,
-  Total: String
+  Total: Number
 });
 
 var inSchema = new Schema({
