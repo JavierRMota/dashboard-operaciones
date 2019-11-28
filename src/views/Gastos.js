@@ -167,7 +167,7 @@ class Gastos extends Component {
                                             primary={
                                                 (gastos.value - gastos.plan ? '↑' : '↓') +
                                                 currency(Math.abs(gastos.value - gastos.plan)) + ' | ' +
-                                                (Math.abs(gastos.value - gastos.plan) / gastos.plan).toFixed(2)
+                                                (100 * Math.abs(gastos.value - gastos.plan) / gastos.plan).toFixed(2)
                                                 + ' %'}
                                             secondary="Diferencia de gastos"
                                         />

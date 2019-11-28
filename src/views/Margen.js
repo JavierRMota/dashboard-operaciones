@@ -147,7 +147,7 @@ class Margen extends Component {
                                             primary={
                                                 (margen.value - margen.plan ? '↑' : '↓') +
                                                 currency(Math.abs(margen.value - margen.plan)) + ' | ' +
-                                                (Math.abs(margen.value - margen.plan) / margen.plan).toFixed(2)
+                                                (100 * Math.abs(margen.value - margen.plan) / margen.plan).toFixed(2)
                                                 + ' %'}
                                             secondary="Diferencia de margen"
                                         />

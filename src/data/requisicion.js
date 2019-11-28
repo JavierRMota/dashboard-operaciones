@@ -118,7 +118,7 @@ export var Requisicion = [
         Fecha_Requisicion: "2/7/19 15:15",
         Fecha_Entrega: "2/7/19 15:16",
         Total: 200
-   },
+    },
     {
         Id_Requisicion: 4,
         Id_Sucursal: 4,
@@ -199,4 +199,4 @@ export var Requisicion = [
         Fecha_Entrega: "9/6/19 17:29",
         Total: 120
     }
-  ];
+];

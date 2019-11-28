@@ -212,7 +212,7 @@ class Ventas extends Component {
                             primary={
                               (ventas.value - ventas.plan ? '↑' : '↓') +
                               currency(Math.abs(ventas.value - ventas.plan)) + ' | ' +
-                              (Math.abs(ventas.value - ventas.plan) / ventas.plan).toFixed(2)
+                              (100 * Math.abs(ventas.value - ventas.plan) / ventas.plan).toFixed(2)
                               + ' %'}
                             secondary="Diferencia de ventas"
                           />

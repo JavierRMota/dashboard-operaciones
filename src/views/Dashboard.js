@@ -550,30 +550,30 @@ class Dashboard extends Component {
 
   render() {
     var gaugeReport = []
-    if (this.state.process === false){
+    if (this.state.process === false) {
       gaugeReport = [
-             {
-                 title: 'VENTAS', value: obtenerVentasReales(this.state.report.liquidaciones, this.state.report.requisiciones), subtitle1: 'Ventas actuales acumuladas',
-                 plan: obtenerVentasPlanActual(this.state.report.planMensual), subtitle2: 'Plan de ventas',
-                 objective: obtenerPlanVentas(this.state.report.planMensual), subtitle3: 'Diferencia de ventas',
-                 subtitle4: 'Objetivo anual de ventas',
-                 path: '/ventas',
-             }, //5042000............... 9650
-             {
-                 title: 'GASTOS', value: obtenerEgresosReales(this.state.report.gastosVariables, this.state.report.gastosFijos), subtitle1: 'Gastos actuales acumulados',
-                 plan: obtenerEgresosPlanActual(this.state.report.planMensual), subtitle2: 'Plan de gastos',
-                 objective: obtenerPlanEgresos(this.state.report.planMensual), subtitle3: 'Diferencia de gastos',
-                 subtitle4: 'Objetivo anual de gastos',
-                 path: '/gastos',
-             }, // 3950000
-             {
-                 title: 'MARGEN', value: obtenerVentasReales(this.state.report.liquidaciones, this.state.report.requisiciones) - obtenerEgresosReales(this.state.report.gastosVariables, this.state.report.gastosFijos), subtitle1: 'Margen actual acumulado',
-                 plan: obtenerVentasPlanActual(this.state.report.planMensual) - obtenerEgresosPlanActual(this.state.report.planMensual), subtitle2: 'Plan de margen',
-                 objective: obtenerPlanVentas(this.state.report.planMensual) - obtenerPlanEgresos(this.state.report.planMensual), subtitle3: 'Diferencia de margen',
-                 subtitle4: 'Objetivo anual de margen',
-                 path: '/margen',
-             }, // 1092000
-         ];
+        {
+          title: 'VENTAS', value: obtenerVentasReales(this.state.report.liquidaciones, this.state.report.requisiciones), subtitle1: 'Ventas actuales acumuladas',
+          plan: obtenerVentasPlanActual(this.state.report.planMensual), subtitle2: 'Plan de ventas',
+          objective: obtenerPlanVentas(this.state.report.planMensual), subtitle3: 'Diferencia de ventas',
+          subtitle4: 'Objetivo anual de ventas',
+          path: '/ventas',
+        }, //5042000............... 9650
+        {
+          title: 'GASTOS', value: obtenerEgresosReales(this.state.report.gastosVariables, this.state.report.gastosFijos), subtitle1: 'Gastos actuales acumulados',
+          plan: obtenerEgresosPlanActual(this.state.report.planMensual), subtitle2: 'Plan de gastos',
+          objective: obtenerPlanEgresos(this.state.report.planMensual), subtitle3: 'Diferencia de gastos',
+          subtitle4: 'Objetivo anual de gastos',
+          path: '/gastos',
+        }, // 3950000
+        {
+          title: 'MARGEN', value: obtenerVentasReales(this.state.report.liquidaciones, this.state.report.requisiciones) - obtenerEgresosReales(this.state.report.gastosVariables, this.state.report.gastosFijos), subtitle1: 'Margen actual acumulado',
+          plan: obtenerVentasPlanActual(this.state.report.planMensual) - obtenerEgresosPlanActual(this.state.report.planMensual), subtitle2: 'Plan de margen',
+          objective: obtenerPlanVentas(this.state.report.planMensual) - obtenerPlanEgresos(this.state.report.planMensual), subtitle3: 'Diferencia de margen',
+          subtitle4: 'Objetivo anual de margen',
+          path: '/margen',
+        }, // 1092000
+      ];
     }
     var gauges = gaugeReport.map((item, key) => (
       <div class="col-md-12 col-lg-12">
@@ -581,7 +581,7 @@ class Dashboard extends Component {
           <CardContent>
             <div>
               <div align="center">
-                <Link to={{ pathname: item.path +'/'+this.state.name, report: this.state.report, gauge: item }} className="link">
+                <Link to={{ pathname: item.path + '/' + this.state.name, report: this.state.report, gauge: item }} className="link">
                   <Button primary={true} look="flat">
                     <u>
                       <b>{item.title}</b>
@@ -618,7 +618,7 @@ class Dashboard extends Component {
                           currency(Math.abs(item.value - item.plan)) +
                           " | " +
                           (
-                            Math.abs(item.value - item.plan) / item.plan
+                            Math.abs(item.value - item.plan) / item.plan * 100
                           ).toFixed(2) +
                           " %"
                         }
@@ -651,7 +651,7 @@ class Dashboard extends Component {
             className="app-container container"
             ref={el => (this.appContainer = el)}
           >
-          {this.state.process && (<CircularProgress />)}
+            {this.state.process && (<CircularProgress />)}
             <div className="row">
               <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <h1>Empresa | Reporte de operaciones</h1>
@@ -670,7 +670,7 @@ class Dashboard extends Component {
             </div>
             {this.state.showDialog && (
               <Dialog title={"Subir documentos"} onClose={this.handleUpload}>
-              {this.state.process && (<CircularProgress />)}
+                {this.state.process && (<CircularProgress />)}
                 <TabStrip
                   selected={this.state.selected}
                   onSelect={this.handleSelect}
