@@ -75,7 +75,8 @@ var planMensualSchema = new Schema({
   Fecha: String,
   Ingreso_Plan: Number,
   Egreso_Plan: Number,
-  Margen: Number
+  Margen: Number,
+  "Margen%": String
 });
 
 var gastoVariableSchema = new Schema({

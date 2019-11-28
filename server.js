@@ -537,186 +537,186 @@ db.once("open", function() {
               Fecha_Entrega: "2/7/19 15:16",
               Total: 200
             }
+          ],
+          provedores: [
+            {
+              ID_Proveedor: 1,
+              Nombre: "Walmart"
+            },
+            {
+              ID_Proveedor: 2,
+              Nombre: "Chedraui"
+            },
+            {
+              ID_Proveedor: 3,
+              Nombre: "Costco"
+            },
+            {
+              ID_Proveedor: 4,
+              Nombre: "La Merced"
+            },
+            {
+              ID_Proveedor: 5,
+              Nombre: "Central de Abastos"
+            },
+            {
+              ID_Proveedor: 6,
+              Nombre: "Mercado Local"
+            },
+            {
+              ID_Proveedor: 7,
+              Nombre: "Carniceria Los Cochinitos"
+            },
+            {
+              ID_Proveedor: 8,
+              Nombre: "Carniceria Don Juan"
+            }
+          ],
+          liquidaciones: [
+            {
+              Id_Liquidacion: 1,
+              Id_Requisicion: 1,
+              Id_Sucursal: 2,
+              Id_Vendedor: 2,
+              Id_Cliente: 7,
+              Cliente_Genero: "Femenino",
+              Cliente_Edad: 50,
+              Cliente_Cantidad: 6,
+              Cliente_Ubicacion: 2,
+              Forma_de_Pago: "Tarjeta",
+              Total_Liquidacion: 450
+            },
+            {
+              Id_Liquidacion: 2,
+              Id_Requisicion: 2,
+              Id_Sucursal: 2,
+              Id_Vendedor: 6,
+              Id_Cliente: 4,
+              Cliente_Genero: "Masculino",
+              Cliente_Edad: 50,
+              Cliente_Cantidad: 4,
+              Cliente_Ubicacion: 2,
+              Forma_de_Pago: "Efectivo",
+              Total_Liquidacion: 385
+            },
+            {
+              Id_Liquidacion: 3,
+              Id_Requisicion: 3,
+              Id_Sucursal: 1,
+              Id_Vendedor: 4,
+              Id_Cliente: 3,
+              Cliente_Genero: "Femenino",
+              Cliente_Edad: 20,
+              Cliente_Cantidad: 3,
+              Cliente_Ubicacion: 1,
+              Forma_de_Pago: "Tarjeta",
+              Total_Liquidacion: 710
+            },
+            {
+              Id_Liquidacion: 4,
+              Id_Requisicion: 4,
+              Id_Sucursal: 4,
+              Id_Vendedor: 3,
+              Id_Cliente: 4,
+              Cliente_Genero: "Masculino",
+              Cliente_Edad: 10,
+              Cliente_Cantidad: 4,
+              Cliente_Ubicacion: 4,
+              Forma_de_Pago: "Tarjeta",
+              Total_Liquidacion: 760
+            },
+            {
+              Id_Liquidacion: 5,
+              Id_Requisicion: 5,
+              Id_Sucursal: 1,
+              Id_Vendedor: 1,
+              Id_Cliente: 3,
+              Cliente_Genero: "Masculino",
+              Cliente_Edad: 70,
+              Cliente_Cantidad: 3,
+              Cliente_Ubicacion: 978,
+              Forma_de_Pago: "Tarjeta",
+              Total_Liquidacion: 970
+            },
+            {
+              Id_Liquidacion: 6,
+              Id_Requisicion: 6,
+              Id_Sucursal: 4,
+              Id_Vendedor: 4,
+              Id_Cliente: 6,
+              Cliente_Genero: "Femenino",
+              Cliente_Edad: 30,
+              Cliente_Cantidad: 10,
+              Cliente_Ubicacion: 4,
+              Forma_de_Pago: "Efectivo",
+              Total_Liquidacion: 190
+            },
+            {
+              Id_Liquidacion: 7,
+              Id_Requisicion: 7,
+              Id_Sucursal: 1,
+              Id_Vendedor: 2,
+              Id_Cliente: 4,
+              Cliente_Genero: "Femenino",
+              Cliente_Edad: 20,
+              Cliente_Cantidad: 4,
+              Cliente_Ubicacion: 1,
+              Forma_de_Pago: "Tarjeta",
+              Total_Liquidacion: 705
+            },
+            {
+              Id_Liquidacion: 8,
+              Id_Requisicion: 8,
+              Id_Sucursal: 3,
+              Id_Vendedor: 4,
+              Id_Cliente: 4,
+              Cliente_Genero: "Femenino",
+              Cliente_Edad: 40,
+              Cliente_Cantidad: 4,
+              Cliente_Ubicacion: 3,
+              Forma_de_Pago: "Tarjeta",
+              Total_Liquidacion: 575
+            },
+            {
+              Id_Liquidacion: 9,
+              Id_Requisicion: 9,
+              Id_Sucursal: 4,
+              Id_Vendedor: 1,
+              Id_Cliente: 6,
+              Cliente_Genero: "Femenino",
+              Cliente_Edad: 10,
+              Cliente_Cantidad: 10,
+              Cliente_Ubicacion: 4,
+              Forma_de_Pago: "Efectivo",
+              Total_Liquidacion: 1185
+            },
+            {
+              Id_Liquidacion: 10,
+              Id_Requisicion: 10,
+              Id_Sucursal: 4,
+              Id_Vendedor: 5,
+              Id_Cliente: 8,
+              Cliente_Genero: "Femenino",
+              Cliente_Edad: 50,
+              Cliente_Cantidad: 7,
+              Cliente_Ubicacion: 4,
+              Forma_de_Pago: "Tarjeta",
+              Total_Liquidacion: 905
+            },
+            {
+              Id_Liquidacion: 11,
+              Id_Requisicion: 11,
+              Id_Sucursal: 4,
+              Id_Vendedor: 5,
+              Id_Cliente: 1,
+              Cliente_Genero: "Femenino",
+              Cliente_Edad: 40,
+              Cliente_Cantidad: 1,
+              Cliente_Ubicacion: 4,
+              Forma_de_Pago: "Tarjeta",
+              Total_Liquidacion: 260
+            }
           ]
-        }
-      ],
-      provedores: [
-        {
-          ID_Proveedor: 1,
-          Nombre: "Walmart"
-        },
-        {
-          ID_Proveedor: 2,
-          Nombre: "Chedraui"
-        },
-        {
-          ID_Proveedor: 3,
-          Nombre: "Costco"
-        },
-        {
-          ID_Proveedor: 4,
-          Nombre: "La Merced"
-        },
-        {
-          ID_Proveedor: 5,
-          Nombre: "Central de Abastos"
-        },
-        {
-          ID_Proveedor: 6,
-          Nombre: "Mercado Local"
-        },
-        {
-          ID_Proveedor: 7,
-          Nombre: "Carniceria Los Cochinitos"
-        },
-        {
-          ID_Proveedor: 8,
-          Nombre: "Carniceria Don Juan"
-        }
-      ],
-      liquidaciones: [
-        {
-          Id_Liquidacion: 1,
-          Id_Requisicion: 1,
-          Id_Sucursal: 2,
-          Id_Vendedor: 2,
-          Id_Cliente: 7,
-          Cliente_Genero: "Femenino",
-          Cliente_Edad: 50,
-          Cliente_Cantidad: 6,
-          Cliente_Ubicacion: 2,
-          Forma_de_Pago: "Tarjeta",
-          Total_Liquidacion: 450
-        },
-        {
-          Id_Liquidacion: 2,
-          Id_Requisicion: 2,
-          Id_Sucursal: 2,
-          Id_Vendedor: 6,
-          Id_Cliente: 4,
-          Cliente_Genero: "Masculino",
-          Cliente_Edad: 50,
-          Cliente_Cantidad: 4,
-          Cliente_Ubicacion: 2,
-          Forma_de_Pago: "Efectivo",
-          Total_Liquidacion: 385
-        },
-        {
-          Id_Liquidacion: 3,
-          Id_Requisicion: 3,
-          Id_Sucursal: 1,
-          Id_Vendedor: 4,
-          Id_Cliente: 3,
-          Cliente_Genero: "Femenino",
-          Cliente_Edad: 20,
-          Cliente_Cantidad: 3,
-          Cliente_Ubicacion: 1,
-          Forma_de_Pago: "Tarjeta",
-          Total_Liquidacion: 710
-        },
-        {
-          Id_Liquidacion: 4,
-          Id_Requisicion: 4,
-          Id_Sucursal: 4,
-          Id_Vendedor: 3,
-          Id_Cliente: 4,
-          Cliente_Genero: "Masculino",
-          Cliente_Edad: 10,
-          Cliente_Cantidad: 4,
-          Cliente_Ubicacion: 4,
-          Forma_de_Pago: "Tarjeta",
-          Total_Liquidacion: 760
-        },
-        {
-          Id_Liquidacion: 5,
-          Id_Requisicion: 5,
-          Id_Sucursal: 1,
-          Id_Vendedor: 1,
-          Id_Cliente: 3,
-          Cliente_Genero: "Masculino",
-          Cliente_Edad: 70,
-          Cliente_Cantidad: 3,
-          Cliente_Ubicacion: 978,
-          Forma_de_Pago: "Tarjeta",
-          Total_Liquidacion: 970
-        },
-        {
-          Id_Liquidacion: 6,
-          Id_Requisicion: 6,
-          Id_Sucursal: 4,
-          Id_Vendedor: 4,
-          Id_Cliente: 6,
-          Cliente_Genero: "Femenino",
-          Cliente_Edad: 30,
-          Cliente_Cantidad: 10,
-          Cliente_Ubicacion: 4,
-          Forma_de_Pago: "Efectivo",
-          Total_Liquidacion: 190
-        },
-        {
-          Id_Liquidacion: 7,
-          Id_Requisicion: 7,
-          Id_Sucursal: 1,
-          Id_Vendedor: 2,
-          Id_Cliente: 4,
-          Cliente_Genero: "Femenino",
-          Cliente_Edad: 20,
-          Cliente_Cantidad: 4,
-          Cliente_Ubicacion: 1,
-          Forma_de_Pago: "Tarjeta",
-          Total_Liquidacion: 705
-        },
-        {
-          Id_Liquidacion: 8,
-          Id_Requisicion: 8,
-          Id_Sucursal: 3,
-          Id_Vendedor: 4,
-          Id_Cliente: 4,
-          Cliente_Genero: "Femenino",
-          Cliente_Edad: 40,
-          Cliente_Cantidad: 4,
-          Cliente_Ubicacion: 3,
-          Forma_de_Pago: "Tarjeta",
-          Total_Liquidacion: 575
-        },
-        {
-          Id_Liquidacion: 9,
-          Id_Requisicion: 9,
-          Id_Sucursal: 4,
-          Id_Vendedor: 1,
-          Id_Cliente: 6,
-          Cliente_Genero: "Femenino",
-          Cliente_Edad: 10,
-          Cliente_Cantidad: 10,
-          Cliente_Ubicacion: 4,
-          Forma_de_Pago: "Efectivo",
-          Total_Liquidacion: 1185
-        },
-        {
-          Id_Liquidacion: 10,
-          Id_Requisicion: 10,
-          Id_Sucursal: 4,
-          Id_Vendedor: 5,
-          Id_Cliente: 8,
-          Cliente_Genero: "Femenino",
-          Cliente_Edad: 50,
-          Cliente_Cantidad: 7,
-          Cliente_Ubicacion: 4,
-          Forma_de_Pago: "Tarjeta",
-          Total_Liquidacion: 905
-        },
-        {
-          Id_Liquidacion: 11,
-          Id_Requisicion: 11,
-          Id_Sucursal: 4,
-          Id_Vendedor: 5,
-          Id_Cliente: 1,
-          Cliente_Genero: "Femenino",
-          Cliente_Edad: 40,
-          Cliente_Cantidad: 1,
-          Cliente_Ubicacion: 4,
-          Forma_de_Pago: "Tarjeta",
-          Total_Liquidacion: 260
         }
       ]
     },
