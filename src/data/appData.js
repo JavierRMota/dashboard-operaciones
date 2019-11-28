@@ -55,7 +55,6 @@ export var obtenerVentasReales = (liquidacion, requisicion) => {
                 month =  parseInt(arrDate[0]);
                 yearDate = arrDate[2].split(" ");
                 year = yearDate[0];
-                console.log(year)
             }
         }
         if (year == anoActual && month <= mesActual) {
