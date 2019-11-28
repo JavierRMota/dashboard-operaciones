@@ -28,7 +28,7 @@ export var obtenerVentasPlanActual = (data) => {
 
     for (let i = 0; i < data.length; i++) {
         let arrDate = data[i].Fecha.split('/');
-        let month = parseInt(arrDate[0]);
+        let month = parseInt(arrDate[1]);
         let year = arrDate[2];
         if (year == anoActual && month <= mesActual) {
             planVentasPlanActual += data[i].Ingreso_Plan;
@@ -52,7 +52,7 @@ export var obtenerVentasReales = (liquidacion, requisicion) => {
         for (let j = 0; j < requisicion.length; j++) {
             if (liquidacion[i].Id_Requisicion == requisicion[j].Id_Requisicion) {
                 arrDate = requisicion[j].Fecha_Entrega.split('/');
-                month =  parseInt(arrDate[0]);
+                month = parseInt(arrDate[1]);
                 yearDate = arrDate[2].split(" ");
                 year = yearDate[0];
             }
@@ -72,7 +72,7 @@ export var obtenerEgresosReales = (gastoVariable, gastoFijo) => {
 
     for (let i = 0; i < gastoVariable.length; i++) {
         let arrDateGV = gastoVariable[i].Fecha.split('/');
-        let monthGV =  parseInt(arrDateGV[0]);
+        let monthGV = parseInt(arrDateGV[1]);
         let yearGV = arrDateGV[2];
         if (yearGV == anoActual && monthGV <= mesActual) {
             egresosReales += gastoVariable[i].Tortillas + gastoVariable[i].Vegetales + gastoVariable[i].Carne + gastoVariable[i].Queso
@@ -82,7 +82,7 @@ export var obtenerEgresosReales = (gastoVariable, gastoFijo) => {
 
     for (let j = 0; j < gastoFijo.length; j++) {
         let arrDateGF = gastoFijo[j].Fecha.split('/');
-        let monthGF =  parseInt(arrDateGF[0]);
+        let monthGF = parseInt(arrDateGF[1]);
         let yearGF = arrDateGF[2];
         if (yearGF == anoActual && monthGF <= mesActual) {
             egresosReales += gastoFijo[j].Renta + gastoFijo[j].Agua + gastoFijo[j].Luz + gastoFijo[j].Salarios + gastoFijo[j].Administracion;
@@ -117,7 +117,7 @@ export var obtenerEgresosPlanActual = (data) => {
 
     for (let i = 0; i < data.length; i++) {
         let arrDate = data[i].Fecha.split('/');
-        let month =  parseInt(arrDate[0]);
+        let month = parseInt(arrDate[1]);
         let year = arrDate[2];
         if (year == anoActual && month <= mesActual) {
             planEgresosPlanActual += data[i].Egreso_Plan;

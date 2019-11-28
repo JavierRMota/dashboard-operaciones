@@ -35,8 +35,8 @@ import { barChartVentas, barCharVentasProductos } from '../data/appData';
 import { generarNombresProducto, generarVentasProductos, totalGenerado, ingresoPorcentaje, construirDataSetProducto, productoMasVendido, productoMenosVendido } from '../data/productoCantidad';
 import { generarNombresEmpleado, generarEmpleadoVentas, totalVentasEmpleados, ventasEmpleadoPorcentaje, construirDataSetEmpleado, empleadoMasVentas, empleadoMenosVentas } from '../data/ventaEmpleado';
 import { generarNombresSucursales, generarVentasSucursales, totalIngresosSucursales, ingresoSucursalPorcentaje, construirDataSetSucursal, sucursalMasVentas, sucursalMenosVentas } from '../data/sucursalDineroGenerado';
-import { pruebaMultiplesDatos, pruebaDatosMultiplesDatos } from '../data/appData';
-import { mesesGraficaMultiple, datosGraficaMultiple } from '../data/datosGraficaMultiple';
+import { pruebaMultiplesDatos, pruebaDatosMultiplesDatos, obtenerPlanVentas } from '../data/appData';
+import { mesesGraficaMultiple, datosGraficaMultiple, obtenerMetaMensualIngresos, obtenerMesVentaReal } from '../data/datosGraficaMultiple';
 import { generarTipoCliente, generarFrecuenciaCliente, frecuenciaTotalClientes, frecuenciaClientePorcentaje, construirDataSetCliente, clienteMasAsiste, clienteMenosAsiste } from '../data/datosTipoClientela';
 import { Catalogo } from '../data/catalogo';
 import { Requisicion } from '../data/requisicion';
@@ -68,29 +68,42 @@ class Ventas extends Component {
     this.catalogoMasVendido = productoMasVendido(this.datosIngresosProductos);
     this.catalogoMenosVendido = productoMenosVendido(this.datosIngresosProductos);
 
-    this.nombresEmpleados = generarNombresEmpleado(Vendedor);
-    this.ventasEmpleados = generarEmpleadoVentas(Liquidacion, Vendedor.length);
+    this.nombresEmpleados = generarNombresEmpleado(this.report.vendedores);
+    this.ventasEmpleados = generarEmpleadoVentas(this.report.liquidaciones, this.report.vendedores.length);
     this.ventasTotalesEmpleados = totalVentasEmpleados(this.ventasEmpleados);
     this.porcentajeVentasEmpleado = ventasEmpleadoPorcentaje(this.ventasEmpleados, this.ventasTotalesEmpleados);
     this.datosEmpleadoVentas = construirDataSetEmpleado(this.nombresEmpleados, this.porcentajeVentasEmpleado);
     this.empleadoMas = empleadoMasVentas(this.datosEmpleadoVentas);
     this.empleadoMenos = empleadoMenosVentas(this.datosEmpleadoVentas);
 
-    this.nombresSucursal = generarNombresSucursales(Sucursal);
-    this.ventasSucursal = generarVentasSucursales(Liquidacion, Sucursal.length);
+    this.nombresSucursal = generarNombresSucursales(this.report.sucursales);
+    this.ventasSucursal = generarVentasSucursales(this.report.liquidaciones, this.report.sucursales.length);
     this.ventasTotalesSucursal = totalIngresosSucursales(this.ventasSucursal);
     this.porcentajeVentasSucursal = ingresoSucursalPorcentaje(this.ventasSucursal, this.ventasTotalesSucursal);
     this.datosSucursalVentas = construirDataSetSucursal(this.nombresSucursal, this.porcentajeVentasSucursal);
     this.sucursalMas = sucursalMasVentas(this.datosSucursalVentas);
     this.sucursalMenos = sucursalMenosVentas(this.datosSucursalVentas);
 
-    this.nombresClientes = generarTipoCliente(Cliente);
-    this.frecuenciaCliente = generarFrecuenciaCliente(Liquidacion, Cliente.length);
+    this.nombresClientes = generarTipoCliente(this.report.clientes);
+    this.frecuenciaCliente = generarFrecuenciaCliente(this.report.liquidaciones, this.report.clientes.length);
     this.sumaFrecuenciasCliente = frecuenciaTotalClientes(this.frecuenciaCliente);
     this.porcentajeFrecuencia = frecuenciaClientePorcentaje(this.frecuenciaCliente, this.sumaFrecuenciasCliente);
     this.datosFrecuenciaCliente = construirDataSetCliente(this.nombresClientes, this.porcentajeFrecuencia);
     this.clienteFrecuenciaMaxima = clienteMasAsiste(this.datosFrecuenciaCliente);
     this.clienteFrecuenciaMinima = clienteMenosAsiste(this.datosFrecuenciaCliente);
+
+    this.planVentas = obtenerPlanVentas(this.report.planMensual);
+    this.ventasMensuales = obtenerMetaMensualIngresos(this.report.planMensual);
+    this.ventasReales = obtenerMesVentaReal(this.report.requisiciones);
+
+    this.multipleGraph = [
+      {
+        data: [{ name: "Meta Final", data: [this.planVentas, this.planVentas, this.planVentas, this.planVentas, this.planVentas, this.planVentas, this.planVentas, this.planVentas, this.planVentas, this.planVentas, this.planVentas, this.planVentas] },
+        { name: "Real", data: /*[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]*/[this.ventasReales[0], this.ventasReales[1], this.ventasReales[2], this.ventasReales[3], this.ventasReales[4], this.ventasReales[5], this.ventasReales[6], this.ventasReales[7], this.ventasReales[8], this.ventasReales[9], this.ventasReales[10], this.ventasReales[11]] },
+        { name: "Meta Mensual Acumulada", data: [this.ventasMensuales[0], this.ventasMensuales[1], this.ventasMensuales[2], this.ventasMensuales[3], this.ventasMensuales[4], this.ventasMensuales[5], this.ventasMensuales[6], this.ventasMensuales[7], this.ventasMensuales[8], this.ventasMensuales[9], this.ventasMensuales[10], this.ventasMensuales[11]] }]
+      }
+    ]
+
   }
 
   report;
@@ -125,6 +138,12 @@ class Ventas extends Component {
   datosFrecuenciaCliente;
   clienteFrecuenciaMaxima;
   clienteFrecuenciaMinima;
+
+  planVentas;
+  planMensual;
+  ventasReales;
+
+  multipleGraph;
 
   handlePDFExport = () => {
     savePDF(ReactDOM.findDOMNode(this.appContainer), { paperSize: 'auto', fileName: 'ventas.pdf' });
@@ -210,7 +229,7 @@ class Ventas extends Component {
                 </Card>
               </div>
               <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <MultipleLineChartContainer title="Ingresos" categories={mesesGraficaMultiple} data={datosGraficaMultiple} />
+                <MultipleLineChartContainer title="Ingresos" categories={mesesGraficaMultiple} data={this.multipleGraph} />
               </div>
             </div>
             <div className="row">

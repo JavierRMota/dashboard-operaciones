@@ -25,13 +25,13 @@ import TableRow from '@material-ui/core/TableRow';
 import MultipleLineChartContainer from '../components/MultipleLineChartContainer';
 
 //Dummy data
-import { donutChartProductsData } from '../data/appData';
+import { donutChartProductsData, obtenerPlanEgresos, obtenerEgresosReales } from '../data/appData';
 import { barChartVentas, barCharVentasProductos } from '../data/appData';
 import { productoCantidad, productoMasVendido, productoMenosVendido } from '../data/productoCantidad';
 import { empleadoTotalVentas, empleadoMasVentas, empleadoMenosVentas } from '../data/ventaEmpleado';
 import { datosSucursalDineroGenerado, sucursalMasVentas, sucursalMenosVentas } from '../data/sucursalDineroGenerado';
 import { pruebaMultiplesDatos, pruebaDatosMultiplesDatos } from '../data/appData';
-import { mesesGraficaMultiple, datosEgresosGraficaMultiple } from '../data/datosGraficaMultiple';
+import { mesesGraficaMultiple, datosEgresosGraficaMultiple, obtenerMetaMensualEgresos, obtenerMesEgresoReal } from '../data/datosGraficaMultiple';
 import { generarNombresInsumo, generarTotalInsumos, totalGastado, insumoPorcentaje, construirDataSetInsumo, insumoMasComprado, insumoMenosComprado } from '../data/datosEgresosInsumo';
 import { generarNombresProveedor, generarTotalProveedor, totalGastadoProveedor, proveedorPorcentaje, construirDataSetProveedor, proveedorMasComprado, proveedorMenosComprado } from '../data/gastosProveedores';
 import { currency, report } from '../data/appData';
@@ -51,31 +51,58 @@ class Gastos extends Component {
             report: props.report,
             gastos: props.gauge,
         };
+        this.report = props.report;
+        this.nombresInsumo = generarNombresInsumo(this.report.insumos);
+        this.totalInsumos = generarTotalInsumos(this.report.detallesGasto, this.report.insumos.length);
+        this.gastoTotal = totalGastado(this.totalInsumos);
+        this.porcentajeInsumos = insumoPorcentaje(this.totalInsumos, this.gastoTotal);
+        this.datosEgresosInsumos = construirDataSetInsumo(this.nombresInsumo, this.porcentajeInsumos);
+        this.insumoCompradoMas = insumoMasComprado(this.datosEgresosInsumos);
+        this.insumoCompradoMenos = insumoMenosComprado(this.datosEgresosInsumos);
+
+        this.nombresProveedor = generarNombresProveedor(this.report.provedores);
+        this.totalProveedor = generarTotalProveedor(this.report.detallesGasto, this.report.provedores.length);
+        this.proveedorGastoTotal = totalGastadoProveedor(this.totalProveedor);
+        this.porcentajeProveedor = proveedorPorcentaje(this.totalProveedor, this.proveedorGastoTotal);
+        this.datosEgresoProveedor = construirDataSetProveedor(this.nombresProveedor, this.porcentajeProveedor);
+        this.proveedorCompradoMas = proveedorMasComprado(this.datosEgresoProveedor);
+        this.proveedorCompradoMenos = proveedorMenosComprado(this.datosEgresoProveedor);
+
+        this.planEgresos = obtenerPlanEgresos(this.report.planMensual);
+        this.egresosMensuales = obtenerMetaMensualEgresos(this.report.planMensual);
+        this.egresosReales = obtenerMesEgresoReal(this.report.gastosVariables, this.report.gastosFijos);
+
+        this.multipleGraph = [
+            {
+                data: [{ name: "Meta Final", data: [this.planEgresos, this.planEgresos, this.planEgresos, this.planEgresos, this.planEgresos, this.planEgresos, this.planEgresos, this.planEgresos, this.planEgresos, this.planEgresos, this.planEgresos, this.planEgresos] },
+                { name: "Real", data: [this.egresosReales[0], this.egresosReales[1], this.egresosReales[2], this.egresosReales[3], this.egresosReales[4], this.egresosReales[5], this.egresosReales[6], this.egresosReales[7], this.egresosReales[8], this.egresosReales[9], this.egresosReales[10], this.egresosReales[11]] },
+                { name: "Meta Mensual Acumulada", data: [this.egresosMensuales[0], this.egresosMensuales[1], this.egresosMensuales[2], this.egresosMensuales[3], this.egresosMensuales[4], this.egresosMensuales[5], this.egresosMensuales[6], this.egresosMensuales[7], this.egresosMensuales[8], this.egresosMensuales[9], this.egresosMensuales[10], this.egresosMensuales[11]] }]
+            }
+        ]
     }
 
-    empleadoMas = empleadoMasVentas(empleadoTotalVentas);
-    empleadoMenos = empleadoMenosVentas(empleadoTotalVentas);
-    sucursalMas = sucursalMasVentas(datosSucursalDineroGenerado);
-    sucursalMenos = sucursalMenosVentas(datosSucursalDineroGenerado);
-    sucursalMasDato = 2385;
-    sucursalMenosDato = 1100;
+    report;
+    nombresInsumo;
+    totalInsumos;
+    gastoTotal;
+    porcentajeInsumos;
+    datosEgresosInsumos;
+    insumoCompradoMas;
+    insumoCompradoMenos;
 
+    nombresProveedor;
+    totalProveedor;
+    proveedorGastoTotal;
+    porcentajeProveedor;
+    datosEgresoProveedor;
+    proveedorCompradoMas;
+    proveedorCompradoMenos;
 
-    nombresInsumo = generarNombresInsumo(Insumo);
-    totalInsumos = generarTotalInsumos(DetalleGasto, Insumo.length);
-    gastoTotal = totalGastado(this.totalInsumos);
-    porcentajeInsumos = insumoPorcentaje(this.totalInsumos, this.gastoTotal);
-    datosEgresosInsumos = construirDataSetInsumo(this.nombresInsumo, this.porcentajeInsumos);
-    insumoCompradoMas = insumoMasComprado(this.datosEgresosInsumos);
-    insumoCompradoMenos = insumoMenosComprado(this.datosEgresosInsumos);
+    planEgresos;
+    egresosMensuales;
+    egresosReales;
 
-    nombresProveedor = generarNombresProveedor(Proveedor);
-    totalProveedor = generarTotalProveedor(DetalleGasto, Proveedor.length);
-    proveedorGastoTotal = totalGastadoProveedor(this.totalProveedor);
-    porcentajeProveedor = proveedorPorcentaje(this.totalProveedor, this.proveedorGastoTotal);
-    datosEgresoProveedor = construirDataSetProveedor(this.nombresProveedor, this.porcentajeProveedor);
-    proveedorCompradoMas = proveedorMasComprado(this.datosEgresoProveedor);
-    proveedorCompradoMenos = proveedorMenosComprado(this.datosEgresoProveedor);
+    multipleGraph;
 
     handlePDFExport = () => {
         savePDF(ReactDOM.findDOMNode(this.appContainer), { paperSize: 'auto', fileName: 'gastos.pdf' });
@@ -154,7 +181,7 @@ class Gastos extends Component {
                                 </List>
                             </div>
                             <div className="col-xs-6 col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                                <MultipleLineChartContainer title="Egresos" categories={mesesGraficaMultiple} data={datosEgresosGraficaMultiple} />
+                                <MultipleLineChartContainer title="Egresos" categories={mesesGraficaMultiple} data={this.multipleGraph} />
                             </div>
                         </div>
                         <div className="row">
