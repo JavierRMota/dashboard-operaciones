@@ -20,7 +20,7 @@ import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Link } from "react-router-dom";
 //Dummy data
-import { report, currency } from "../data/appData";
+import { obtenerVentasReales, obtenerEgresosReales, obtenerVentasPlanActual, obtenerEgresosPlanActual, obtenerPlanVentas, obtenerPlanEgresos, currency } from "../data/appData";
 
 import { TabStrip, TabStripTab } from "@progress/kendo-react-layout";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -549,7 +549,37 @@ class Dashboard extends Component {
   }
 
   render() {
-    var gauges = report.gauges.map((item, key) => (
+    var gaugeReport = []
+    if (this.state.process === false){
+      gaugeReport = [
+             {
+                 title: 'VENTAS', value: obtenerVentasReales(this.state.report.liquidaciones, this.state.report.requisiciones), subtitle1: 'Ventas actuales acumuladas',
+                 plan: obtenerVentasPlanActual(this.state.report.planMensual), subtitle2: 'Plan de ventas',
+                 objective: obtenerPlanVentas(this.state.report.planMensual), subtitle3: 'Diferencia de ventas',
+                 subtitle4: 'Objetivo anual de ventas',
+                 path: '/ventas',
+             }, //5042000............... 9650
+             {
+                 title: 'GASTOS', value: obtenerEgresosReales(this.state.report.gastosVariables, this.state.report.gastosFijos), subtitle1: 'Gastos actuales acumulados',
+                 plan: obtenerEgresosPlanActual(this.state.report.planMensual), subtitle2: 'Plan de gastos',
+                 objective: obtenerPlanEgresos(this.state.report.planMensual), subtitle3: 'Diferencia de gastos',
+                 subtitle4: 'Objetivo anual de gastos',
+                 path: '/gastos',
+             }, // 3950000
+             {
+                 title: 'MARGEN', value: obtenerVentasReales(this.state.report.liquidaciones, this.state.report.requisiciones) - obtenerEgresosReales(this.state.report.gastosVariables, this.state.report.gastosFijos), subtitle1: 'Margen actual acumulado',
+                 plan: obtenerVentasPlanActual(this.state.report.planMensual) - obtenerEgresosPlanActual(this.state.report.planMensual), subtitle2: 'Plan de margen',
+                 objective: obtenerPlanVentas(this.state.report.planMensual) - obtenerPlanEgresos(this.state.report.planMensual), subtitle3: 'Diferencia de margen',
+                 subtitle4: 'Objetivo anual de margen',
+                 path: '/margen',
+             }, // 1092000
+         ];
+    }
+
+        console.log(gaugeReport)
+
+        console.log(this.state.report)
+    var gauges = gaugeReport.map((item, key) => (
       <div class="col-md-12 col-lg-12">
         <Card>
           <CardContent>
