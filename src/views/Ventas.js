@@ -57,7 +57,7 @@ class Ventas extends Component {
     this.state = {
       showDialog: false,
       report: props.report,
-      ventas: report.gauges[0],
+      ventas: props.gauge,
     };
     this.report = props.report
     this.nombresProducto = generarNombresProducto(this.report.catalogo);

@@ -49,7 +49,7 @@ class Gastos extends Component {
         this.state = {
             showDialog: false,
             report: props.report,
-            gastos: report.gauges[1],
+            gastos: props.gauge,
         };
     }
 

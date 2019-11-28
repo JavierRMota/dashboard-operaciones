@@ -37,7 +37,7 @@ class App extends Component {
                     <Button color="inherit" >Regresar</Button>
                   </Link>
                 } />
-                <Ventas report={props.location.report}/>
+                <Ventas report={props.location.report} gauge={props.location.gauge}/>
               </div>}} />
             <Route
               exact
@@ -50,7 +50,7 @@ class App extends Component {
                     <Button color="inherit" >Regresar</Button>
                   </Link>
                 } />
-                <Gastos report={props.location.report}/>
+                <Gastos report={props.location.report} gauge={props.location.gauge}/>
               </div>}} />
             <Route
               exact
@@ -63,7 +63,7 @@ class App extends Component {
                     <Button color="inherit" >Regresar</Button>
                   </Link>
                 } />
-                <Margen report={props.location.report}/>
+                <Margen report={props.location.report} gauge={props.location.gauge}/>
               </div>}} />
             <Route
               path="/reporte/:compania"

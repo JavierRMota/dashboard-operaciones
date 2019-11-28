@@ -45,7 +45,7 @@ class Margen extends Component {
         this.state = {
             showDialog: false,
             report: props.report,
-            margen: report.gauges[2],
+            margen: props.gauge,
         };
     }
 

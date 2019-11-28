@@ -575,17 +575,13 @@ class Dashboard extends Component {
              }, // 1092000
          ];
     }
-
-        console.log(gaugeReport)
-
-        console.log(this.state.report)
     var gauges = gaugeReport.map((item, key) => (
       <div class="col-md-12 col-lg-12">
         <Card>
           <CardContent>
             <div>
               <div align="center">
-                <Link to={{ pathname: item.path +'/'+this.state.name, report: this.state.report }} className="link">
+                <Link to={{ pathname: item.path +'/'+this.state.name, report: this.state.report, gauge: item }} className="link">
                   <Button primary={true} look="flat">
                     <u>
                       <b>{item.title}</b>
