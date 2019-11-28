@@ -23,6 +23,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import MultipleLineChartContainer from '../components/MultipleLineChartContainer';
+import Typography from "@material-ui/core/Typography";
 
 //Dummy data
 import { donutChartProductsData, obtenerPlanEgresos, obtenerEgresosReales } from '../data/appData';
@@ -164,11 +165,13 @@ class Gastos extends Component {
                                     </ListItem>
                                     <ListItem>
                                         <ListItemText
-                                            primary={
-                                                (gastos.value - gastos.plan ? '↑' : '↓') +
-                                                currency(Math.abs(gastos.value - gastos.plan)) + ' | ' +
-                                                (Math.abs(gastos.value - gastos.plan) / gastos.plan).toFixed(2)
-                                                + ' %'}
+                                        primary={<Typography variant="h9" style={{ color: (gastos.value - gastos.plan < 0 ? '#3cb44b' : '#e6194b' )  }}>{(gastos.value - gastos.plan > 0 ? "↑" : "↓") +
+                                        currency(Math.abs(gastos.value - gastos.plan)) +
+                                        " | " +
+                                        (
+                                          Math.abs(gastos.value - gastos.plan) * 100 / gastos.plan
+                                        ).toFixed(2) +
+                                        " %"}</Typography>}
                                             secondary="Diferencia de gastos"
                                         />
                                     </ListItem>

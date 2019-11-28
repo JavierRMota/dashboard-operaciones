@@ -23,6 +23,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import MultipleLineChartContainer from '../components/MultipleLineChartContainer';
+import Typography from "@material-ui/core/Typography";
 
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
@@ -209,11 +210,13 @@ class Ventas extends Component {
                         </ListItem>
                         <ListItem>
                           <ListItemText
-                            primary={
-                              (ventas.value - ventas.plan ? '↑' : '↓') +
-                              currency(Math.abs(ventas.value - ventas.plan)) + ' | ' +
-                              (Math.abs(ventas.value - ventas.plan) / ventas.plan).toFixed(2)
-                              + ' %'}
+                          primary={<Typography variant="h9" style={{ color: (ventas.value - ventas.plan > 0 ? '#3cb44b' : '#e6194b' )  }}>{(ventas.value - ventas.plan > 0 ? "↑" : "↓") +
+                          currency(Math.abs(ventas.value - ventas.plan)) +
+                          " | " +
+                          (
+                            Math.abs(ventas.value - ventas.plan) * 100 / ventas.plan
+                          ).toFixed(2) +
+                          " %"}</Typography>}
                             secondary="Diferencia de ventas"
                           />
                         </ListItem>

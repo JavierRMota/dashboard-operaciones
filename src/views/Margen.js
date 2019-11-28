@@ -23,6 +23,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import MultipleLineChartContainer from '../components/MultipleLineChartContainer';
+import Typography from "@material-ui/core/Typography";
 
 //Dummy data
 import { donutChartProductsData } from '../data/appData';
@@ -144,11 +145,13 @@ class Margen extends Component {
                                     </ListItem>
                                     <ListItem>
                                         <ListItemText
-                                            primary={
-                                                (margen.value - margen.plan ? '↑' : '↓') +
-                                                currency(Math.abs(margen.value - margen.plan)) + ' | ' +
-                                                (Math.abs(margen.value - margen.plan) / margen.plan).toFixed(2)
-                                                + ' %'}
+                                        primary={<Typography variant="h9" style={{ color: (margen.value - margen.plan > 0 ? '#3cb44b' : '#e6194b' )  }}>{(margen.value - margen.plan > 0 ? "↑" : "↓") +
+                                        currency(Math.abs(margen.value - margen.plan)) +
+                                        " | " +
+                                        (
+                                          Math.abs(margen.value - margen.plan) * 100 / margen.plan
+                                        ).toFixed(2) +
+                                        " %"}</Typography>}
                                             secondary="Diferencia de margen"
                                         />
                                     </ListItem>
