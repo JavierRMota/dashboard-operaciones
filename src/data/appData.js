@@ -4,14 +4,6 @@ import { Requisicion } from './requisicion';
 import { GastoFijo } from './gastoFijo';
 import { GastoVariable } from './gastoVariable';
 
-//Datos dummies
-export var companies = [
-    { id: 0, name: "FEMSA" },
-    { id: 1, name: "FACEBOOK" },
-    { id: 2, name: "PEPSICO" },
-    { id: 3, name: "MICROSOFT" }
-];
-
 export var obtenerPlanVentas = (data) => {
     let planTotalVentas = 0;
     let fechaActual = new Date();
@@ -20,7 +12,7 @@ export var obtenerPlanVentas = (data) => {
     for (let i = 0; i < data.length; i++) {
         let arrDate = data[i].Fecha.split('/');
         let year = arrDate[2];
-        if (year == anoActual.substring(2)) {
+        if (year == anoActual) {
             planTotalVentas += data[i].Ingreso_Plan;
         }
     }
@@ -36,9 +28,9 @@ export var obtenerVentasPlanActual = (data) => {
 
     for (let i = 0; i < data.length; i++) {
         let arrDate = data[i].Fecha.split('/');
-        let month = arrDate[0];
+        let month = parseInt(arrDate[0]);
         let year = arrDate[2];
-        if (year == anoActual.substring(2) && month <= mesActual) {
+        if (year == anoActual && month <= mesActual) {
             planVentasPlanActual += data[i].Ingreso_Plan;
         }
 
@@ -56,17 +48,17 @@ export var obtenerVentasReales = (liquidacion, requisicion) => {
     let fechaActual = new Date();
     let mesActual = fechaActual.getMonth() + 1;
     let anoActual = fechaActual.getFullYear().toString();
-
     for (let i = 0; i < liquidacion.length; i++) {
         for (let j = 0; j < requisicion.length; j++) {
             if (liquidacion[i].Id_Requisicion == requisicion[j].Id_Requisicion) {
                 arrDate = requisicion[j].Fecha_Entrega.split('/');
-                month = arrDate[0];
+                month =  parseInt(arrDate[0]);
                 yearDate = arrDate[2].split(" ");
                 year = yearDate[0];
+                console.log(year)
             }
         }
-        if (year == anoActual.substring(2) && month <= mesActual) {
+        if (year == anoActual && month <= mesActual) {
             ventasReales += liquidacion[i].Total_Liquidacion;
         }
     }
@@ -81,9 +73,9 @@ export var obtenerEgresosReales = (gastoVariable, gastoFijo) => {
 
     for (let i = 0; i < gastoVariable.length; i++) {
         let arrDateGV = gastoVariable[i].Fecha.split('/');
-        let monthGV = arrDateGV[0];
+        let monthGV =  parseInt(arrDateGV[0]);
         let yearGV = arrDateGV[2];
-        if (yearGV == anoActual.substring(2) && monthGV <= mesActual) {
+        if (yearGV == anoActual && monthGV <= mesActual) {
             egresosReales += gastoVariable[i].Tortillas + gastoVariable[i].Vegetales + gastoVariable[i].Carne + gastoVariable[i].Queso
                 + gastoVariable[i].Bebidas;
         }
@@ -91,9 +83,9 @@ export var obtenerEgresosReales = (gastoVariable, gastoFijo) => {
 
     for (let j = 0; j < gastoFijo.length; j++) {
         let arrDateGF = gastoFijo[j].Fecha.split('/');
-        let monthGF = arrDateGF[0];
+        let monthGF =  parseInt(arrDateGF[0]);
         let yearGF = arrDateGF[2];
-        if (yearGF == anoActual.substring(2) && monthGF <= mesActual) {
+        if (yearGF == anoActual && monthGF <= mesActual) {
             egresosReales += gastoFijo[j].Renta + gastoFijo[j].Agua + gastoFijo[j].Luz + gastoFijo[j].Salarios + gastoFijo[j].Administracion;
         }
     }
@@ -110,7 +102,7 @@ export var obtenerPlanEgresos = (data) => {
     for (let i = 0; i < data.length; i++) {
         let arrDate = data[i].Fecha.split('/');
         let year = arrDate[2];
-        if (year == anoActual.substring(2)) {
+        if (year == anoActual) {
             planTotalEgresos += data[i].Egreso_Plan;
         }
     }
@@ -126,9 +118,9 @@ export var obtenerEgresosPlanActual = (data) => {
 
     for (let i = 0; i < data.length; i++) {
         let arrDate = data[i].Fecha.split('/');
-        let month = arrDate[0];
+        let month =  parseInt(arrDate[0]);
         let year = arrDate[2];
-        if (year == anoActual.substring(2) && month <= mesActual) {
+        if (year == anoActual && month <= mesActual) {
             planEgresosPlanActual += data[i].Egreso_Plan;
         }
     }

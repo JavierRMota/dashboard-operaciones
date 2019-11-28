@@ -43,20 +43,20 @@ db.once("open", function() {
           nombre: "Facebook",
           planMensual: [
             {
-              Fecha: "1/1/19",
+              Fecha: "1/1/2019",
               Ingreso_Plan: 520000,
               Egreso_Plan: 450000,
               Margen: 70000
             },
             {
-              Fecha: "1/2/19",
+              Fecha: "1/2/2019",
               Ingreso_Plan: 530000,
               Egreso_Plan: 455000,
               Margen: 75000,
               Margen_Porcentaje: "14%"
             },
             {
-              Fecha: "1/3/19",
+              Fecha: "1/3/2019",
               Ingreso_Plan: 540000,
               Egreso_Plan: 460000,
               Margen: 80000,
@@ -79,7 +79,7 @@ db.once("open", function() {
           ],
           gastosFijos: [
             {
-              Fecha: "31/01/19",
+              Fecha: "31/01/2019",
               Renta: 20000,
               Agua: 10000,
               Luz: 5000,
@@ -87,7 +87,7 @@ db.once("open", function() {
               Administracion: 10000
             },
             {
-              Fecha: "28/02/19",
+              Fecha: "28/02/2019",
               Renta: 20000,
               Agua: 10200,
               Luz: 5000,
@@ -97,7 +97,7 @@ db.once("open", function() {
           ],
           gastosVariables: [
             {
-              Fecha: "31/1/19",
+              Fecha: "31/1/2019",
               Tortillas: 414.87,
               Vegetales: 966.08,
               Carne: 6906.13,
@@ -105,7 +105,7 @@ db.once("open", function() {
               Bebidas: 2675.92
             },
             {
-              Fecha: "21/2/19",
+              Fecha: "21/2/2019",
               Tortillas: 429.68,
               Vegetales: 873.01,
               Carne: 6918.99,
@@ -181,133 +181,133 @@ db.once("open", function() {
           ],
           detallesGasto: [
             {
-              Fecha: "1/1/19",
+              Fecha: "1/1/2019",
               Id_Insumo: 1,
               Insumo_Categoria: "Tortillas",
               Id_Proveedor: 6,
               Gasto: 414.87
             },
             {
-              Fecha: "1/1/19",
+              Fecha: "1/1/2019",
               Id_Insumo: 4,
               Insumo_Categoria: "Verduras",
               Id_Proveedor: 4,
               Gasto: 966.08
             },
             {
-              Fecha: "1/1/19",
+              Fecha: "1/1/2019",
               Id_Insumo: 9,
               Insumo_Categoria: "Carne",
               Id_Proveedor: 8,
               Gasto: 6906.13
             },
             {
-              Fecha: "1/1/19",
+              Fecha: "1/1/2019",
               Id_Insumo: 11,
               Insumo_Categoria: "Queso",
               Id_Proveedor: 4,
               Gasto: 1294.76
             },
             {
-              Fecha: "1/1/19",
+              Fecha: "1/1/2019",
               Id_Insumo: 18,
               Insumo_Categoria: "Bebidas",
               Id_Proveedor: 5,
               Gasto: 2675.92
             },
             {
-              Fecha: "1/2/19",
+              Fecha: "1/2/2019",
               Id_Insumo: 2,
               Insumo_Categoria: "Tortillas",
               Id_Proveedor: 3,
               Gasto: 429.68
             },
             {
-              Fecha: "1/2/19",
+              Fecha: "1/2/2019",
               Id_Insumo: 4,
               Insumo_Categoria: "Verduras",
               Id_Proveedor: 5,
               Gasto: 873.01
             },
             {
-              Fecha: "1/2/19",
+              Fecha: "1/2/2019",
               Id_Insumo: 8,
               Insumo_Categoria: "Carne",
               Id_Proveedor: 7,
               Gasto: 6918.99
             },
             {
-              Fecha: "1/2/19",
+              Fecha: "1/2/2019",
               Id_Insumo: 12,
               Insumo_Categoria: "Queso",
               Id_Proveedor: 6,
               Gasto: 1336.96
             },
             {
-              Fecha: "1/2/19",
+              Fecha: "1/2/2019",
               Id_Insumo: 20,
               Insumo_Categoria: "Bebidas",
               Id_Proveedor: 5,
               Gasto: 2251.77
             },
             {
-              Fecha: "1/3/19",
+              Fecha: "1/3/2019",
               Id_Insumo: 1,
               Insumo_Categoria: "Tortillas",
               Id_Proveedor: 1,
               Gasto: 451.31
             },
             {
-              Fecha: "1/3/19",
+              Fecha: "1/3/2019",
               Id_Insumo: 3,
               Insumo_Categoria: "Verduras",
               Id_Proveedor: 6,
               Gasto: 751.39
             },
             {
-              Fecha: "1/3/19",
+              Fecha: "1/3/2019",
               Id_Insumo: 8,
               Insumo_Categoria: "Carne",
               Id_Proveedor: 8,
               Gasto: 7898.94
             },
             {
-              Fecha: "1/3/19",
+              Fecha: "1/3/2019",
               Id_Insumo: 12,
               Insumo_Categoria: "Queso",
               Id_Proveedor: 7,
               Gasto: 1093.93
             },
             {
-              Fecha: "1/3/19",
+              Fecha: "1/3/2019",
               Id_Insumo: 19,
               Insumo_Categoria: "Bebidas",
               Id_Proveedor: 6,
               Gasto: 2208.59
             },
             {
-              Fecha: "1/4/19",
+              Fecha: "1/4/2019",
               Id_Insumo: 1,
               Insumo_Categoria: "Tortillas",
               Id_Proveedor: 3,
               Gasto: 458.05
             },
             {
-              Fecha: "1/4/19",
+              Fecha: "1/4/2019",
               Id_Insumo: 5,
               Insumo_Categoria: "Verduras",
               Id_Proveedor: 5,
               Gasto: 1042.57
             },
             {
-              Fecha: "1/4/19",
+              Fecha: "1/4/2019",
               Id_Insumo: 8,
               Insumo_Categoria: "Carne",
               Id_Proveedor: 7,
               Gasto: 7635.61
             },
             {
-              Fecha: "1/4/19",
+              Fecha: "1/4/2019",
               Id_Insumo: 12,
               Insumo_Categoria: "Queso",
               Id_Proveedor: 8,
@@ -423,8 +423,8 @@ db.once("open", function() {
               Id_Vendedor: 2,
               Id_Catalogo: 3,
               Cantidad: 5,
-              Fecha_Requisicion: "10/11/19 18:01",
-              Fecha_Entrega: "10/11/19 18:04",
+              Fecha_Requisicion: "10/11/2019 18:01",
+              Fecha_Entrega: "10/11/2019 18:04",
               Total: 175
             },
             {
@@ -433,8 +433,8 @@ db.once("open", function() {
               Id_Vendedor: 2,
               Id_Catalogo: 10,
               Cantidad: 5,
-              Fecha_Requisicion: "10/11/19 18:06",
-              Fecha_Entrega: "10/11/19 18:11",
+              Fecha_Requisicion: "10/11/2019 18:06",
+              Fecha_Entrega: "10/11/2019 18:11",
               Total: 275
             },
             {
@@ -443,8 +443,8 @@ db.once("open", function() {
               Id_Vendedor: 6,
               Id_Catalogo: 4,
               Cantidad: 4,
-              Fecha_Requisicion: "10/26/19 19:09",
-              Fecha_Entrega: "10/26/19 19:14",
+              Fecha_Requisicion: "10/26/2019 19:09",
+              Fecha_Entrega: "10/26/2019 19:14",
               Total: 160
             },
             {
@@ -453,8 +453,8 @@ db.once("open", function() {
               Id_Vendedor: 6,
               Id_Catalogo: 2,
               Cantidad: 5,
-              Fecha_Requisicion: "10/26/19 19:14",
-              Fecha_Entrega: "10/26/19 19:18",
+              Fecha_Requisicion: "10/26/2019 19:14",
+              Fecha_Entrega: "10/26/2019 19:18",
               Total: 150
             },
             {
@@ -463,8 +463,8 @@ db.once("open", function() {
               Id_Vendedor: 6,
               Id_Catalogo: 1,
               Cantidad: 3,
-              Fecha_Requisicion: "10/26/19 19:16",
-              Fecha_Entrega: "10/26/19 19:17",
+              Fecha_Requisicion: "10/26/2019 19:16",
+              Fecha_Entrega: "10/26/2019 19:17",
               Total: 75
             },
             {
@@ -473,8 +473,8 @@ db.once("open", function() {
               Id_Vendedor: 4,
               Id_Catalogo: 9,
               Cantidad: 5,
-              Fecha_Requisicion: "8/15/19 17:10",
-              Fecha_Entrega: "8/15/19 17:15",
+              Fecha_Requisicion: "8/15/2019 17:10",
+              Fecha_Entrega: "8/15/2019 17:15",
               Total: 175
             },
             {
@@ -483,8 +483,8 @@ db.once("open", function() {
               Id_Vendedor: 4,
               Id_Catalogo: 4,
               Cantidad: 7,
-              Fecha_Requisicion: "8/15/19 17:15",
-              Fecha_Entrega: "8/15/19 17:20",
+              Fecha_Requisicion: "8/15/2019 17:15",
+              Fecha_Entrega: "8/15/2019 17:20",
               Total: 280
             },
             {
@@ -493,8 +493,8 @@ db.once("open", function() {
               Id_Vendedor: 4,
               Id_Catalogo: 7,
               Cantidad: 3,
-              Fecha_Requisicion: "8/15/19 17:16",
-              Fecha_Entrega: "8/15/19 17:21",
+              Fecha_Requisicion: "8/15/2019 17:16",
+              Fecha_Entrega: "8/15/2019 17:21",
               Total: 75
             },
             {
@@ -503,8 +503,8 @@ db.once("open", function() {
               Id_Vendedor: 4,
               Id_Catalogo: 6,
               Cantidad: 3,
-              Fecha_Requisicion: "8/15/19 17:17",
-              Fecha_Entrega: "8/15/19 17:19",
+              Fecha_Requisicion: "8/15/2019 17:17",
+              Fecha_Entrega: "8/15/2019 17:19",
               Total: 180
             },
             {
@@ -513,8 +513,8 @@ db.once("open", function() {
               Id_Vendedor: 3,
               Id_Catalogo: 6,
               Cantidad: 4,
-              Fecha_Requisicion: "2/7/19 15:09",
-              Fecha_Entrega: "2/7/19 15:13",
+              Fecha_Requisicion: "2/7/2019 15:09",
+              Fecha_Entrega: "2/7/2019 15:13",
               Total: 240
             },
             {
@@ -523,8 +523,8 @@ db.once("open", function() {
               Id_Vendedor: 3,
               Id_Catalogo: 7,
               Cantidad: 5,
-              Fecha_Requisicion: "2/7/19 15:12",
-              Fecha_Entrega: "2/7/19 15:14",
+              Fecha_Requisicion: "2/7/2019 15:12",
+              Fecha_Entrega: "2/7/2019 15:14",
               Total: 125
             },
             {
@@ -533,8 +533,8 @@ db.once("open", function() {
               Id_Vendedor: 3,
               Id_Catalogo: 4,
               Cantidad: 5,
-              Fecha_Requisicion: "2/7/19 15:15",
-              Fecha_Entrega: "2/7/19 15:16",
+              Fecha_Requisicion: "2/7/2019 15:15",
+              Fecha_Entrega: "2/7/2019 15:16",
               Total: 200
             }
           ]
