@@ -70,7 +70,7 @@ class Dashboard extends Component {
       for (var j = 0; j < headers.length; j++) {
         if (currentline[j]) {
           empty = false;
-          obj[headers[j]] = currentline[j];
+          obj[headers[j].trim()] = currentline[j].trim();
         }
       }
       if (!empty) {
