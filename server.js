@@ -38,9 +38,9 @@ db.once("open", function() {
       mail: "a",
       password: "a",
       companias: [
-        { nombre: "nem" },
+        { nombre: "FACEBOOK" },
         {
-          nombre: "Facebook",
+          nombre: "Tacos Los Toños",
           planMensual: [
             {
               Fecha: "1/1/2019",

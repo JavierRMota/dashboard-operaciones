@@ -9,6 +9,8 @@ import "bootstrap-4-grid/css/grid.min.css";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+
+import Typography from "@material-ui/core/Typography";
 import "../App.css";
 import RadialGaugeContainer from "../components/RadialGaugeContainer";
 
@@ -575,7 +577,13 @@ class Dashboard extends Component {
              }, // 1092000
          ];
     }
-    var gauges = gaugeReport.map((item, key) => (
+    var gauges = gaugeReport.map((item, key) => {
+      let dif = item.value - item.plan
+      if (item.title == 'GASTOS') {
+          dif = item.plan - item.value
+
+      }
+      return(
       <div class="col-md-12 col-lg-12">
         <Card>
           <CardContent>
@@ -613,15 +621,14 @@ class Dashboard extends Component {
                   <List>
                     <ListItem>
                       <ListItemText
-                        primary={
-                          (item.value - item.plan ? "↑" : "↓") +
-                          currency(Math.abs(item.value - item.plan)) +
-                          " | " +
-                          (
-                            Math.abs(item.value - item.plan) / item.plan
-                          ).toFixed(2) +
-                          " %"
-                        }
+                        primary={<Typography variant="h9" style={{ color: (dif > 0 ? '#3cb44b' : '#e6194b' )  }}>{(item.value - item.plan > 0 ? "↑" : "↓") +
+                        currency(Math.abs(item.value - item.plan)) +
+                        " | " +
+                        (
+                          Math.abs(item.value - item.plan) * 100 / item.plan
+                        ).toFixed(2) +
+                        " %"}</Typography>}
+
                         secondary={item.subtitle3}
                       />
                     </ListItem>
@@ -642,7 +649,7 @@ class Dashboard extends Component {
           </CardContent>
         </Card>
       </div>
-    ));
+    )});
 
     return (
       <Ripple>
