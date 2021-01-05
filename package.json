@@ -18,7 +18,7 @@
     "@progress/kendo-react-pdf": "^3.4.1",
     "@progress/kendo-react-ripple": "^3.4.1",
     "@progress/kendo-theme-material": "^3.3.4",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bcrypt": "^3.0.6",
     "bootstrap-4-grid": "^3.1.1",
     "cors": "^2.8.5",
